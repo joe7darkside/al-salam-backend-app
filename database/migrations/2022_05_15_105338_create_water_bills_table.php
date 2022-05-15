@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBillsTable extends Migration
+class CreateWaterBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bills', function (Blueprint $table) {
+        Schema::create('water_bills', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('payment_date');
-            $table->string('month_name');
-            $table->boolean('payment_status')->default(false);
+            $table->bigInteger('bill_id');
+            $table->bigInteger('cost');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateBillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('water_bills');
     }
 }

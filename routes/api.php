@@ -47,4 +47,6 @@ Route::group(['middleware' => 'api',], function () {
     Route::post('/trips/create', [TripController::class, 'addTrip']);
     Route::get('/bills/monthly-bills', [BillController::class, 'getMonthlyBills']);
     Route::get('/bills/user/bills', [BillController::class, 'getUserBills']);
+    Route::post('/bills/create', [BillController::class, 'addUserBill']);
+
 });
