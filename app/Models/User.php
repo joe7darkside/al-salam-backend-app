@@ -85,12 +85,15 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
+    public function preTrip()
+    {
+        return $this->hasOne(PreTrip::class, 'user_id');
+    }
+
     public function trip()
     {
         return $this->hasMany(Trip::class, 'user_id');
     }
-
-
 
     public function bill()
     {

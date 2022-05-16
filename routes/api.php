@@ -44,9 +44,14 @@ Route::group(['middleware' => 'api',], function () {
     Route::post('/invitation/create', [InvitationController::class, 'addInvitation']);
     Route::get('/user/invitaions', [InvitationController::class, 'getUserInvitaions']);
     Route::get('/user/trips', [TripController::class, 'getUserTrip']);
-    Route::post('/trips/create', [TripController::class, 'addTrip']);
+    Route::get('/user/pre-trips', [TripController::class, 'getUserPreTrip']);
+    Route::post('/trips/add-preTrip', [TripController::class, 'addTrip']);
+    Route::post('/trips/add-pick-up', [TripController::class, 'addPickUpPoint']);
+    Route::post('/trips/add-drop-of', [TripController::class, 'addDropOfPoint']);
+    Route::put('/trips/add-cost', [TripController::class, 'addCost']);
+    Route::post('/trips/add-trip', [TripController::class, 'orderTrip']);
+    Route::get('/trips/captain-details', [TripController::class, 'getCaptainDetails']);
     Route::get('/bills/monthly-bills', [BillController::class, 'getMonthlyBills']);
     Route::get('/bills/user/bills', [BillController::class, 'getUserBills']);
     Route::post('/bills/create', [BillController::class, 'addUserBill']);
-
 });

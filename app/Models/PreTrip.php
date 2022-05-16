@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Trip extends Model
+class PreTrip extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'user_id',
-        'captain_id',
         'cost',
         'payment_method',
-        'payed'
+
     ];
 
     public function pickUp()

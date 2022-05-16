@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTripsTable extends Migration
+class CreatePreTripsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,14 @@ class CreateTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trips', function (Blueprint $table) {
+        Schema::create('pre_trips', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('captain_id');
-            $table->integer('cost');
-            $table->string('payment_method');
-            $table->boolean('payed')->default(false);
+            $table->integer('cost')->nullable();
+            $table->string('payment_method')->nullable();
             $table->timestamps();
         });
     }
-
-
-
 
     /**
      * Reverse the migrations.
@@ -34,6 +29,6 @@ class CreateTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taxis');
+        Schema::dropIfExists('pre_trips');
     }
 }
