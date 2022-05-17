@@ -26,4 +26,10 @@ class Trip extends Model
     {
         return $this->hasOne(DropOf::class, 'trip_id');
     }
+
+
+    public function captain()
+    {
+        return $this->belongsTo(Captain::class);
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CaptainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+//Route group for Captain.
+Route::group(['prefix' => 'captain', ['middleware' => 'web']], function () {
+
+    Route::get('/captains', [CaptainController::class, 'captains']);
 });

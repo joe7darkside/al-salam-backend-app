@@ -123,13 +123,13 @@ class TripController extends Controller
     }
 
 
-    public function getCaptainDetails(Request $request)
+    public function getCaptainDetails($id)
     {
-        // $user_id = $request->user()->id;
-        $user_trip = $request->user()->trip;
-        
+
+        $captain_details = Trip::find($id)->captain;
 
 
-        return response()->json(['user' => $user_trip]);
+
+        return response()->json(['Captain details' => $captain_details]);
     }
 }

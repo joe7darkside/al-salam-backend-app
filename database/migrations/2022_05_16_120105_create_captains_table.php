@@ -15,12 +15,14 @@ class CreateCaptainsTable extends Migration
     {
         Schema::create('captains', function (Blueprint $table) {
             $table->id();
-            $table->string('fist_name');
+          
+            $table->string('first_name');
             $table->string('last_name');
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('vehicle');
+            $table->string('licence_plate');
             $table->float('rate')->nullable();
             $table->timestamps();
         });

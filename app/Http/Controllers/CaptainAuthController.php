@@ -2,26 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Captain;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Captain;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 
-class AuthController extends Controller
+class CaptainAuthController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware(
-    //         ['assign.guard:api', 'jwt.auth'],
-    //         ['except' => ['login', 'register']]
-    //     );
-    // }
-
-
     /**
-     * Register a User.
+     * Register a Captian.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -31,23 +20,27 @@ class AuthController extends Controller
 
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
+            'phone' => 'required|string|unique:captains|max:11',
+            'email' => 'required|email|unique:captains|max:255',
+            'vehicle' => 'required|max:255',
+            'licence_plate' => 'required|max:255',
+            'password' => 'required|confirmed|max:255',
 
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
-        $user = User::create(array_merge(
+
+        $user = Captain::create(array_merge(
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
-        $token = auth()->guard('api')->attempt($validator->validated());
+        $token = auth()->guard('captain')->attempt($validator->validated());
+
         return response()->json([
-            'message' => 'User successfully registered',
-            'userToken' => $this->respondWithToken($token)
-        ], 200);
+            'message' => 'Customer successfully registered',
+            'user' => $user
+        ], 201);
     }
 
 
@@ -65,7 +58,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        if (!$token = auth()->guard('api')->attempt($validator->validated())) {
+        if (!$token = auth()->guard('captain')->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return $this->respondWithToken($token);
@@ -78,7 +71,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth('captain')->user());
     }
 
     /**
@@ -88,7 +81,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('captain')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -101,7 +94,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth('captain')->refresh());
     }
 
 
@@ -118,7 +111,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->guard('captain')->factory()->getTTL() * 60
         ]);
     }
 }

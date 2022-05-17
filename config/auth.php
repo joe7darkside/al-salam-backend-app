@@ -44,6 +44,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'users',
         ],
+
+        'captain' => [
+            'driver' => 'jwt',
+            'provider' => 'captains',
+        ],
     ],
 
     /*
@@ -67,6 +72,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'captains' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Captain::class,
         ],
 
         // 'users' => [
@@ -93,6 +102,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'captains' => [
+            'provider' => 'captains',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

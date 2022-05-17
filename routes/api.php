@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\CaptainAuthController;
+use App\Http\Controllers\CaptainController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
@@ -20,14 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-], function () {
+Route::group(['prefix' => 'auth'], function () {
 
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
@@ -36,8 +32,7 @@ Route::group([
     Route::post('/me', [AuthController::class, 'me']);
 });
 
-Route::group(['middleware' => 'api',], function () {
-
+Route::group(['middleware' => ['assign.guard:api', 'jwt.auth']], function () {
     Route::get('/user/cards', [UserController::class, 'getVisaCard']);
     Route::get('/user/info', [UserController::class, 'getUserInfo']);
     Route::post('/visa-card/create', [VisaCardController::class, 'addVisaCard']);
@@ -50,8 +45,27 @@ Route::group(['middleware' => 'api',], function () {
     Route::post('/trips/add-drop-of', [TripController::class, 'addDropOfPoint']);
     Route::put('/trips/add-cost', [TripController::class, 'addCost']);
     Route::post('/trips/add-trip', [TripController::class, 'orderTrip']);
-    Route::get('/trips/captain-details', [TripController::class, 'getCaptainDetails']);
+    Route::get('/trips/captain-details/{id}', [TripController::class, 'getCaptainDetails']);
+    Route::get('/captain/trips/{id}', [CaptainController::class, 'getCaptainTrips']);
     Route::get('/bills/monthly-bills', [BillController::class, 'getMonthlyBills']);
     Route::get('/bills/user/bills', [BillController::class, 'getUserBills']);
     Route::post('/bills/create', [BillController::class, 'addUserBill']);
+});
+
+// Route group for Registering and login Captains. 
+
+Route::group([
+    'prefix' => 'captain/auth'
+], function () {
+    Route::post('/register', [CaptainAuthController::class, 'register']);
+    Route::post('/login', [CaptainAuthController::class, 'login']);
+});
+
+
+
+Route::group(['prefix' => 'captain', 'middleware' => ['assign.guard:captain', 'jwt.auth']], function () {
+    Route::get('/trips', [CaptainController::class, 'captainTrips']);
+    Route::post('/logout', [CaptainAuthController::class, 'logout']);
+    Route::post('/refresh', [CaptainAuthController::class, 'refresh']);
+    Route::post('/me', [CaptainAuthController::class, 'me']);
 });
