@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\UserController;
+// use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CaptainController;
+use Inertia\Inertia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +16,37 @@ use App\Http\Controllers\CaptainController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+//TODO: Add ['middleware' => 'auth'] to the route group 
+
+//* Routes for UserController
+Route::group(['prefix' => 'user'], function () {
+
+    Route::get('/overview', [UserController::class, 'getUsers'])->name('user.overView');
+    Route::get('/search', [UserController::class, 'search'])->name('user.search');
+    Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('user.profile');
 });
 
-//Route group for Captain.
-Route::group(['prefix' => 'captain', ['middleware' => 'web']], function () {
 
-    Route::get('/captains', [CaptainController::class, 'captains']);
-});
+
+
+
+
+
+
+
+require __DIR__ . '/auth.php';
