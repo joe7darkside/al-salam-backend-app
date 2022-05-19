@@ -24,8 +24,6 @@ class UserController extends Controller
 
 
         return View::make('dashboard.users.overview', ['users' => $users]);
-
-        // return response()->json(['users' => $users]);
     }
 
 
@@ -79,18 +77,13 @@ class UserController extends Controller
             'user' => $user,
 
         ]);
-
-        // return response()->json([
-        //     'user' => $user,
-
-        // ]);
     }
 
 
 
 
     /**
-     * Return Profile view with user object
+     * Send notification & return Profile view 
      * @param Integer $id
      * @param Request $request
      * @return View|Response
@@ -118,9 +111,6 @@ class UserController extends Controller
 
         return  redirect()->back()->with('sussess', 'Notification sent successfully');
     }
-
-
-
 
 
     /**

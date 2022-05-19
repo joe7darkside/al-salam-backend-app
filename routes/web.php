@@ -39,6 +39,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/overview', [UserController::class, 'getUsers'])->name('user.overView');
     Route::get('/search', [UserController::class, 'search'])->name('user.search');
     Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('user.profile');
+    Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('user.send');
 });
 
 
