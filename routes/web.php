@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\CaptainController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
@@ -64,11 +65,23 @@ Route::group(['prefix' => 'trips'], function () {
 });
 
 //* Routes for InvitationController 
-Route::group(['prefix' => 'invitation'], function () {
+Route::group(['prefix' => 'invitations'], function () {
     Route::get('/overview', [InvitationController::class, 'getinvitations'])->name('invitations.overView');
     Route::get('/categorized-invitations/{category}', [InvitationController::class, 'categorizedInvitations'])->name('invitations.category');
     Route::get('/search', [InvitationController::class, 'search'])->name('invitations.search');
     Route::get('/category-search/{category}', [InvitationController::class, 'categorizedSearch'])->name('invitations.category.search');
+});
+
+
+
+//* Routes for CaptainController 
+Route::group(['prefix' => 'captains'], function () {
+    Route::get('/overview', [CaptainController::class, 'getCaptains'])->name('captains.overView');
+    Route::get('/categorized-invitations/{category}', [CaptainController::class, 'categorizedInvitations'])->name('invitations.category');
+    Route::get('/search', [CaptainController::class, 'search'])->name('invitations.search');
+    Route::get('/category-search/{category}', [CaptainController::class, 'categorizedSearch'])->name('invitations.category.search');
+    Route::get('/profile/{id}', [CaptainController::class, 'getCaptainProfile'])->name('captains.profile');
+
 });
 
 

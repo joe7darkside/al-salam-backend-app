@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Bill::factory(10)->create();
         \App\Models\Trip::factory(10)->create();
         \App\Models\Invitation::factory(10)->create();
+        \App\Models\Captain::factory(10)->create();
     }
 }
