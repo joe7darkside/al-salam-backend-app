@@ -50,6 +50,7 @@ Route::group(['prefix' => 'bills'], function () {
     Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
     Route::get('/paymentStatus/{Status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
     Route::get('/statusSearch/{Status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
+    Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
     Route::get('/search', [BillController::class, 'search'])->name('bills.search');
 });
 

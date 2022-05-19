@@ -8,6 +8,7 @@ use App\Models\PreTrip;
 use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class TripController extends Controller
 {
@@ -131,5 +132,21 @@ class TripController extends Controller
 
 
         return response()->json(['Captain details' => $captain_details]);
+    }
+
+
+    /**
+     * Return overview view with array of trips
+    
+     * @return View|array
+     */
+
+    public function getTrips()
+    {
+
+        $trips = Trip::orderBy('created_at', 'desc')->with(['captain', 'pickUp', 'dropOf'])->paginate(10);
+
+        // return response()->json(['trips' => $trips]);
+        return View::make('dashboard.trips.overview', ['trips' => $trips]);
     }
 }

@@ -232,7 +232,38 @@ class BillController extends Controller
 
 
     /**
-     * Return overview view with array search results of bills
+     * Return categorized view with array search results of bills
+     * @param Request $request
+     * @return View|array
+     */
+
+    public function categorizedSearch(Request $request, $category)
+    {
+
+        $search_text = $request->input('search');
+
+
+        if (isset($search_text)) {
+            $bills = Bill::where('Payment_date', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('month_name', 'LIKE', '%' . $search_text . '%')
+                ->with($category)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            $bills->appends($request->all());
+
+            return response()->json(['bill' => $bills]);
+            // return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+        }
+        $bills =  Bill::with($category)->orderBy('created_at', 'desc')->paginate(10);
+
+        // return response()->json(['bill' => $bills]);
+        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
+    }
+
+
+    /**
+     * Return paymentStatus view with array search results of bills
      * @param Request $request
      * @return View|array
      */
@@ -242,6 +273,7 @@ class BillController extends Controller
 
         $status = $paymentStatus;
         $search_text = $request->input('search');
+
 
         if (isset($search_text)) {
             $bills = Bill::where('payment_status', 'LIKE', '%' . $status . '%')
@@ -261,10 +293,3 @@ class BillController extends Controller
         return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
     }
 }
-// $users = DB::table('users')
-//             ->where('votes', '>', 100)
-//             ->orWhere(function($query) {
-//                 $query->where('name', 'Abigail')
-//                       ->where('votes', '>', 50);
-//             })
-//             ->get();
