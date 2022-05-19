@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 // use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +36,27 @@ use Inertia\Inertia;
 //TODO: Add ['middleware' => 'auth'] to the route group 
 
 //* Routes for UserController
-Route::group(['prefix' => 'user'], function () {
+Route::group(['prefix' => 'users'], function () {
 
-    Route::get('/overview', [UserController::class, 'getUsers'])->name('user.overView');
-    Route::get('/search', [UserController::class, 'search'])->name('user.search');
-    Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('user.profile');
-    Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('user.send');
+    Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
+    Route::get('/search', [UserController::class, 'search'])->name('users.search');
+    Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
+    Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('users.send');
+});
+
+
+Route::group(['prefix' => 'bills'], function () {
+    Route::get('/overview', [BillController::class, 'getBills'])->name('bills.overView');
+    Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
+    Route::get('/paymentStatus/{Status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
+    Route::get('/statusSearch/{Status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
+    Route::get('/search', [BillController::class, 'search'])->name('bills.search');
+});
+
+Route::group(['prefix' => 'trips'], function () {
+    Route::get('/overview', [TripController::class, 'getTrips'])->name('trips.overView');
+    // Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
+    // Route::get('/paymentStatus/{Status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
 });
 
 

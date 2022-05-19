@@ -10,6 +10,7 @@ use App\Models\WaterBill;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Error;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
 class BillController extends Controller
@@ -77,16 +78,18 @@ class BillController extends Controller
     // ]);
 
 
+    /**
+     * Return array of user's bills
+     * @param Request $request
+     * @return array
+     */
 
     public function getUserBills(Request $request)
     {
         $user_id = $request->user()->id;
 
-
-
         $user_bills = Bill::where('user_id', 'LIKE', '%' . $user_id . '%')
             ->with(['waterBill', 'gasBill', 'electricityBill'])->get();
-
 
         return response()->json(['User bills' => $user_bills]);
 
@@ -99,9 +102,13 @@ class BillController extends Controller
         //     $months_name[] = $monthName;
         // }
 
-
-
     }
+
+    // /**
+    //  * Return overview view with array of users
+    //  * @param Request $request
+    //  * @return View|array
+    //  */
 
     public function addUserBill(Request $request)
     {
@@ -149,4 +156,115 @@ class BillController extends Controller
 
         return response()->json(['New bill' => $bill]);
     }
+
+
+
+    /**
+     * Return overview view with array of bills
+     * @param Request $request
+     * @return View|array
+     */
+
+    public function getBills(Request $request)
+    {
+        $bills = Bill::orderBy('created_at', 'desc')->paginate(10);
+
+        return View::make('dashboard.bills.overview', ['bills' => $bills]);
+    }
+
+    /**
+     * Return categorizedBills view with array of categorized bills 
+     * @param Request $request
+     * @return View|array
+     */
+
+    public function getCategorizedBills(Request $request, $category)
+    {
+        $bills = Bill::orderBy('created_at', 'desc')->with($category)->paginate(10);
+
+        // return response()->json(['bill' => $bills]);
+        return View::make('dashboard.bills.categorized', ['bills' => $bills]);
+    }
+
+    /**
+     * Return paymentStatuss view with array of categorized bills base on payment status
+     * @param Request $request
+     * @return View|array
+     */
+
+    public function paymentStatusBills($Status)
+    {
+        $bills =  Bill::where('payment_status', 'LIKE', '%' . $Status . '%')->with(['waterBill', 'gasBill', 'electricityBill'])->paginate(10);
+
+        return View::make('dashboard.bills.paymentStatus', ['bills' => $bills]);
+    }
+
+
+
+    /**
+     * Return overview view with array search results of bills
+     * @param Request $request
+     * @return View|array
+     */
+
+    public function search(Request $request)
+    {
+
+        $search_text = $request->input('search');
+
+
+        if (isset($search_text)) {
+            $bills = Bill::where('Payment_date', 'LIKE', '%' . $search_text . '%')
+                ->with(['waterBill', 'gasBill', 'electricityBill'])
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            $bills->appends($request->all());
+
+            // return response()->json(['bill' => $bills]);
+            return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+        }
+        $bills =  Bill::orderBy('created_at', 'desc')->with(['waterBill', 'gasBill', 'electricityBill'])->paginate(10);
+
+        // return response()->json(['bill' => $bills]);
+        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
+    }
+
+
+    /**
+     * Return overview view with array search results of bills
+     * @param Request $request
+     * @return View|array
+     */
+
+    public function statusSearch(Request $request, $paymentStatus)
+    {
+
+        $status = $paymentStatus;
+        $search_text = $request->input('search');
+
+        if (isset($search_text)) {
+            $bills = Bill::where('payment_status', 'LIKE', '%' . $status . '%')
+                ->where('Payment_date', 'LIKE', '%' . $search_text . '%')
+                ->with(['waterBill', 'gasBill', 'electricityBill'])
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            $bills->appends($request->all());
+
+            // return response()->json(['bill' => $bills]);
+            return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+        }
+        $bills =  Bill::where('payment_status', 'LIKE', '%' . $status . '%')->with(['waterBill', 'gasBill', 'electricityBill'])->paginate(10);
+
+        // return response()->json(['bill' => $bills]);
+        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
+    }
 }
+// $users = DB::table('users')
+//             ->where('votes', '>', 100)
+//             ->orWhere(function($query) {
+//                 $query->where('name', 'Abigail')
+//                       ->where('votes', '>', 50);
+//             })
+//             ->get();
