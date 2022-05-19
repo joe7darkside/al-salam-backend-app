@@ -252,8 +252,8 @@ class BillController extends Controller
 
             $bills->appends($request->all());
 
-            return response()->json(['bill' => $bills]);
-            // return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+            // return response()->json(['bill' => $bills]);
+            return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
         }
         $bills =  Bill::with($category)->orderBy('created_at', 'desc')->paginate(10);
 
