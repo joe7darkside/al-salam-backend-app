@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 // use Illuminate\Foundation\Application;
@@ -35,7 +36,7 @@ use Inertia\Inertia;
 
 //TODO: Add ['middleware' => 'auth'] to the route group 
 
-//* Routes for UserController
+//* Routes for UserController 
 Route::group(['prefix' => 'users'], function () {
 
     Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
@@ -44,7 +45,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('users.send');
 });
 
-
+//* Routes for BillController 
 Route::group(['prefix' => 'bills'], function () {
     Route::get('/overview', [BillController::class, 'getBills'])->name('bills.overView');
     Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
@@ -54,13 +55,20 @@ Route::group(['prefix' => 'bills'], function () {
     Route::get('/search', [BillController::class, 'search'])->name('bills.search');
 });
 
+//* Routes for TripController 
 Route::group(['prefix' => 'trips'], function () {
     Route::get('/overview', [TripController::class, 'getTrips'])->name('trips.overView');
     Route::get('/categorized-tripss/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
     Route::get('/search', [TripController::class, 'search'])->name('trips.search');
     Route::get('/category-search/{category}', [TripController::class, 'categorizedSearch'])->name('trips.category.search');
-    // Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
-    // Route::get('/paymentStatus/{Status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
+});
+
+//* Routes for InvitationController 
+Route::group(['prefix' => 'invitation'], function () {
+    Route::get('/overview', [InvitationController::class, 'getinvitations'])->name('invitations.overView');
+    Route::get('/categorized-invitations/{category}', [InvitationController::class, 'categorizedInvitations'])->name('invitations.category');
+    Route::get('/search', [InvitationController::class, 'search'])->name('invitations.search');
+    Route::get('/category-search/{category}', [InvitationController::class, 'categorizedSearch'])->name('invitations.category.search');
 });
 
 
