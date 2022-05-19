@@ -144,9 +144,89 @@ class TripController extends Controller
     public function getTrips()
     {
 
-        $trips = Trip::orderBy('created_at', 'desc')->with(['captain', 'pickUp', 'dropOf'])->paginate(10);
+        $trips = Trip::with(['captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['trips' => $trips]);
         return View::make('dashboard.trips.overview', ['trips' => $trips]);
+    }
+
+    /**
+     * Return overview view with array of search results trips
+    
+     * @return View|array
+     */
+
+    public function search(Request $request)
+    {
+
+        $search_text = $request->input('search');
+
+
+        if (isset($search_text)) {
+            $trips = Trip::where('cost', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('payment_method', 'LIKE', '%' . $search_text . '%')
+                ->with(['captain', 'pickUp', 'dropOf'])
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            $trips->appends($request->all());
+
+            // return response()->json(['trips' => $trips]);
+            return View::make('dashboard.trips.overview',  ['trips' => $trips]);
+        }
+        $trips = Trip::with(['captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
+
+        // return response()->json(['trips' => $trips]);
+        return View::make('dashboard.trips.overview',  ['trips' => $trips]);
+    }
+
+
+    /**
+     * Return overview view with array of trips
+    
+     * @return View|array
+     */
+
+    public function categorizedTrips($category)
+    {
+
+        $trips = Trip::where('payment_method', 'LIKE', '%' . $category . '%')
+            ->with(['captain', 'pickUp', 'dropOf'])
+            ->orderBy('created_at', 'desc')->paginate(10);
+
+        // return response()->json(['trips' => $trips]);
+        return View::make('dashboard.trips.categorized', ['trips' => $trips]);
+    }
+
+
+
+    /**
+     * Return overview view with array of search results trips
+    
+     * @return View|array
+     */
+
+    public function categorizedSearch(Request $request, $category)
+    {
+        $search_text = $request->input('search');
+
+        if (isset($search_text)) {
+            $trips = Trip::where('payment_method', 'LIKE', '%' . $category . '%')
+                ->Where('cost', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('captain_id', 'LIKE', '%' . $search_text . '%')
+                ->with(['captain', 'pickUp', 'dropOf'])
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            $trips->appends($request->all());
+
+            // return response()->json(['trips' => $trips]);
+            return View::make('dashboard.trips.categorized',  ['trips' => $trips]);
+        }
+        $trips = Trip::with(['captain', 'pickUp', 'dropOf'])
+            ->orderBy('created_at', 'desc')->paginate(10);
+
+        // return response()->json(['trips' => $trips]);
+        return View::make('dashboard.trips.categorized',  ['trips' => $trips]);
     }
 }

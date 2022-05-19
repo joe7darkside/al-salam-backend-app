@@ -56,6 +56,9 @@ Route::group(['prefix' => 'bills'], function () {
 
 Route::group(['prefix' => 'trips'], function () {
     Route::get('/overview', [TripController::class, 'getTrips'])->name('trips.overView');
+    Route::get('/categorized-tripss/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
+    Route::get('/search', [TripController::class, 'search'])->name('trips.search');
+    Route::get('/category-search/{category}', [TripController::class, 'categorizedSearch'])->name('trips.category.search');
     // Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
     // Route::get('/paymentStatus/{Status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
 });
