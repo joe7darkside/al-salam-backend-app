@@ -11,7 +11,7 @@ class CaptainController extends Controller
 {
 
     /**
-     * Update the specified center in storage.
+     * Update the specified captain in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -121,7 +121,8 @@ class CaptainController extends Controller
         $captains = Captain::orderBy('created_at', 'desc')->paginate(10);
 
 
-        return response()->json(['captains' => $captains]);
+        return View::make('dashboard.captains.overview',  ['captains' => $captains]);
+        // return response()->json(['captains' => $captains]);
     }
 
 
