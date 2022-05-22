@@ -36,7 +36,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-//TODO: Add ['middleware' => 'auth'] to the route group 
+Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     //* Routes for UserController 
     Route::group(['prefix' => 'users'], function () {
 
-        Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
+        // Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
         Route::get('/search', [UserController::class, 'search'])->name('users.search');
         Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
         Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('users.send');
