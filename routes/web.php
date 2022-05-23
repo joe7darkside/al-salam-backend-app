@@ -10,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,10 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+Route::get('/home', function () {
+    return View::make('dashboard.home.home');
+    
+});
 Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
 
 Route::group(['middleware' => 'auth'], function () {

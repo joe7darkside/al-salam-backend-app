@@ -15,9 +15,9 @@
                                 App Logo
 
                             </div>
-                            <div class="toggler">
-                                <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                            </div>
+                            <!-- <div class="toggler">
+                                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                                        </div> -->
                         </div>
                     </div>
                     <div class="sidebar-menu">
@@ -31,12 +31,6 @@
                                 </a>
                             </li>
 
-                            {{-- <li class="sidebar-item ">
-                            <a href="/preferences" class='sidebar-link'>
-                                <i class="bi bi-bookmark-heart"></i>
-                                <span>Preferences</span>
-                            </a>
-                        </li> --}}
 
                             <li class="sidebar-item ">
                                 <a href="" class='sidebar-link'>
@@ -50,47 +44,16 @@
                                 </a>
                             </li>
                             <br>
-                            <li class="sidebar-title"><strong>Services</strong></li>
-
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-gear-fill"></i>
-                                    <span>Installation</span>
-                                </a>
-                                <ul class="submenu ">
-                                    <li class="submenu-item ">
-                                        <a href="">Overview</a>
-                                    </li>
-                                    <li class="submenu-item ">
-                                        <a href="">Smart
-                                            Home</a>
-                                    </li>
-
-                                    <li class="submenu-item ">
-                                        <a href="">Monitoring
-                                            System</a>
-                                    </li>
-
-                                    <li class="submenu-item ">
-                                        <a href="">DoorPhone</a>
-                                    </li>
-                                    <li class="submenu-item ">
-                                        <a href="">Satelite
-                                            System</a>
-                                    </li>
-                                    <li class="submenu-item ">
-                                        <a href="">Internal
-                                            Telephone</a>
-                                    </li>
 
 
-                                </ul>
-                            </li>
+                            <li class="sidebar-title"><strong>Admins</strong></li>
+                           
+
 
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-tools"></i>
-                                    <span>Maintenance</span>
+                                    <span>Admins</span>
                                 </a>
 
                                 <ul class="submenu ">
@@ -98,8 +61,7 @@
                                         <a href="">Overview</a>
                                     </li>
                                     <li class="submenu-item ">
-                                        <a href="">Smart
-                                            Home</a>
+                                        <a href="">Captains Admins</a>
                                     </li>
 
                                     <li class="submenu-item ">
@@ -121,7 +83,7 @@
                                 </ul>
                             </li>
 
-                            <li class="sidebar-item  has-sub">
+                            {{-- <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-envelope-fill"></i>
                                     <span>Guest Invitation</span>
@@ -142,8 +104,8 @@
 
 
                                 </ul>
-                            </li>
-                            <li class="sidebar-item  has-sub">
+                            </li> --}}
+                            {{-- <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-cash-stack"></i>
                                     <span>Customer Bills</span>
@@ -166,16 +128,16 @@
 
 
                                 </ul>
-                            </li>
-                            <li class="sidebar-item  has-sub">
+                            </li> --}}
+                            {{-- <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-truck"></i>
                                     <span>Transportation & Delivery</span>
                                 </a>
                                 <ul class="submenu ">
-                                    {{-- <li class="submenu-item ">
+                                    <li class="submenu-item ">
                                     <a href="">Overview</a>
-                                </li> --}}
+                                </li>
                                     <li class="submenu-item ">
                                         <a href="">Captains </a>
                                     </li>
@@ -185,15 +147,15 @@
                                     <li class="submenu-item ">
                                         <a href="">Trips </a>
                                     </li>
-                                    {{-- <li class="submenu-item ">
+                                    <li class="submenu-item ">
                                     <a href="">Trips </a>
-                                </li> --}}
+                                </li>
 
 
 
 
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li class="sidebar-title"><strong>Orders</strong></li>
                             <li class="sidebar-item  has-sub">

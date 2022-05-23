@@ -16,6 +16,19 @@
 <html lang="en">
 
 <head>
+
+    <!--  -->
+    <!-- <link rel="stylesheet" href="{{ asset('assets/form/css/util.css') }}"> -->
+    <!-- <link rel="stylesheet" href=" {{ asset('assets/form/css/main.css') }}"> -->
+    <!-- <link rel="stylesheet" href=" {{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}"> -->
+    <!-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }} ">
+    <!-- <link id="pagestyle" href=" {{ asset('assets/css/soft-ui-dashboard.css?v=1.0.5') }}" rel="stylesheet" />
+    <link rel="stylesheet" href=" {{ asset('assets/vendors/simple-datatables/style.css') }}"> -->
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="{{ asset('icons/bootstrap-icons/bootstrap-icons.css') }} ">
+
+    <!--  -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{-- <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
@@ -37,14 +50,13 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show  bg-page">
 
     @include('dashboard.components.sideBar')
     @yield('sideBar')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-            navbar-scroll="true">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -57,8 +69,7 @@
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                    aria-hidden="true"></i></span>
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                             <input type="text" class="form-control" placeholder="Type here...">
                         </div>
                     </div>
@@ -88,69 +99,63 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                            <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 USER</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
+                                            <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
                                                 Phone</th>
                                             {{-- <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Status</th> --}}
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                            <th class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                            <th class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($users as $user)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        <div>
-                                                            <img src="../assets/img/team-2.jpg"
-                                                                class="avatar avatar-sm me-3" alt="user1">
-                                                        </div>
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $user->first_name }}
-                                                                {{ $user->last_name }}</h6>
-                                                            <p class="text-s text-secondary mb-0">
-                                                                {{ $user->email }}
-                                                            </p>
-                                                        </div>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-s font-weight-bold mb-0">{{ $user->phone }}</p>
-                                                </td>
-                                                {{-- <td class="align-middle text-center text-sm">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ $user->first_name }}
+                                                            {{ $user->last_name }}
+                                                        </h6>
+                                                        <p class="text-s text-secondary mb-0">
+                                                            {{ $user->email }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-s font-weight-bold mb-0">{{ $user->phone }}</p>
+                                            </td>
+                                            {{-- <td class="align-middle text-center text-sm">
                                                     <span class="badge badge-sm bg-gradient-success">Online</span>
                                                 </td> --}}
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-secondary text-s font-weight-bold">{{ $user->created_at->diffForHumans() }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-secondary text-s font-weight-bold">{{ $user->updated_at->diffForHumans() }}</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <button class="btn btn-link text-secondary mb-0">
-                                                        <i class="fa fa-ellipsis-v text-s"></i>
-                                                    </button>
-                                                </td>
-                                                {{-- <td class="align-middle">
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-s font-weight-bold">{{ $user->created_at->diffForHumans() }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-s font-weight-bold">{{ $user->updated_at->diffForHumans() }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <button class="btn btn-link text-secondary mb-0">
+                                                    <i class="fa fa-ellipsis-v text-s"></i>
+                                                </button>
+                                            </td>
+                                            {{-- <td class="align-middle">
                                                     <a href="javascript:;"
                                                         class="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip" data-original-title="Edit user">
                                                         Edit
                                                     </a>
                                                 </td> --}}
-                                            </tr>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
