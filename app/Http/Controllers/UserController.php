@@ -11,7 +11,6 @@ class UserController extends Controller
 {
 
 
-
     /**
      * Return overview view with array of users
      * @param Request $request
@@ -20,10 +19,10 @@ class UserController extends Controller
 
     public function getUsers(Request $request)
     {
-        $users = User::orderBy('created_at', 'asc')->paginate(10);
+        // $admin = $request->user()->first_name;
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
 
-
-        return View::make('dashboard.users.overview', ['users' => $users]);
+        return View::make('dashboard.users.overview', ['users' => $users,]);
     }
 
 
@@ -67,16 +66,23 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $user->bill;
+        $bills = $user->bill;
+        foreach ($bills as $key => $bill) {
+            $waterBill =  $bill->waterBill;
+            $gasBill = $bill->gasBill;
+            $electricityBill = $bill->electricityBill;
+            $total = $waterBill ;
+        }
 
         $user->invitaion;
 
         $user->trip;
 
-        return View::make('dashboard.users.profile', [
-            'user' => $user,
+        return response()->json(['user' => $user, 'rule' => 'Customer', 'total' => $total]);
+        // return View::make('dashboard.users.profile', [
+        //     'user' => $user, 'rule' => 'Customer', 'total' => $total
 
-        ]);
+        // ]);
     }
 
 

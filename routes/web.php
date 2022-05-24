@@ -41,6 +41,8 @@ Route::get('/home', function () {
     
 });
 Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
+Route::get('/search', [UserController::class, 'search'])->name('users.search');
+Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -49,8 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'users'], function () {
 
         // Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
-        Route::get('/search', [UserController::class, 'search'])->name('users.search');
-        Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
+        // Route::get('/search', [UserController::class, 'search'])->name('users.search');
+        // Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
         Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('users.send');
     });
 
