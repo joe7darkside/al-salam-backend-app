@@ -97,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['prefix' => 'admins'], function () {
     Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
     Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
-    Route::get('/search', [AdminController::class, 'search'])->name('invitations.search');
+    Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
     Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
     Route::get('/profile/{id}', [AdminController::class, 'getAdminsProfile'])->name('admins.profile');
 });

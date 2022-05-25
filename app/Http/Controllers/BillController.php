@@ -167,9 +167,10 @@ class BillController extends Controller
 
     public function getBills(Request $request)
     {
+        $admin = $request->user()->first_name;
         $bills = Bill::orderBy('created_at', 'desc')->paginate(10);
 
-        return View::make('dashboard.bills.overview', ['bills' => $bills]);
+        return View::make('dashboard.bills.overview', ['bills' => $bills, 'admin' => $admin]);
     }
 
     /**

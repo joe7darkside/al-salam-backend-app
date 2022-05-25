@@ -58,7 +58,7 @@
 
                                 <ul class="submenu ">
                                     <li class="submenu-item ">
-                                        <a href="">Overview</a>
+                                        <a href="{{ route('admins.overView') }}">Overview</a>
                                     </li>
                                     <li class="submenu-item ">
                                         <a href="">Captains Admins</a>
@@ -157,28 +157,28 @@
                                 </ul>
                             </li> --}}
 
-                            <li class="sidebar-title"><strong>Orders</strong></li>
+                            <li class="sidebar-title"><strong>Bills</strong></li>
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-cart-plus-fill"></i>
-                                    <span>Orders Menu</span>
+                                    <span>Bills Menu</span>
                                 </a>
                                 <ul class="submenu ">
                                     <li class="submenu-item ">
-                                        <a href="">Overview</a>
+                                        <a href="{{ route('bills.overView') }}">Overview</a>
                                     </li>
                                     <li class="submenu-item ">
-                                        <a href="">Submitted</a>
+                                        <a href="">Paid</a>
                                     </li>
                                     <li class="submenu-item ">
-                                        <a href="">Under revision</a>
+                                        <a href="">Unpaid</a>
                                     </li>
-                                    <li class="submenu-item ">
+                                    {{-- <li class="submenu-item ">
                                         <a href="">Confirmed</a>
                                     </li>
                                     <li class="submenu-item ">
                                         <a href="">Done</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </li>
 

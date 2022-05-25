@@ -14,13 +14,15 @@ class AdminController extends Controller
      * @return View|array
      */
 
-    public function getAdmins()
+    public function getAdmins(Request $request)
     {
+
+        $admin = $request->user()->first_name;
         $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
 
-        // return View::make('dashboard.admins.overview',  ['admins' => $admins]);
+        return View::make('dashboard.admins.overview',  ['admins' => $admins, 'admin' => $admin]);
 
-        return response()->json(['admins' => $admins]);
+        // return response()->json(['admins' => $admins]);
     }
 
 
