@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
@@ -14,9 +14,9 @@
 
             <!-- First Name -->
             <div>
-                <x-label for="fisrt_name" :value="__('FisrtName')" />
+                <x-label for="first_name" :value="__('FirstName')" />
 
-                <x-input id="fisrt_name" class="block mt-1 w-full" type="text" name="fisrt_name" :value="old('fisrt_name')"
+                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')"
                     required autofocus />
             </div>
             <!-- Last Name -->
@@ -77,4 +77,114 @@
             </div>
         </form>
     </x-auth-card>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+
+    @include('dashboard.components.header')
+    @yield('header')
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100" style="background-color: rgb(224, 230, 230)">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                <form class="login100-form validate-form" action="{{ route('register.store') }}" method="POST">
+                    @csrf
+                    <span class="login100-form-title p-b-49">
+                        Register
+                    </span>
+                    <div class="row ">
+                        <div class="col-6">
+                            <div class="wrap-input100 validate-input m-b-23" data-validate="First Name is reauired">
+                                <span class="label-input100">First Name</span>
+                                <input class="input100" type="text" name="first_name"
+                                    placeholder="Type first name">
+                                <span class="focus-input100" data-symbol="&#xf206;"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="wrap-input100 validate-input m-b-23" data-validate="Last Name is reauired">
+                                <span class="label-input100">Last Name</span>
+                                <input class="input100" type="text" name="last_name" placeholder="Type last name">
+                                <span class="focus-input100" data-symbol="&#xf206;"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="wrap-input100 validate-input m-b-23" data-validate="Phone is reauired">
+                                <span class="label-input100">Phone</span>
+                                <input class="input100" type="text" name="phone" placeholder="Type your phone">
+                                <span class="focus-input100" data-symbol="&#xf206;"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="wrap-input100 validate-input m-b-23" data-validate="Rule is reauired">
+                                <span class="label-input100">Rule</span>
+                                <input class="input100" type="text" name="rule" placeholder="Type your rule">
+                                <span class="focus-input100" data-symbol="&#xf206;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Email is reauired">
+                        <span class="label-input100">Email</span>
+                        <input class="input100" type="text" name="email" placeholder="Type your email">
+                        <span class="focus-input100" data-symbol="&#xf206;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-23" data-validate="Password is required">
+                        <span class="label-input100">Password</span>
+                        <input class="input100" type="password" name="password" placeholder="Type your password">
+                        <span class="focus-input100" data-symbol="&#xf190;"></span>
+                    </div>
+
+                    <div class="  wrap-input100 validate-input " data-validate="Password Confirmation is required">
+                        <span class="label-input100">Password Confirmation</span>
+                        <input class="input100" type="password" name="password_confirmation"
+                            placeholder="Type your password confirmation">
+                        <span class="focus-input100" data-symbol="&#xf190;"></span>
+                    </div>
+
+                    <div class="text-right p-t-8 p-b-31">
+                        <a href="{{ route('login') }}">
+                            Already registered?
+                        </a>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+
+                            <button class="login100-form-btn">
+                                Register
+                            </button>
+
+
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login/jquery-3.2.1.min.js"></script>
+    <script src="js/login/main.js"></script>
+
+
+</body>
+
+</html>

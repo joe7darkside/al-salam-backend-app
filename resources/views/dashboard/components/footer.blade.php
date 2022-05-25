@@ -1,5 +1,5 @@
 @section('footer')
-    {{-- <footer class="footer pt-3  ">
+    <footer class="footer pt-3  ">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">
                 <div class="col-lg-6 mb-lg-0 mb-4">
@@ -20,8 +20,8 @@
                 </div>
             </div>
         </div>
-    </footer> --}}
-    <script src="{{ asset('/js/sideBar/sideBar.js') }}"></script>
+    </footer>
+    {{-- <script src="{{ asset('/js/sideBar/sideBar.js') }}"></script>
     <script src="{{ asset('/js/dashboard/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('/js/dashboard/plugins/smooth-scrollbar.min.js') }}"></script>
     <script>
@@ -34,5 +34,5 @@
         }
     </script>
 
-    <script src="{{ asset('/js/dashboard/soft-ui-dashboard.min.js?v=1.0.5') }}"></script>
+    <script src="{{ asset('/js/dashboard/soft-ui-dashboard.min.js?v=1.0.5') }}"></script> --}}
 @endsection

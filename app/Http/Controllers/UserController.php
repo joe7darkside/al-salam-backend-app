@@ -19,10 +19,10 @@ class UserController extends Controller
 
     public function getUsers(Request $request)
     {
-        // $admin = $request->user()->first_name;
+        $admin = $request->user()->first_name;
         $users = User::orderBy('created_at', 'desc')->paginate(10);
 
-        return View::make('dashboard.users.overview', ['users' => $users,]);
+        return View::make('dashboard.users.overview', ['users' => $users, 'admin' => $admin]);
     }
 
 
@@ -36,6 +36,8 @@ class UserController extends Controller
     {
         $search_text = $request->input('search');
 
+        $admin = $request->user()->first_name;
+
         if (isset($search_text)) {
             $users = User::where('first_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $search_text . '%')
@@ -46,11 +48,11 @@ class UserController extends Controller
 
             $users->appends($request->all());
 
-            return View::make('dashboard.users.overview', ['users' => $users]);
+            return View::make('dashboard.users.overview', ['users' => $users, 'admin' => $admin]);
         }
         $users = User::orderBy('created_at', 'desc')->paginate(10);
 
-        return View::make('dashboard.users.overview', ['users' => $users]);
+        return View::make('dashboard.users.overview', ['users' => $users, 'admin' => $admin]);
     }
 
 
@@ -64,25 +66,41 @@ class UserController extends Controller
     public function userProfile($id)
     {
 
+        $user_trips = array();
+        $captains = array();
         $user = User::find($id);
 
-        $bills = $user->bill;
-        foreach ($bills as $key => $bill) {
-            $waterBill =  $bill->waterBill;
-            $gasBill = $bill->gasBill;
-            $electricityBill = $bill->electricityBill;
-            $total = $waterBill ;
-        }
+        $user->bill;
 
         $user->invitaion;
 
-        $user->trip;
+        $trips =  $user->trip;
 
-        return response()->json(['user' => $user, 'rule' => 'Customer', 'total' => $total]);
-        // return View::make('dashboard.users.profile', [
-        //     'user' => $user, 'rule' => 'Customer', 'total' => $total
+        // foreach ($trips as $key => $trip) {
 
+        //     $user_trips[] = $trip;
+        // }
+
+        // foreach ($trips as $key => $trip) {
+
+        //     $trip_captain = Captain::where('id', 'LIKE', '%' . $trip->trip_captain . '%');
+        //     $captains[] = $trip_captain;
+        // }
+
+
+
+        // foreach ($bills as $key => $bill) {
+        //     $waterBill =  $bill->waterBill;
+        //     $gasBill = $bill->gasBill;
+        //     $electricityBill = $bill->electricityBill;
+        // }
+
+        // return response()->json([
+        //     'user' => $user,
         // ]);
+        return View::make('dashboard.users.profile', [
+            'user' => $user,
+        ]);
     }
 
 

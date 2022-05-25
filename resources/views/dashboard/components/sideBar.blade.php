@@ -16,8 +16,8 @@
 
                             </div>
                             <!-- <div class="toggler">
-                                                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                                                    </div> -->
+                                                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                                                        </div> -->
                         </div>
                     </div>
                     <div class="sidebar-menu">
@@ -25,7 +25,7 @@
                             <li class="sidebar-title"><strong>Menu</strong></li>
 
                             <li class="sidebar-item">
-                                <a href="" class='sidebar-link'>
+                                <a href="{{ route('home') }}" class='sidebar-link'>
                                     <i class="bi bi-house-door-fill"></i>
                                     <span>Home</span>
                                 </a>
@@ -270,7 +270,8 @@
 
                             <li class="sidebar-item">
 
-                                <a href="" class='sidebar-link'> <i class="bi bi-box-arrow-right"></i>
+                                <a href="{{ route('logout') }}" class='sidebar-link'> <i
+                                        class="bi bi-box-arrow-right"></i>
                                     <span>Sign Out </span></a>
 
                             </li>

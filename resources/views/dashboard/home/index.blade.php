@@ -23,6 +23,9 @@
 
     @include('dashboard.components.footer')
     @yield('footer')
+
+    @include('dashboard.components.script')
+    @yield('script')
 </body>
 
 </html>

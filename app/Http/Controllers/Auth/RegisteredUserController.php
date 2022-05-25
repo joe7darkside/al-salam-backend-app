@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 
@@ -21,7 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Auth/Register');
+        // return Inertia::render('Auth/Register');
+        return View::make('auth.register');
     }
 
     /**
@@ -55,7 +57,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-        // return response()->json(['message' => 'Works']);
         return redirect(RouteServiceProvider::HOME);
     }
 }

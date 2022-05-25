@@ -28,7 +28,6 @@
                         </li>
                         <li class="breadcrumb-item text-s text-dark active" aria-current="page">Overview</li>
                     </ol>
-                    {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
                 </nav>
                 {{-- Search bar --}}
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -47,11 +46,8 @@
                     <ul class="navbar-nav  justify-content-end">
 
                         <li class="nav-item d-flex align-items-center">
-                            {{-- <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-
-                            </a> --}}
-                            <i class="fa fa-user me-sm-1"></i>
-                            {{-- <span class="d-sm-inline d-none">{{ $admin }}</span> --}}
+                            @include('dashboard.components.adminName')
+                            @yield('admin.name')
                         </li>
 
                     </ul>
@@ -157,8 +153,8 @@
                 </div>
             </div>
 
-            {{-- @include('dashboard.components.footer')
-            @yield('footer') --}}
+            @include('dashboard.components.footer')
+            @yield('footer')
         </div>
     </main>
 
@@ -166,6 +162,8 @@
     {{-- <script src="{{ asset('/js/dashboard/core/popper.min.js') }}"></script>
     <script src="{{ asset('/js/dashboard/core/bootstrap.min.js') }}"></script> --}}
 
+    @include('dashboard.components.script')
+    @yield('script')
 </body>
 
 </html>
