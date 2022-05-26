@@ -88,7 +88,8 @@
 
 <head>
     <title>Login</title>
-
+    <link rel="stylesheet" href="{{ asset('css/login.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/utils.css') }} ">
     @include('dashboard.components.header')
     @yield('header')
 </head>

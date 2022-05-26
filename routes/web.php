@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/statusSearch/{Status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
         Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
         Route::get('/search', [BillController::class, 'search'])->name('bills.search');
+        Route::get('/bills/delete/{bill}', [BillController::class, 'destroy'])->name('bills.delete');
     });
 
     //* Routes for TripController 
@@ -99,7 +100,7 @@ Route::group(['prefix' => 'admins'], function () {
     Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
     Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
     Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
-    Route::get('/profile/{id}', [AdminController::class, 'getAdminsProfile'])->name('admins.profile');
+    Route::get('/delete/{admin}', [AdminController::class, 'destroy'])->name('admins.delete');
 });
 
 

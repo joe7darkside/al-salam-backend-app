@@ -56,6 +56,13 @@
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
+            @if (session('Message'))
+                <div class="deleted">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';"
+                        class="deleted">&times;</span>
+                    <p style="color: crimson">{{ session('Message') }}</p>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -138,11 +145,16 @@
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                <a href="#"><i
+                                                                {{-- <a href="#"><i
                                                                         class="fa-solid fa-paper-plane send"></i></a>
                                                                 <a href=""><i
-                                                                        class="fa-solid fa-address-card profile"></i></a>
-                                                                <a href=""><i class="fa-solid fa-trash delete"></i></a>
+                                                                        class="fa-solid fa-address-card profile"></i></a> --}}
+                                                                <a href="#"><i class="fa-solid fa-pen edit"></i></a>
+                                                                <a
+                                                                    href="{{ route('admins.delete', ['admin' => $admin]) }}"><i
+                                                                        class="fa-solid fa-trash delete">
+                                                                        @method('DELETE')</i>
+                                                                </a>
                                                             </div>
                                                         </i>
                                                     </div>

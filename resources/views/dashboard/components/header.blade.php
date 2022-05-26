@@ -1,7 +1,5 @@
 @section('header')
     <link rel="stylesheet" href="{{ asset('css/main.css') }} ">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }} ">
-    <link rel="stylesheet" href="{{ asset('css/utils.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }} ">
     <link rel="stylesheet" href="{{ asset('icons/iconic/css/material-design-iconic-font.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('icons/bootstrap-icons/bootstrap-icons.css') }} ">

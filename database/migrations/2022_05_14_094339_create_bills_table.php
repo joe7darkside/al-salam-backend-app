@@ -18,6 +18,7 @@ class CreateBillsTable extends Migration
             $table->integer('user_id');
             $table->string('payment_date');
             $table->string('month_name');
+            $table->double('bill_cost');
             $table->boolean('payment_status')->default(false);
             $table->timestamps();
         });

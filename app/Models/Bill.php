@@ -14,6 +14,7 @@ class Bill extends Model
         'user_id',
         'Payment_date',
         'payment_status',
+        'bill_cost',
         'month_name'
     ];
 
@@ -30,5 +31,10 @@ class Bill extends Model
     public function electricityBill()
     {
         return  $this->hasOne(electricityBill::class, 'bill_id');
+    }
+
+    public function user()
+    {
+        return  $this->belongsTo(User::class, 'user_id');
     }
 }

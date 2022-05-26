@@ -27,6 +27,30 @@ class BillController extends Controller
 
         return response()->json(['Monthly Bills' => $monthly_bills]);
     }
+
+
+
+
+    /**
+     * Remove the specified admin from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $admin = $request->user()->first_name;
+        $bill = Bill::find($id);
+
+        if ($bill) {
+            $bill->delete();
+            return redirect()->back()
+                ->with(['Message' => 'Deleted Successfully.', 'admin' => $admin]);
+        } else {
+            return redirect()->back()
+                ->with(['Message' => 'Record Faild to Deleted', 'admin' => $admin]);
+        }
+    }
     // $bill = $User_bills->first();
     // $bill->waterBill;
     // $bill->gasBill;
@@ -118,6 +142,9 @@ class BillController extends Controller
             "Payment_date" => "required",
             "month_name" => "required",
             "payment_status" => "required",
+            "water_bill" => "required",
+            "gas_bill" => "required",
+            "electricity_bill" => "required",
 
 
         ]);
@@ -130,27 +157,29 @@ class BillController extends Controller
         $date = Carbon::now();
         $monthName = $date->format('F');
 
+        $bill_cost = $request->water_bill + $request->gas_bill + $request->electricity_bill;
         $bill = Bill::create([
             "user_id" => $user_id,
             "Payment_date" => $request->Payment_date,
             "month_name" => $monthName,
             "payment_status" => $request->payment_status,
+            "bill_cost" => $bill_cost,
         ]);
 
         $waterBill = WaterBill::create([
             "bill_id" => $bill->id,
-            "cost" => $request->cost,
+            "cost" => $request->water_bill,
 
         ]);
 
         $gasBill = GasBill::create([
             "bill_id" => $bill->id,
-            "cost" => $request->cost,
+            "cost" => $request->gas_bill,
 
         ]);
         $electricityBill = ElectricityBill::create([
             "bill_id" => $bill->id,
-            "cost" => $request->cost,
+            "cost" => $request->electricity_bill,
 
         ]);
 
@@ -170,6 +199,14 @@ class BillController extends Controller
         $admin = $request->user()->first_name;
         $bills = Bill::orderBy('created_at', 'desc')->paginate(10);
 
+        foreach ($bills as $key => $bill) {
+            $bill->user;
+            $bill->waterBill;
+            $bill->gasBill;
+            $bill->electricityBill;
+        }
+
+        // return response()->json(['bills' => $bills]);
         return View::make('dashboard.bills.overview', ['bills' => $bills, 'admin' => $admin]);
     }
 

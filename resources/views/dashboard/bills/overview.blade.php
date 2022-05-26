@@ -24,7 +24,7 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-s">Customers
+                        <li class="breadcrumb-item text-s">Bills
                         </li>
                         <li class="breadcrumb-item text-s text-dark active" aria-current="page">Overview</li>
                     </ol>
@@ -64,102 +64,124 @@
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
+
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                user</th>
-
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                #</th>
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                Customer</th>
+                                            <th
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                total cost</th>
+                                            {{-- <th
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 water bill</th>
-
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 gas bill</th>
+                                            <th
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                electricity bill</th> --}}
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                payment status</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                payment date</th>
 
-                                            <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                electricity</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
-                                                Payment date</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                Month</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                Payment status</th>
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
-                                            <th class="text-secondary opacity-7"></th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($bills as $bill)
                                             <tr>
-                                                <td>
-                                                    <p class="text-s text-secondary mb-0">
-                                                        {{ $bill->user_id }}
-                                                    </p>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->id }}</span>
                                                 </td>
 
-                                                <td>
-                                                    <p class="text-s text-secondary mb-0">
-                                                        {{ $bill->water_bill->cost }}
-                                                    </p>
-                                                </td>
-
-                                                <td>
-                                                    <p class="text-s text-secondary mb-0">
-                                                        {{ $bill->gas_bill->cost }}
-                                                    </p>
-                                                </td>
-
-                                                <td>
-                                                    <p class="text-s text-secondary mb-0">
-                                                        {{ $bill->electricity_bill->cost }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-s font-weight-bold mb-0">{{ $bill->payment_date }}
-                                                    </p>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-s font-weight-bold mb-0">
+                                                        {{ $bill->user->first_name }}
+                                                        {{ $bill->user->last_name }}
+                                                    </span>
                                                 </td>
 
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-secondary text-s font-weight-bold">{{ $bill->created_at->diffForHumans() }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->bill_cost }}</span>
+                                                </td>
+                                                {{-- <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->waterBill->cost }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-secondary text-s font-weight-bold">{{ $bill->updated_at->diffForHumans() }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->gasBill->cost }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->electricityBill->cost }}</span>
+                                                </td> --}}
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_status }}</span>
+                                                </td>
+
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_date }}</span>
+                                                </td>
+
+
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->created_at->diffForHumans() }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->updated_at->diffForHumans() }}</span>
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{-- <div class="dropdown">
+                                                    <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                <a href="#"><i
-                                                                        class="fa-solid fa-paper-plane send"></i></a>
+                                                                <a href="">
+                                                                    <i class="bi bi-info-circle-fill send"></i></a>
+                                                                <a href="#"><i class="fa-solid fa-pen edit"></i></a>
+
                                                                 <a
-                                                                    href="{{ route('bills.profile', ['id' => $bill->id]) }}"><i
-                                                                        class="fa-solid fa-address-card profile"></i></a>
-                                                                <a href=""><i class="fa-solid fa-trash delete"></i></a>
+                                                                    href="{{ route('bills.delete', ['bill' => $bill]) }}"><i
+                                                                        class="fa-solid fa-trash delete">
+                                                                        @method('DELETE')</i>
+                                                                </a>
                                                             </div>
                                                         </i>
-                                                    </div> --}}
+                                                    </div>
 
-                                                    {{-- </button> --}}
+
                                                 </td>
 
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+
+
                                 <div class="float-start pagination-margin "> {{ $bills->links() }}</div>
                             </div>
                         </div>
@@ -178,3 +200,106 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+{{-- <table class="table align-items-center mb-0">
+    <thead>
+        <tr>
+            <th
+                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                user</th>
+
+            <th
+                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                water bill</th>
+
+            <th
+                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                gas bill</th>
+
+            <th
+                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                electricity</th>
+            <th
+                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
+                Payment date</th>
+            <th
+                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                Month</th>
+            <th
+                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                Payment status</th>
+            <th
+                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                Created at</th>
+            <th
+                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                Updated at</th>
+            <th class="text-secondary opacity-7"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($bills as $bill)
+            <tr>
+                <td>
+                    <p class="text-s text-secondary mb-0">
+                        {{ $bill->user_id }}
+                    </p>
+                </td>
+
+                <td>
+                    <p class="text-s text-secondary mb-0">
+                        {{ $bill->waterBill->cost }}
+                    </p>
+                </td>
+
+                <td>
+                    <p class="text-s text-secondary mb-0">
+                        {{ $bill->gasBill->cost }}
+                    </p>
+                </td>
+
+                <td>
+                    <p class="text-s text-secondary mb-0">
+                        {{ $bill->electricityBill->cost }}
+                    </p>
+                </td>
+                <td>
+                    <p class="text-s font-weight-bold mb-0">{{ $bill->payment_date }}
+                    </p>
+                </td>
+
+                <td class="align-middle text-center">
+                    <span
+                        class="text-secondary text-s font-weight-bold">{{ $bill->created_at->diffForHumans() }}</span>
+                </td>
+                <td class="align-middle text-center">
+                    <span
+                        class="text-secondary text-s font-weight-bold">{{ $bill->updated_at->diffForHumans() }}</span>
+                </td>
+                <td class="align-middle">
+                    <div class="dropdown">
+                        <i class="fa fa-ellipsis-v ">
+                            <div class="dropdown-content">
+                                <a href="#"><i
+                                        class="fa-solid fa-paper-plane send"></i></a>
+                                <a
+                                    href="{{ route('bills.profile', ['id' => $bill->id]) }}"><i
+                                        class="fa-solid fa-address-card profile"></i></a>
+                                <a href=""><i class="fa-solid fa-trash delete"></i></a>
+                            </div>
+                        </i>
+                    </div>
+
+                    {{-- </button> --}}
+{{-- </td>
+
+</tr>
+@endforeach --}}
+</tbody>
+</table> --}}

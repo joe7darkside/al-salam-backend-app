@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Database\Eloquent\Builder;
 
 class AdminController extends Controller
 {
@@ -18,8 +19,12 @@ class AdminController extends Controller
     {
 
         $admin = $request->user()->first_name;
-        $admins = Admin::orderBy('created_at', 'desc')->paginate(10);
+        $admins = Admin::orderBy('created_at', 'asc')->paginate(10);
 
+        // $admins = Admin::whereDoesntHave(function (Builder $query) use ($request) {
+        //     $query->where('email', 'LIKE', '%' . $request->user()->email . '%')
+        //         ->orWhere('phone', 'LIKE', '%' . $request->user()->phone . '%');
+        // })->get();
         return View::make('dashboard.admins.overview',  ['admins' => $admins, 'admin' => $admin]);
 
         // return response()->json(['admins' => $admins]);
@@ -56,17 +61,20 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $admin = Admin::find($id);
+        $admin = $request->user()->first_name;
+        $adminData = Admin::find($id);
 
-        if ($admin) {
-            $admin->delete();
-            return View::make('dashboard.admins.overview')
-                ->with('Message', 'Deleted Successfully.');
+        if ($adminData) {
+            $adminData->delete();
+            return redirect()->back()
+                ->with(['Message' => 'Deleted Successfully.', 'admin' => $admin]);
         } else {
-            return View::make('dashboard.admins.overview')
-                ->with('Message', 'Record Faild to Deleted');
+            return redirect()->back()
+                ->with(['Message' => 'Record Faild to Deleted', 'admin' => $admin]);
+            // return View::make('dashboard.admins.overview', ['admin' => $admin])
+            //     ->with('Message', 'Record Faild to Deleted');
         }
     }
 
@@ -79,6 +87,7 @@ class AdminController extends Controller
 
     public function search(Request $request)
     {
+        $admin = $request->user()->first_name;
 
         $search_text = $request->input('search');
 
@@ -87,36 +96,37 @@ class AdminController extends Controller
             $admins = Admin::where('first_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('phone', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('rule', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('email', 'LIKE', '%' . $search_text . '%')
-                ->orderBy('created_at', 'desc')
+                ->orderBy('created_at', 'asc')
                 ->paginate(10);
 
             $admins->appends($request->all());
 
             // return response()->json(['admins' => $admins]);
-            return View::make('dashboard.admins.overview',  ['admins' => $admins]);
+            return View::make('dashboard.admins.overview',  ['admins' => $admins, 'admin' => $admin]);
         }
-        $admins =  Admin::orderBy('created_at', 'desc')->paginate(10);
+        $admins =  Admin::orderBy('created_at', 'asc')->paginate(10);
 
 
         // return response()->json(['admins' => $admins]);
-        return View::make('dashboard.admins.overview',  ['admins' => $admins]);
+        return View::make('dashboard.admins.overview',  ['admins' => $admins, 'admin' => $admin]);
     }
 
 
-    /**
-     * Return profile view with admin details
-     * @param Request $request
-     * @return View
-     */
+    // /**
+    //  * Return profile view with admin details
+    //  * @param Request $request
+    //  * @return View
+    //  */
 
-    public function getAdminProfile($id)
-    {
-        $admin = Admin::find($id);
+    // public function getAdminProfile($id)
+    // {
+    //     $admin = Admin::find($id);
 
-        return View::make('dashboard.admins.profile',  ['admin' => $admin]);
-        // return response()->json(['admin' => $admin]);
-    }
+    //     return View::make('dashboard.admins.profile',  ['admin' => $admin]);
+    //     // return response()->json(['admin' => $admin]);
+    // }
 
     /**
      * Return overview view with array of admins

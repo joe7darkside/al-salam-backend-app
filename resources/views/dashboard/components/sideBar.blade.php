@@ -16,8 +16,8 @@
 
                             </div>
                             <!-- <div class="toggler">
-                                                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                                                        </div> -->
+                                                                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                                                                </div> -->
                         </div>
                     </div>
                     <div class="sidebar-menu">
@@ -39,18 +39,16 @@
                             </li>
 
                             <li class="sidebar-item ">
-                                <a href="" class='sidebar-link'>
-                                    <i class="bi bi-collection-fill"></i> <span>Sliders</span>
+                                <a href="{{ route('admins.overView') }}" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i> <span>Admins</span>
                                 </a>
                             </li>
                             <br>
 
 
-                            <li class="sidebar-title"><strong>Admins</strong></li>
+                            {{-- <li class="sidebar-title"><strong>Admins</strong></li> --}}
 
-
-
-                            <li class="sidebar-item  has-sub">
+                            {{-- <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-tools"></i>
                                     <span>Admins</span>
@@ -81,7 +79,7 @@
                                             Telephone</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             {{-- <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>

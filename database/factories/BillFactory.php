@@ -16,6 +16,7 @@ class BillFactory extends Factory
         return [
             'user_id' => $this->faker->numberBetween(0, 10),
             'Payment_date' => now(),
+            'bill_cost' => $this->faker->randomNumber(),
             'month_name' => $this->faker->monthName(),
             'payment_status' => $this->faker->boolean(), // password
         ];
