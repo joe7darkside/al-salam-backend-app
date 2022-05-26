@@ -16,8 +16,8 @@
 
                             </div>
                             <!-- <div class="toggler">
-                                                                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                                                                </div> -->
+                                                                                                                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                                                                                                                    </div> -->
                         </div>
                     </div>
                     <div class="sidebar-menu">
@@ -158,7 +158,7 @@
                             <li class="sidebar-title"><strong>Bills</strong></li>
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-cart-plus-fill"></i>
+                                    <i class="bi bi-cash-stack"></i>
                                     <span>Bills Menu</span>
                                 </a>
                                 <ul class="submenu ">
@@ -166,44 +166,18 @@
                                         <a href="{{ route('bills.overView') }}">Overview</a>
                                     </li>
                                     <li class="submenu-item ">
-                                        <a href="">Paid</a>
+                                        <a href="{{ route('bills.paymentStatus', ['status' => 1]) }}">Paid</a>
                                     </li>
                                     <li class="submenu-item ">
-                                        <a href="">Unpaid</a>
+                                        <a href="{{ route('bills.paymentStatus', ['status' => 0]) }}">Unpaid</a>
                                     </li>
-                                    {{-- <li class="submenu-item ">
-                                        <a href="">Confirmed</a>
-                                    </li>
-                                    <li class="submenu-item ">
-                                        <a href="">Done</a>
-                                    </li> --}}
+
                                 </ul>
                             </li>
 
+                            {{-- <li class="sidebar-title"> <strong>Compounds </strong> </li> --}}
+
                             {{-- <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-cart-fill"></i>
-                                <span>Orders Record</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">page</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">page</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-navbar.html">page</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-horizontal.html">page</a>
-                                </li>
-                            </ul>
-                        </li> --}}
-
-                            <li class="sidebar-title"> <strong>Compounds </strong> </li>
-
-                            <li class="sidebar-item  has-sub">
                                 <a href="" class='sidebar-link'>
                                     <i class="bi bi-person-lines-fill"></i>
                                     <span>All Supported Compounds</span>
@@ -217,7 +191,7 @@
                                     </li>
                                 </ul>
 
-                            </li>
+                            </li> --}}
                             {{-- <li class="sidebar-item  ">
                             <a href="{{ route('compounds.index') }}" class='sidebar-link'>
                                 <i class="bi bi-building"></i>
@@ -241,7 +215,63 @@
                                 </ul>
                             </li>
 
-                            <li class="sidebar-title"> <strong> Locations </strong></li>
+                            <li class="sidebar-title"> <strong> Invitations </strong></li>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-person-lines-fill"></i>
+                                    <span>Invitations</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('invitations.overView') }}">Overview</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('invitations.category', ['category' => 1]) }}">Approved</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('invitations.category', ['category' => 0]) }}">Denied</a>
+                                    </li>
+                                </ul>
+
+
+                            </li>
+
+
+
+
+
+
+                            <li class="sidebar-title"> <strong> Taxi </strong></li>
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Captains</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('captains.overView') }}">Overview</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+                            <li class="sidebar-item  has-sub">
+                                <a href="#" class='sidebar-link'>
+                                    <i class="fa fa-suitcase-rolling"></i>
+                                    <span>Trips</span>
+                                </a>
+                                <ul class="submenu ">
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('trips.overView') }}">Overview</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            {{-- <li class="sidebar-title"> <strong> Locations </strong></li>
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-map-fill"></i>
@@ -251,11 +281,9 @@
                                     <li class="submenu-item ">
                                         <a href="">Overview</a>
                                     </li>
-                                    {{-- <li class="submenu-item ">
-                                    <a href="ui-map-jsvectormap.html">page</a>
-                                </li> --}}
+                              
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li class="sidebar-title "> <strong> Account Setting </strong></li>
 

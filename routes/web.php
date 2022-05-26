@@ -59,8 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'bills'], function () {
         Route::get('/overview', [BillController::class, 'getBills'])->name('bills.overView');
         Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
-        Route::get('/paymentStatus/{Status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
-        Route::get('/statusSearch/{Status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
+        Route::get('/paymentStatus/{status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
+        Route::get('/statusSearch/{status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
         Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
         Route::get('/search', [BillController::class, 'search'])->name('bills.search');
         Route::get('/bills/delete/{bill}', [BillController::class, 'destroy'])->name('bills.delete');
@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //* Routes for InvitationController 
     Route::group(['prefix' => 'invitations'], function () {
-        Route::get('/overview', [InvitationController::class, 'getinvitations'])->name('invitations.overView');
+        Route::get('/overview', [InvitationController::class, 'getInvitations'])->name('invitations.overView');
         Route::get('/categorized-invitations/{category}', [InvitationController::class, 'categorizedInvitations'])->name('invitations.category');
         Route::get('/search', [InvitationController::class, 'search'])->name('invitations.search');
         Route::get('/category-search/{category}', [InvitationController::class, 'categorizedSearch'])->name('invitations.category.search');
@@ -87,9 +87,9 @@ Route::group(['middleware' => 'auth'], function () {
     //* Routes for CaptainController 
     Route::group(['prefix' => 'captains'], function () {
         Route::get('/overview', [CaptainController::class, 'getCaptains'])->name('captains.overView');
-        Route::get('/categorized-invitations/{category}', [CaptainController::class, 'categorizedInvitations'])->name('invitations.category');
-        Route::get('/search', [CaptainController::class, 'search'])->name('invitations.search');
-        Route::get('/category-search/{category}', [CaptainController::class, 'categorizedSearch'])->name('invitations.category.search');
+        // Route::get('/categorized-invitations/{category}', [CaptainController::class, 'categorizedInvitations'])->name('invitations.category');
+        Route::get('/search', [CaptainController::class, 'search'])->name('captains.search');
+        // Route::get('/category-search/{category}', [CaptainController::class, 'categorizedSearch'])->name('invitations.category.search');
         Route::get('/profile/{id}', [CaptainController::class, 'getCaptainProfile'])->name('captains.profile');
     });
 });
@@ -97,9 +97,9 @@ Route::group(['middleware' => 'auth'], function () {
 //* Routes for AdminController 
 Route::group(['prefix' => 'admins'], function () {
     Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
-    Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
+    // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
     Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
-    Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
+    // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
     Route::get('/delete/{admin}', [AdminController::class, 'destroy'])->name('admins.delete');
 });
 

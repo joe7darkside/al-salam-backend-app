@@ -230,11 +230,26 @@ class BillController extends Controller
      * @return View|array
      */
 
-    public function paymentStatusBills($Status)
+    public function paymentStatusBills($status, Request $request)
     {
-        $bills =  Bill::where('payment_status', 'LIKE', '%' . $Status . '%')->with(['waterBill', 'gasBill', 'electricityBill'])->paginate(10);
+        $admin = $request->user()->first_name;
+        $bills =  Bill::where('payment_status', 'LIKE', '%' . $status . '%')
+            ->with(['user', 'waterBill', 'gasBill', 'electricityBill'])
+            ->paginate(10);
 
-        return View::make('dashboard.bills.paymentStatus', ['bills' => $bills]);
+        if ($status == 1) {
+
+            $status_name = "Paid";
+        } else {
+            $status_name = "Unpaid";
+        }
+        // return response()->json(['bills' => $bills, 'admin' => $admin]);
+        return View::make('dashboard.bills.paymentStatus', [
+            'bills' => $bills,
+            'admin' => $admin,
+            'status_name' => $status_name,
+            'status' => $status
+        ]);
     }
 
 
@@ -247,57 +262,59 @@ class BillController extends Controller
 
     public function search(Request $request)
     {
-
+        $admin = $request->user()->first_name;
         $search_text = $request->input('search');
 
 
         if (isset($search_text)) {
             $bills = Bill::where('Payment_date', 'LIKE', '%' . $search_text . '%')
-                ->with(['waterBill', 'gasBill', 'electricityBill'])
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-
-            $bills->appends($request->all());
-
-            // return response()->json(['bill' => $bills]);
-            return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
-        }
-        $bills =  Bill::orderBy('created_at', 'desc')->with(['waterBill', 'gasBill', 'electricityBill'])->paginate(10);
-
-        // return response()->json(['bill' => $bills]);
-        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
-    }
-
-
-    /**
-     * Return categorized view with array search results of bills
-     * @param Request $request
-     * @return View|array
-     */
-
-    public function categorizedSearch(Request $request, $category)
-    {
-
-        $search_text = $request->input('search');
-
-
-        if (isset($search_text)) {
-            $bills = Bill::where('Payment_date', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('bill_cost', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('month_name', 'LIKE', '%' . $search_text . '%')
-                ->with($category)
+                ->with(['user', 'waterBill', 'gasBill', 'electricityBill'])
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             $bills->appends($request->all());
 
             // return response()->json(['bill' => $bills]);
-            return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+            return View::make('dashboard.bills.overview',  ['bills' => $bills, 'admin' => $admin]);
         }
-        $bills =  Bill::with($category)->orderBy('created_at', 'desc')->paginate(10);
+        $bills =  Bill::orderBy('created_at', 'desc')->with(['user', 'waterBill', 'gasBill', 'electricityBill'])->paginate(10);
 
         // return response()->json(['bill' => $bills]);
-        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
+        return View::make('dashboard.bills.overview',  ['bills' => $bills, 'admin' => $admin]);
     }
+
+
+    // /**
+    //  * Return categorized view with array search results of bills
+    //  * @param Request $request
+    //  * @return View|array
+    //  */
+
+    // public function categorizedSearch(Request $request, $category)
+    // {
+
+    //     $search_text = $request->input('search');
+
+
+    //     if (isset($search_text)) {
+    //         $bills = Bill::where('Payment_date', 'LIKE', '%' . $search_text . '%')
+    //             ->orWhere('month_name', 'LIKE', '%' . $search_text . '%')
+    //             ->with($category)
+    //             ->orderBy('created_at', 'desc')
+    //             ->paginate(10);
+
+    //         $bills->appends($request->all());
+
+    //         // return response()->json(['bill' => $bills]);
+    //         return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+    //     }
+    //     $bills =  Bill::with($category)->orderBy('created_at', 'desc')->paginate(10);
+
+    //     // return response()->json(['bill' => $bills]);
+    //     return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
+    // }
 
 
     /**
@@ -311,23 +328,32 @@ class BillController extends Controller
 
         $status = $paymentStatus;
         $search_text = $request->input('search');
+        $admin = $request->user()->first_name;
+        if ($status == 1) {
 
-
+            $status_name = "Paid";
+        } else {
+            $status_name = "Unpaid";
+        }
         if (isset($search_text)) {
             $bills = Bill::where('payment_status', 'LIKE', '%' . $status . '%')
                 ->where('Payment_date', 'LIKE', '%' . $search_text . '%')
-                ->with(['waterBill', 'gasBill', 'electricityBill'])
+                ->orWhere('bill_cost', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('month_name', 'LIKE', '%' . $search_text . '%')
+                ->with(['user', 'waterBill', 'gasBill', 'electricityBill'])
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             $bills->appends($request->all());
 
+
+
             // return response()->json(['bill' => $bills]);
-            return View::make('dashboard.users.paymentStatus',  ['bills' => $bills]);
+            return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills, 'admin' => $admin, 'status' => $status, 'status_name' => $status_name]);
         }
-        $bills =  Bill::where('payment_status', 'LIKE', '%' . $status . '%')->with(['waterBill', 'gasBill', 'electricityBill'])->paginate(10);
+        $bills =  Bill::where('payment_status', 'LIKE', '%' . $status . '%')->with(['user', 'waterBill', 'gasBill', 'electricityBill'])->paginate(10);
 
         // return response()->json(['bill' => $bills]);
-        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills]);
+        return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills, 'admin' => $admin, 'status' => $status, 'status_name' => $status_name]);
     }
 }

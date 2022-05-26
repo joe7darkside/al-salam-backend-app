@@ -63,6 +63,7 @@ class CaptainController extends Controller
     public function search(Request $request)
     {
 
+        $admin = $request->user()->first_name;
         $search_text = $request->input('search');
 
 
@@ -79,13 +80,19 @@ class CaptainController extends Controller
             $captains->appends($request->all());
 
             // return response()->json(['captains' => $captains]);
-            return View::make('dashboard.captains.overview',  ['captains' => $captains]);
+            return View::make('dashboard.captains.overview',  [
+                'captains' => $captains,
+                'admin' => $admin
+            ]);
         }
         $captains =  Captain::orderBy('created_at', 'desc')->paginate(10);
 
 
         // return response()->json(['captains' => $captains]);
-        return View::make('dashboard.captains.overview',  ['captains' => $captains]);
+        return View::make('dashboard.captains.overview',  [
+            'captains' => $captains,
+            'admin' => $admin
+        ]);
     }
 
 
@@ -116,12 +123,16 @@ class CaptainController extends Controller
      * @return View|array
      */
 
-    public function getCaptains()
+    public function getCaptains(Request $request)
     {
+        $admin = $request->user()->first_name;
         $captains = Captain::orderBy('created_at', 'desc')->paginate(10);
 
 
-        return View::make('dashboard.captains.overview',  ['captains' => $captains]);
+        return View::make('dashboard.captains.overview',  [
+            'captains' => $captains,
+            'admin' => $admin
+        ]);
         // return response()->json(['captains' => $captains]);
     }
 

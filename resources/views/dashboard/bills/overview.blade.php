@@ -86,9 +86,9 @@
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 electricity bill</th> --}}
-                                            <th
+                                            {{-- <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment status</th>
+                                                payment status</th> --}}
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 payment date</th>
@@ -136,10 +136,10 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $bill->electricityBill->cost }}</span>
                                                 </td> --}}
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $bill->payment_status }}</span>
-                                                </td>
+                                                </td> --}}
 
                                                 <td class="align-middle text-center">
                                                     <span
@@ -200,106 +200,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-{{-- <table class="table align-items-center mb-0">
-    <thead>
-        <tr>
-            <th
-                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                user</th>
-
-            <th
-                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                water bill</th>
-
-            <th
-                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                gas bill</th>
-
-            <th
-                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                electricity</th>
-            <th
-                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
-                Payment date</th>
-            <th
-                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                Month</th>
-            <th
-                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                Payment status</th>
-            <th
-                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                Created at</th>
-            <th
-                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                Updated at</th>
-            <th class="text-secondary opacity-7"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($bills as $bill)
-            <tr>
-                <td>
-                    <p class="text-s text-secondary mb-0">
-                        {{ $bill->user_id }}
-                    </p>
-                </td>
-
-                <td>
-                    <p class="text-s text-secondary mb-0">
-                        {{ $bill->waterBill->cost }}
-                    </p>
-                </td>
-
-                <td>
-                    <p class="text-s text-secondary mb-0">
-                        {{ $bill->gasBill->cost }}
-                    </p>
-                </td>
-
-                <td>
-                    <p class="text-s text-secondary mb-0">
-                        {{ $bill->electricityBill->cost }}
-                    </p>
-                </td>
-                <td>
-                    <p class="text-s font-weight-bold mb-0">{{ $bill->payment_date }}
-                    </p>
-                </td>
-
-                <td class="align-middle text-center">
-                    <span
-                        class="text-secondary text-s font-weight-bold">{{ $bill->created_at->diffForHumans() }}</span>
-                </td>
-                <td class="align-middle text-center">
-                    <span
-                        class="text-secondary text-s font-weight-bold">{{ $bill->updated_at->diffForHumans() }}</span>
-                </td>
-                <td class="align-middle">
-                    <div class="dropdown">
-                        <i class="fa fa-ellipsis-v ">
-                            <div class="dropdown-content">
-                                <a href="#"><i
-                                        class="fa-solid fa-paper-plane send"></i></a>
-                                <a
-                                    href="{{ route('bills.profile', ['id' => $bill->id]) }}"><i
-                                        class="fa-solid fa-address-card profile"></i></a>
-                                <a href=""><i class="fa-solid fa-trash delete"></i></a>
-                            </div>
-                        </i>
-                    </div>
-
-                    {{-- </button> --}}
-{{-- </td>
-
-</tr>
-@endforeach --}}
-</tbody>
-</table> --}}

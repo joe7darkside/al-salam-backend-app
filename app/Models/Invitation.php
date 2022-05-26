@@ -10,4 +10,9 @@ class Invitation extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'visiter_name', 'permission'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

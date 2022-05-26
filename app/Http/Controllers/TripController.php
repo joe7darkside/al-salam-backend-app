@@ -141,13 +141,14 @@ class TripController extends Controller
      * @return View|array
      */
 
-    public function getTrips()
+    public function getTrips(Request $request)
     {
+        $admin = $request->user()->first_name;
 
-        $trips = Trip::with(['captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
+        $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['trips' => $trips]);
-        return View::make('dashboard.trips.overview', ['trips' => $trips]);
+        return View::make('dashboard.trips.overview', ['trips' => $trips, 'admin' => $admin]);
     }
 
     /**
@@ -158,26 +159,26 @@ class TripController extends Controller
 
     public function search(Request $request)
     {
-
+        $admin = $request->user()->first_name;
         $search_text = $request->input('search');
 
 
         if (isset($search_text)) {
             $trips = Trip::where('cost', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('payment_method', 'LIKE', '%' . $search_text . '%')
-                ->with(['captain', 'pickUp', 'dropOf'])
+                ->with(['user', 'captain', 'pickUp', 'dropOf'])
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             $trips->appends($request->all());
 
             // return response()->json(['trips' => $trips]);
-            return View::make('dashboard.trips.overview',  ['trips' => $trips]);
+            return View::make('dashboard.trips.overview',  ['trips' => $trips, 'admin' => $admin]);
         }
-        $trips = Trip::with(['captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
+        $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['trips' => $trips]);
-        return View::make('dashboard.trips.overview',  ['trips' => $trips]);
+        return View::make('dashboard.trips.overview',  ['trips' => $trips, 'admin' => $admin]);
     }
 
 
@@ -187,15 +188,19 @@ class TripController extends Controller
      * @return View|array
      */
 
-    public function categorizedTrips($category)
+    public function categorizedTrips($category, Request $request)
     {
+        $admin = $request->user()->first_name;
 
         $trips = Trip::where('payment_method', 'LIKE', '%' . $category . '%')
-            ->with(['captain', 'pickUp', 'dropOf'])
+            ->with(['user', 'captain', 'pickUp', 'dropOf'])
             ->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['trips' => $trips]);
-        return View::make('dashboard.trips.categorized', ['trips' => $trips]);
+        return View::make('dashboard.trips.categorized', [
+            'trips' => $trips,
+            'admin' => $admin
+        ]);
     }
 
 
@@ -209,24 +214,24 @@ class TripController extends Controller
     public function categorizedSearch(Request $request, $category)
     {
         $search_text = $request->input('search');
-
+        $admin = $request->user()->first_name;
         if (isset($search_text)) {
             $trips = Trip::where('payment_method', 'LIKE', '%' . $category . '%')
                 ->Where('cost', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('captain_id', 'LIKE', '%' . $search_text . '%')
-                ->with(['captain', 'pickUp', 'dropOf'])
+                ->with(['user', 'captain', 'pickUp', 'dropOf'])
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             $trips->appends($request->all());
 
             // return response()->json(['trips' => $trips]);
-            return View::make('dashboard.trips.categorized',  ['trips' => $trips]);
+            return View::make('dashboard.trips.categorized',  ['trips' => $trips, 'admin' => $admin]);
         }
-        $trips = Trip::with(['captain', 'pickUp', 'dropOf'])
+        $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])
             ->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['trips' => $trips]);
-        return View::make('dashboard.trips.categorized',  ['trips' => $trips]);
+        return View::make('dashboard.trips.categorized',  ['trips' => $trips, 'admin' => $admin]);
     }
 }

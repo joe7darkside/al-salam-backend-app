@@ -32,4 +32,9 @@ class Trip extends Model
     {
         return $this->belongsTo(Captain::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
