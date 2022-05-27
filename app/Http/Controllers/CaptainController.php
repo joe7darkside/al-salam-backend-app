@@ -18,18 +18,21 @@ class CaptainController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function updateCaptain(Request $request, $id)
+    public function updateCaptain(Request $request)
     {
-
-        $captain = Captain::find($id);
+        $captain_id = $request->input('captain_id');
+        $captain = Captain::find($captain_id);
 
         if ($captain) {
             $captain->update($request->all());
-            return View::make('dashboard.captains.overview')
-                ->with('Message', 'updated successfully.');
+            return redirect()->back()->with('Message', 'Deleted Successfully.');
+            // return View::make('dashboard.captains.overview')
+            //     ->with('Message', 'updated successfully.');
         } else {
-            return View::make('dashboard.captains.overview')
-                ->with('Message', 'No Data Updated');
+
+            return redirect()->back()->with('Message', 'Deleted Successfully.');
+            // return View::make('dashboard.captains.overview')
+            //     ->with(['Message', 'No Data Updated', 'admin' => $request->user()->first_name]);
         }
     }
 
@@ -39,16 +42,19 @@ class CaptainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $captain = Captain::find($id);
+        $captain_id = $request->input('delete_captain_id');
+        $captain = Captain::find($captain_id);
 
         if ($captain) {
             $captain->delete();
-            return View::make('dashboard.captains.overview')
+            // return response()->json(['result' => 'works']);
+            return redirect()->back()
                 ->with('Message', 'Deleted Successfully.');
         } else {
-            return View::make('dashboard.captains.overview')
+            // return response()->json(['result' => $captain]);
+            return redirect()->back()
                 ->with('Message', 'Record Faild to Deleted');
         }
     }
@@ -153,5 +159,23 @@ class CaptainController extends Controller
 
         return View::make('dashboard.captains.profile',  ['captain' => $captain]);
         // return response()->json(['captain' => $captain]);
+    }
+
+
+    /**
+     * Return profile view with captain details
+     * @param Request $request
+     * @return View
+     */
+
+    public function editCaptain($id)
+    {
+        $captain = Captain::find($id);
+
+        $trips = $captain->trip;
+
+
+        // return View::make('dashboard.captains.profile',  ['captain' => $captain]);
+        return response()->json(['status' => 200, 'captain' => $captain]);
     }
 }

@@ -28,7 +28,8 @@ class CaptainAuthController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            redirect()->back()->with(['message', $validator->errors()->toJson()]);
+            // return response()->json($validator->errors()->toJson(), 400);
         }
 
         $user = Captain::create(array_merge(

@@ -125,12 +125,13 @@
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                <a href="#"><i
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#sendModal"><i
                                                                         class="fa-solid fa-paper-plane send"></i></a>
                                                                 <a
                                                                     href="{{ route('users.profile', ['id' => $user->id]) }}"><i
                                                                         class="fa-solid fa-address-card profile"></i></a>
-                                                                <a href=""><i class="fa-solid fa-trash delete"></i></a>
+                                                                {{-- <a href=""><i class="fa-solid fa-trash delete"></i></a> --}}
                                                             </div>
                                                         </i>
                                                     </div>
@@ -160,10 +161,36 @@
         </div>
     </main>
 
+    <!--Start Send Modal -->
+    <div class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Bill</h5>
+                </div>
+                <form>
+                    @csrf
+                    {{-- @method('DELETE') --}}
+                    {{-- <input type="hidden" name="" id=""> --}}
+                    <div class="modal-body">
+                        Confirm Send Notification?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End Send Modal -->
+
     <!--   Core JS Files   -->
     {{-- <script src="{{ asset('/js/dashboard/core/popper.min.js') }}"></script>
     <script src="{{ asset('/js/dashboard/core/bootstrap.min.js') }}"></script> --}}
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
     @include('dashboard.components.script')
     @yield('script')
 </body>

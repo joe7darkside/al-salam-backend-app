@@ -102,9 +102,9 @@
                                             {{-- <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th> --}}
-                                            <th
+                                            {{-- <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                            </th>
+                                            </th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -175,14 +175,13 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $trip->updated_at->diffForHumans() }}</span>
                                                 </td> --}}
-                                                <td class="align-middle">
+                                                {{-- <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
                                                                 <a href="">
                                                                     <i class="bi bi-info-circle-fill send"></i></a>
-                                                                {{-- <a href="#"><i class="fa-solid fa-pen edit"></i></a> --}}
-                                                                {{-- {{ route('trips.delete', ['trip' => $trip]) }} --}}
+
                                                                 <a href=""><i class="fa-solid fa-trash delete">
                                                                         @method('DELETE')</i>
                                                                 </a>
@@ -191,7 +190,7 @@
                                                     </div>
 
 
-                                                </td>
+                                                </td> --}}
 
                                             </tr>
                                         @endforeach

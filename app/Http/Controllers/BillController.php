@@ -37,8 +37,10 @@ class BillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
+
+        $id = $request->input('delete_bill_id');
         $admin = $request->user()->first_name;
         $bill = Bill::find($id);
 
@@ -139,9 +141,10 @@ class BillController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            "user_id" => "required",
+            "user_first_name" => "required",
+            "user_last_name" => "required",
             "Payment_date" => "required",
-            "month_name" => "required",
+            // "month_name" => "required",
             "payment_status" => "required",
             "water_bill" => "required",
             "gas_bill" => "required",
@@ -149,10 +152,13 @@ class BillController extends Controller
 
 
         ]);
-        $user_id = $request->user()->id;
+        $user_id = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
+            ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
+        // $user_id = $request->user()->id;
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            return redirect()->back()->with(['message', $validator->errors()->toJson()]);
+            // return response()->json($validator->errors()->toJson(), 400);
         }
 
         $date = Carbon::now();
@@ -160,7 +166,7 @@ class BillController extends Controller
 
         $bill_cost = $request->water_bill + $request->gas_bill + $request->electricity_bill;
         $bill = Bill::create([
-            "user_id" => $request->user_id,
+            "user_id" => $user_id->id,
             "Payment_date" => $request->Payment_date,
             "month_name" => $monthName,
             "payment_status" => $request->payment_status,
@@ -356,5 +362,25 @@ class BillController extends Controller
 
         // return response()->json(['bill' => $bills]);
         return View::make('dashboard.bills.paymentStatus',  ['bills' => $bills, 'admin' => $admin, 'status' => $status, 'status_name' => $status_name]);
+    }
+
+
+
+
+    /**
+     * Return profile view with captain details
+     * @param Request $request
+     * @return View
+     */
+
+    public function editBill($id)
+    {
+        $bill = Bill::find($id);
+
+        $trips = $bill->trip;
+
+
+        // return View::make('dashboard.captains.profile',  ['captain' => $captain]);
+        return response()->json(['status' => 200, 'captain' => $captain]);
     }
 }

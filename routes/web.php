@@ -63,8 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/statusSearch/{status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
         Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
         Route::get('/search', [BillController::class, 'search'])->name('bills.search');
-        Route::get('/bills/delete/{bill}', [BillController::class, 'destroy'])->name('bills.delete');
+        Route::delete('/bills/delete', [BillController::class, 'destroy'])->name('bills.delete');
         Route::post('/bills/add', [BillController::class, 'addUserBill'])->name('bills.add');
+        Route::get('/bills/edit/{id}', [BillController::class, 'addUserBill'])->name('bills.edit');
     });
 
     //* Routes for TripController 
@@ -93,7 +94,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/search', [CaptainController::class, 'search'])->name('captains.search');
         // Route::get('/category-search/{category}', [CaptainController::class, 'categorizedSearch'])->name('invitations.category.search');
         Route::get('/profile/{id}', [CaptainController::class, 'getCaptainProfile'])->name('captains.profile');
+        Route::get('/edit/{id}', [CaptainController::class, 'editCaptain'])->name('captains.edit');
         Route::put('/update', [CaptainController::class, 'updateCaptain'])->name('captains.update');
+        Route::delete('/delete', [CaptainController::class, 'destroy'])->name('captains.delete');
     });
 });
 
@@ -103,7 +106,7 @@ Route::group(['prefix' => 'admins'], function () {
     // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
     Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
     // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
-    Route::get('/delete/{admin}', [AdminController::class, 'destroy'])->name('admins.delete');
+    Route::delete('/delete', [AdminController::class, 'destroy'])->name('admins.delete');
 });
 
 

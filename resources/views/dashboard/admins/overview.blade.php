@@ -158,21 +158,33 @@
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                {{-- <a href="#"><i
-                                                                        class="fa-solid fa-paper-plane send"></i></a>
-                                                                <a href=""><i
-                                                                        class="fa-solid fa-address-card profile"></i></a> --}}
-                                                                <a href="#"><i class="fa-solid fa-pen edit"></i></a>
-                                                                <a
-                                                                    href="{{ route('admins.delete', ['admin' => $admin]) }}"><i
-                                                                        class="fa-solid fa-trash delete">
+                                                                {{-- <a href="">
+                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
+                                                                {{-- <button value="{{ $captain->id }}"
+                                                                    class="infoBtn "
+                                                                    style="border: 0ch; color: blue"><i
+                                                                        class="bi bi-info-circle-fill"></i></button> --}}
+
+                                                                <button value="{{ $admin->id }}"
+                                                                    class="editBtn "
+                                                                    style="border: 0ch; color: darkgoldenrod"><i
+                                                                        class="fa fa-pen "></i></button>
+                                                                {{-- <a href="#edit{{ $captain->id }}"><i
+                                                                        class="fa-solid fa-pen update "
+                                                                        data-toggle="modal"></i></a> --}}
+                                                                {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
+                                                                {{-- <a href=""><i class="fa-solid fa-trash delete">
                                                                         @method('DELETE')</i>
-                                                                </a>
+                                                                </a> --}}
+                                                                <button value="{{ $admin->id }} "
+                                                                    class="deleteBtn"
+                                                                    style="border: 0ch; color: crimson"><i
+                                                                        class="fa fa-trash update "></i></button>
                                                             </div>
                                                         </i>
                                                     </div>
 
-                                                    {{-- </button> --}}
+
                                                 </td>
 
                                             </tr>
@@ -279,18 +291,50 @@
             </div>
         </div>
     </div>
+    <!--Start Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Captain</h5>
+                </div>
+                <form action="{{ route('admins.delete') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="delete_admin_id" id="delete_admin_id">
+                    <div class="modal-body">
+                        Confirm Delete Admin?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
+    <!--End Delete Modal -->
     <!--End Create Modal -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> --}}
+    {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
+    {{-- <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script> --}}
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="/js/dashboard/modal/modal.js"></script> --}}
 
+    <script src="{{ asset('js/dashboard/modal/admin.js') }}"></script>
 
     @include('dashboard.components.script')
     @yield('script')
 
 
-{{-- 
-    <script src="js/login/jquery-3.2.1.min.js"></script>
-    <script src="js/login/main.js"></script> --}}
 
 
 </body>

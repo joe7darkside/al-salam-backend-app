@@ -13,13 +13,15 @@
     <link rel="stylesheet" href="{{ asset('icons/bootstrap-icons/bootstrap-icons.css') }} ">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/dropdown-menu.css') }}">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"> --}}
+
+
+
+
+
+
+
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> --}}
-
-
-
-
-
-
 </head>
 
 <body>
@@ -66,16 +68,6 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
@@ -154,28 +146,16 @@
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                {{-- <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
-                                                                {{-- <button value="{{ $captain->id }}"
-                                                                    class="infoBtn "
-                                                                    style="border: 0ch; color: blue"><i
-                                                                        class="bi bi-info-circle-fill"></i></button> --}}
-
-                                                                <button value="{{ $captain->id }}"
-                                                                    class="editBtn "
-                                                                    style="border: 0ch; color: darkgoldenrod"><i
-                                                                        class="fa fa-pen "></i></button>
-                                                                {{-- <a href="#edit{{ $captain->id }}"><i
-                                                                        class="fa-solid fa-pen update "
-                                                                        data-toggle="modal"></i></a> --}}
+                                                                <a href="">
+                                                                    <i class="bi bi-info-circle-fill send"></i></a>
+                                                                <a href="#edit{{ $captain->id }}"><i
+                                                                        class="fa-solid fa-pen update " 
+                                                                        data-toggle="modal"
+                                                                        ></i></a>
                                                                 {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
-                                                                {{-- <a href=""><i class="fa-solid fa-trash delete">
+                                                                <a href=""><i class="fa-solid fa-trash delete">
                                                                         @method('DELETE')</i>
-                                                                </a> --}}
-                                                                <button value="{{ $captain->id }} "
-                                                                    class="deleteBtn"
-                                                                    style="border: 0ch; color: crimson"><i
-                                                                        class="fa fa-trash update "></i></button>
+                                                                </a>
                                                             </div>
                                                         </i>
                                                     </div>
@@ -218,7 +198,8 @@
                     </div>
                 </div>
             </footer>
-
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 
@@ -235,7 +216,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('captains.register') }}" method="POST" class="validate-form">
+                    <form action="{{ route('captains.register') }}" method="POST">
                         @csrf
                         {{-- FIRST ROW --}}
                         <div class="row">
@@ -331,7 +312,7 @@
 
     <!--Start Update Modal -->
 
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal{{$captain->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -342,7 +323,6 @@
                     <form id="editForm" action="{{ route('captains.update') }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" id="captain_id" name="captain_id" value="">
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}
@@ -433,67 +413,18 @@
         </div>
     </div>
 
-
-
-    <!-- Button trigger modal -->
-    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button> --}}
-
-    <!--Start Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Captain</h5>
-                </div>
-                <form action="{{ route('captains.delete') }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="delete_captain_id" id="delete_captain_id">
-                    <div class="modal-body">
-                        Confirm Delete captain?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!--End Delete Modal -->
-
-
-    <script src="{{ asset('/js/dashboard/validation/validation.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script> --}}
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script> --}}
+    <!--End Update Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script> --}}
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="/js/dashboard/modal/modal.js"></script> --}}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="/js/dashboard/modal/modal.js"></script>
 
-    @include('dashboard.components.script')
-    @yield('script')
-    <script src="{{ asset('js/dashboard/modal/modal.js') }}"></script>
-    {{-- <script>
-        $(document).ready(function() {
-
-            $(document).on('click', '.editBtn', function() {
-                var captain_id = $(this).val();
-
-                $('#editModal').modal('show');
-
-
-            });
-        })
-    </script> --}}
 </body>
 
 </html>
