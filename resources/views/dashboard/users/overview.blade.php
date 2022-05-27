@@ -8,12 +8,14 @@
     <title>
         Users
     </title>
-
+    <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
     @include('dashboard.components.header')
     @yield('header')
 </head>
 
-<body class="g-sidenav-show  bg-page">
+
+
+<body class="g-sidenav-show  bg-page main-scrollBar">
 
     @include('dashboard.components.sideBar')
     @yield('sideBar')
@@ -55,7 +57,7 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-4 ">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">

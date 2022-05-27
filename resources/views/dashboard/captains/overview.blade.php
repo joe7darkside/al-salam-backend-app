@@ -65,7 +65,7 @@
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
 
-                                <table class="table align-items-center mb-0">
+                                <table class="table align-items-center mb-0" id="datatable">
                                     <thead>
                                         <tr>
                                             <th
@@ -82,20 +82,6 @@
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 email</th>
 
-                                            {{-- <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                gas captain</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                electricity captain</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment status</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment method</th> --}}
-
-
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
@@ -104,6 +90,9 @@
                                                 Updated at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                <a href="#" style="color:forestgreen; font-size: 15px"
+                                                    data-toggle="modal" data-target="#createModal">Create</a>
+
                                             </th>
                                         </tr>
                                     </thead>
@@ -130,41 +119,6 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $captain->email }}</span>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $captain->watercaptain->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $captain->gascaptain->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $captain->electricitycaptain->cost }}</span>
-                                                </td> --}}
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $captain->payment_status }}</span>
-                                                </td> --}}
-
-                                                {{-- <td class="align-middle text-center">
-                                                    @switch($captain->payment_method)
-                                                        @case(0)
-                                                            <span class="text-s font-weight-bold mb-0">Cash</span>
-                                                        @break
-
-                                                        @case(1)
-                                                            <span class="text-s font-weight-bold mb-0">Visa Card</span>
-                                                        @break
-
-                                                        @case(2)
-                                                            <span class="text-s font-weight-bold mb-0">Al Salam Card</span>
-                                                        @break
-
-                                                        @default
-                                                    @endswitch
-
-                                                </td> --}}
 
 
                                                 <td class="align-middle text-center">
@@ -181,7 +135,8 @@
                                                             <div class="dropdown-content">
                                                                 <a href="">
                                                                     <i class="bi bi-info-circle-fill send"></i></a>
-                                                                <a href="#"><i class="fa-solid fa-pen edit"></i></a>
+                                                                <a href="#"><i
+                                                                        class="fa-solid fa-pen update edit"></i></a>
                                                                 {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
                                                                 <a href=""><i class="fa-solid fa-trash delete">
                                                                         @method('DELETE')</i>
@@ -212,9 +167,215 @@
         </div>
     </main>
 
+    <!--Start Create Modal -->
 
-    @include('dashboard.components.script')
-    @yield('script')
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Admin</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('captains.register') }}" method="POST">
+                        @csrf
+                        {{-- FIRST ROW --}}
+                        <div class="row">
+                            {{-- First name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>First Name </label>
+                                    <input type="text" name="first_name" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Last name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" name="last_name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- SECOND ROW --}}
+                        <div class="row">
+                            {{-- Phone --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" name="phone" class="form-control" aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Email --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" name="email" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        {{-- Thired ROW --}}
+                        <div class="row">
+                            {{-- vehicle --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>vehicle</label>
+                                    <input type="text" name="vehicle" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Email --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Licence plate</label>
+                                    <input type="text" name="licence_plate" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {{-- Password --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                        </div>
+                        {{-- Password conformition --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Password Confirmation</label>
+                                <input type="password" name="password_confirmation" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--End Create Modal -->
+
+    <!--Start Update Modal -->
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Captain</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" action="{{ route('captains.update') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        {{-- FIRST ROW --}}
+                        <div class="row">
+                            {{-- First name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>First Name </label>
+                                    <input type="text" name="first_name" id="first_name" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Last name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" name="last_name" id="last_name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- SECOND ROW --}}
+                        <div class="row">
+                            {{-- Phone --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" name="phone" id="phone" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Email --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" name="email" id="email" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        {{-- Thired ROW --}}
+                        <div class="row">
+                            {{-- vehicle --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>vehicle</label>
+                                    <input type="text" name="vehicle" id="vehicle" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Email --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Licence plate</label>
+                                    <input type="text" name="licence_plate" id="licence_plate" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {{-- Password --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                        </div>
+                        {{-- Password conformition --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Password Confirmation</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--End Update Modal -->
+
+
+
 </body>
 
 </html>

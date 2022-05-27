@@ -9,8 +9,30 @@
     <title>
         Profile
     </title>
-
+    <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
 </head>
+
+{{-- <style>
+    body::-webkit-scrollbar {
+        width: 12px;
+        /* width of the entire scrollbar */
+    }
+
+    body::-webkit-scrollbar-track {
+        background: orange;
+        /* color of the tracking area */
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: blue;
+        /* color of the scroll thumb */
+        border-radius: 20px;
+        /* roundness of the scroll thumb */
+        border: 3px solid orange;
+        /* creates padding around scroll thumb */
+    }
+
+</style> --}}
 
 <body class="g-sidenav-show bg-gray-100">
     @include('dashboard.components.sideBar')
@@ -104,7 +126,7 @@
                         <div class="card-header pb-0 p-3">
                             <h5 class="mb-0">Invitations</h5>
                         </div>
-                        <div class="scrollable-container p-3">
+                        <div class=" scrollable-container p-3 card-scrollBar">
 
                             <ul class="list-group">
                                 @foreach ($user->invitaion as $invite)
@@ -132,7 +154,7 @@
                         <div class="card-header pb-0 p-3">
                             <h5 class="mb-0">Trips</h5>
                         </div>
-                        <div class="scrollable-container p-3">
+                        <div class="scrollable-container p-3 card-scrollBar">
                             <ul class="list-group">
                                 @for ($i = 0; $i <= $user->trip->count(); $i++)
                                 @endfor
@@ -182,7 +204,7 @@
                         <div class="card-header pb-0 p-3">
                             <h5 class="mb-0">Bills</h5>
                         </div>
-                        <div class="scrollable-container p-3">
+                        <div class="scrollable-container p-3 card-scrollBar">
                             <ul class="list-group">
                                 @foreach ($user->bill as $bill)
                                     <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">

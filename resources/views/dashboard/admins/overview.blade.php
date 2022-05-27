@@ -67,7 +67,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>admins Table</h6>
+                            <h6>Admins Table</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -89,8 +89,6 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 email</th>
-
-
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
@@ -99,6 +97,21 @@
                                                 Updated at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+
+
+                                                <!-- Button trigger modal -->
+                                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#exampleModal">
+                                                    Launch demo modal
+                                                </button> --}}
+
+
+
+                                                {{-- <button type="submit" style="color:forestgreen "
+                                                    id="createModal">Create</button> --}}
+
+                                                <a href="#" style="color:forestgreen; font-size: 15px"
+                                                    data-toggle="modal" data-target="#createModal">Create</a>
                                             </th>
                                         </tr>
                                     </thead>
@@ -179,8 +192,107 @@
     </main>
 
 
+
+
+
+
+    <!--Start Create Modal -->
+
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Admin</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('register.store') }}" method="POST">
+                        @csrf
+                        {{-- FIRST ROW --}}
+                        <div class="row">
+                            {{-- First name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>First Name </label>
+                                    <input type="text" name="first_name" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Last name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" name="last_name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- SECOND ROW --}}
+                        <div class="row">
+                            {{-- Phone --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="text" name="phone" class="form-control" aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+
+                            {{-- Rule --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Rule</label>
+                                    <input type="text" name="rule" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Email --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" name="email" class="form-control">
+                            </div>
+                        </div>
+                        {{-- Password --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                        </div>
+                        {{-- Password conformition --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Password Confirmation</label>
+                                <input type="password" name="password_confirmation" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--End Create Modal -->
+
+
+
     @include('dashboard.components.script')
     @yield('script')
+
+
+{{-- 
+    <script src="js/login/jquery-3.2.1.min.js"></script>
+    <script src="js/login/main.js"></script> --}}
+
+
 </body>
 
 </html>

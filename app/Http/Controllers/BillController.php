@@ -139,6 +139,7 @@ class BillController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
+            "user_id" => "required",
             "Payment_date" => "required",
             "month_name" => "required",
             "payment_status" => "required",
@@ -159,7 +160,7 @@ class BillController extends Controller
 
         $bill_cost = $request->water_bill + $request->gas_bill + $request->electricity_bill;
         $bill = Bill::create([
-            "user_id" => $user_id,
+            "user_id" => $request->user_id,
             "Payment_date" => $request->Payment_date,
             "month_name" => $monthName,
             "payment_status" => $request->payment_status,
@@ -182,8 +183,8 @@ class BillController extends Controller
             "cost" => $request->electricity_bill,
 
         ]);
-
-        return response()->json(['New bill' => $bill]);
+        return redirect()->back();
+        // return response()->json(['New bill' => $bill]);
     }
 
 

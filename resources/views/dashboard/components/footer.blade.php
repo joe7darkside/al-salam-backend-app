@@ -21,6 +21,13 @@
             </div>
         </div>
     </footer>
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
     {{-- <script src="{{ asset('/js/sideBar/sideBar.js') }}"></script>
     <script src="{{ asset('/js/dashboard/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('/js/dashboard/plugins/smooth-scrollbar.min.js') }}"></script>

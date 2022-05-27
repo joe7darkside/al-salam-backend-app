@@ -37,10 +37,11 @@ class CaptainAuthController extends Controller
         ));
         $token = auth()->guard('captain')->attempt($validator->validated());
 
-        return response()->json([
-            'message' => 'Customer successfully registered',
-            'user' => $user
-        ], 201);
+        // return response()->json([
+        //     'message' => 'Customer successfully registered',
+        //     'user' => $user
+        // ], 201);
+        return redirect()->back();
     }
 
 

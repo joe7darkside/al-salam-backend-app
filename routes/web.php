@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\View;
-
+use App\Http\Controllers\CaptainAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
         Route::get('/search', [BillController::class, 'search'])->name('bills.search');
         Route::get('/bills/delete/{bill}', [BillController::class, 'destroy'])->name('bills.delete');
+        Route::post('/bills/add', [BillController::class, 'addUserBill'])->name('bills.add');
     });
 
     //* Routes for TripController 
@@ -86,11 +87,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     //* Routes for CaptainController 
     Route::group(['prefix' => 'captains'], function () {
+        Route::post('/register', [CaptainAuthController::class, 'register'])->name('captains.register');
         Route::get('/overview', [CaptainController::class, 'getCaptains'])->name('captains.overView');
         // Route::get('/categorized-invitations/{category}', [CaptainController::class, 'categorizedInvitations'])->name('invitations.category');
         Route::get('/search', [CaptainController::class, 'search'])->name('captains.search');
         // Route::get('/category-search/{category}', [CaptainController::class, 'categorizedSearch'])->name('invitations.category.search');
         Route::get('/profile/{id}', [CaptainController::class, 'getCaptainProfile'])->name('captains.profile');
+        Route::put('/update', [CaptainController::class, 'updateCaptain'])->name('captains.update');
     });
 });
 

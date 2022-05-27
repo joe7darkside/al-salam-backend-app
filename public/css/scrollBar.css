@@ -1,0 +1,25 @@
+.card-scrollBar::-webkit-scrollbar {
+    width: 10px;
+    /* overflow: hidden; */
+    /* width of the entire scrollbar */
+}
+
+.main-scrollBar::-webkit-scrollbar-track {
+    background: rgb(222, 222, 221);
+    /* color of the tracking area */
+}
+
+.main-scrollBar::-webkit-scrollbar-thumb {
+    background-color: rgb(163, 162, 162);
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    /* border: 3px solid orange; */
+    /* creates padding around scroll thumb */
+}
+
+.main-scrollBar::-webkit-scrollbar {
+    width: 10px;
+    /* overflow: hidden; */
+    /* width of the entire scrollbar */
+}

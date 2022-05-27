@@ -1,13 +1,13 @@
 @section('sideBar')
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3  "
         id="sidenav-main">
 
 
 
         <div id="app ">
 
-            <div id="sidebar" class="active">
-                <div class="sidebar-wrapper active">
+            <div id="sidebar" class="active ">
+                <div class="sidebar-wrapper active main-scrollBar">
                     <div class="sidebar-header">
                         <div class="d-flex justify-content-between">
                             <div class="logo">
@@ -15,9 +15,7 @@
                                 App Logo
 
                             </div>
-                            <!-- <div class="toggler">
-                                                                                                                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                                                                                                                    </div> -->
+
                         </div>
                     </div>
                     <div class="sidebar-menu">

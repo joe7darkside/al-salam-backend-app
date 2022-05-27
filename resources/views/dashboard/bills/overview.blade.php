@@ -102,6 +102,8 @@
                                                 Updated at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                <a href="#" style="color:forestgreen; font-size: 15px"
+                                                    data-toggle="modal" data-target="#createModal">Create</a>
                                             </th>
                                         </tr>
                                     </thead>
@@ -115,8 +117,8 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{ $bill->user->first_name }}
-                                                        {{ $bill->user->last_name }}
+                                                        {{-- {{ $bill->user->first_name }}
+                                                        {{ $bill->user->last_name }} --}}
                                                     </span>
                                                 </td>
 
@@ -194,6 +196,94 @@
         </div>
     </main>
 
+
+
+
+    <!--Start Create Modal -->
+
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Admin</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('bills.add') }}" method="POST">
+                        @csrf
+                        {{-- FIRST ROW --}}
+                        <div class="row">
+                            {{-- First name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Payment date </label>
+                                    <input type="text" name="Payment_date" class="form-control"
+                                        aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+                            {{-- Last name --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Month Name</label>
+                                    <input type="text" name="month_name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- SECOND ROW --}}
+                        <div class="row">
+                            {{-- Phone --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Payment Status</label>
+                                    <input type="text" name="payment_status" class="form-control" aria-describedby="emailHelp">
+
+                                </div>
+                            </div>
+
+                            {{-- Rule --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Water bill</label>
+                                    <input type="text" name="water_bill" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Email --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Gas bill</label>
+                                <input type="text" name="gas_bill" class="form-control">
+                            </div>
+                        </div>
+                        {{-- Password --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Electricity bil</label>
+                                <input type="text" name="electricity_bill" class="form-control">
+                            </div>
+                        </div>
+                        {{-- Password conformition --}}
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>user id</label>
+                                <input type="text" name="user_id" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--End Create Modal -->
 
     @include('dashboard.components.script')
     @yield('script')
