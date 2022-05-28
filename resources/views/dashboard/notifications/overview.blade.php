@@ -12,8 +12,11 @@
     @include('dashboard.components.header')
     @yield('header')
 </head>
+{{-- style="border: 0px; color: rgb(225, 255, 0)" --}}
+<style>
 
 
+</style>
 
 <body class="g-sidenav-show  bg-page main-scrollBar">
 
@@ -86,22 +89,18 @@
                                             <th
                                                 class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
                                                 title en</th>
-
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 title ar</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 description en</th>
-
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 description ar</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
-
-
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
@@ -164,43 +163,16 @@
                                                                         class="bi bi-info-circle-fill"></i></button> --}}
 
                                                                 <button value="{{ $notification->id }}"
-                                                                    class="editBtn "
-                                                                    style="border: 0ch; color: darkgoldenrod"><i
-                                                                        class="fa fa-pen "></i></button>
-                                                                {{-- <a href="#edit{{ $captain->id }}"><i
-                                                                        class="fa-solid fa-pen update "
-                                                                        data-toggle="modal"></i></a> --}}
-                                                                {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
-                                                                {{-- <a href=""><i class="fa-solid fa-trash delete">
-                                                                        @method('DELETE')</i>
-                                                                </a> --}}
+                                                                    class="editBtn "><i
+                                                                        class="fa fa-pen"></i></button>
+
                                                                 <button value="{{ $notification->id }} "
-                                                                    class="deleteBtn"
-                                                                    style="border: 0ch; color: crimson"><i
+                                                                    class="deleteBtn"><i
                                                                         class="fa fa-trash update "></i></button>
                                                             </div>
                                                         </i>
                                                     </div>
-
-
                                                 </td>
-                                                {{-- <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <i class="fa fa-ellipsis-v ">
-                                                            <div class="dropdown-content">
-                                                                <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a>
-
-                                                                <a href=""><i class="fa-solid fa-trash delete">
-                                                                        @method('DELETE')</i>
-                                                                </a>
-                                                            </div>
-                                                        </i>
-                                                    </div>
-
-
-                                                </td> --}}
-
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -218,210 +190,43 @@
     </main>
 
     <!--Start Send Modal -->
-    <div class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Bill</h5>
-                </div>
-                <form>
-                    @csrf
-                    {{-- @method('DELETE') --}}
-                    {{-- <input type="hidden" name="" id=""> --}}
-                    <div class="modal-body">
-                        Confirm Send Notification?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--End Send Modal -->
 
+    @include('dashboard.notifications.modals.sendModal')
+    @yield('sendModal')
+
+    <!--End Send Modal -->
 
 
     <!--Start Create Modal -->
 
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Notification</h5>
-
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('notifications.add') }}" method="POST">
-                        @csrf
-                        {{-- FIRST ROW --}}
-                        <div class="row">
-                            {{-- First name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Title EN</label>
-                                    <input type="text" name="title_en" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Last name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Title AR</label>
-                                    <input type="text" name="title_ar" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- SECOND ROW --}}
-                        <div class="row">
-                            {{-- Phone --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Description EN</label>
-                                    <input type="text" name="description_en" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Email --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Description AR</label>
-                                    <input type="text" name="description_ar" class="form-control">
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    @include('dashboard.notifications.modals.createModal')
+    @yield('createModal')
 
     <!--End Create Modal -->
 
-
-
-
     <!--Start Update Modal -->
 
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    @include('dashboard.notifications.modals.editModal')
+    @yield('editModal')
 
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Notification</h5>
+    {{-- End Update Modal --}}
 
-                </div>
-                <div class="modal-body">
-                    <form id="editForm" action="{{ route('notifications.update') }}" method="POST">
-                        <input type="text" name="notification_id" id="notification_id">
-                        @csrf
-                        @method('PUT')
-                        {{-- FIRST ROW --}}
-                        <div class="row">
-                            {{-- First name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Title EN</label>
-                                    <input type="text" name="title_en" id="title_en" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Last name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Title AR</label>
-                                    <input type="text" name="title_ar" id="title_ar" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- SECOND ROW --}}
-                        <div class="row">
-                            {{-- Phone --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Description EN</label>
-                                    <input type="text" name="description_en" id="description_en" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Email --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Description AR</label>
-                                    <input type="text" name="description_ar" id="description_ar"
-                                        class="form-control">
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Button trigger modal -->
-    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button> --}}
 
     <!--Start Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Captain</h5>
-                </div>
-                <form action="{{ route('notifications.delete') }}" method="POST">
 
-                    <input type="hidden" name="delete_notification_id">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="delete_notification_id" id="delete_notification_id">
-                    <div class="modal-body">
-                        Confirm Delete notification?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('dashboard.notifications.modals.deleteModal')
+    @yield('deleteModal')
 
-    <script src="{{ asset('/js/dashboard/validation/validation.js') }}"></script>
+    {{-- End Delete Modal --}}
+
+    {{--  --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script> --}}
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script> --}}
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="/js/dashboard/modal/modal.js"></script> --}}
+    <script src="{{ asset('js/dashboard/validation/validation.js') }}"></script>
+
     @include('dashboard.components.script')
     @yield('script')
 
