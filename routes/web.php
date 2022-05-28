@@ -12,6 +12,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\CaptainAuthController;
+use App\Http\Controllers\NotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,16 +100,38 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/update', [CaptainController::class, 'updateCaptain'])->name('captains.update');
         Route::delete('/delete', [CaptainController::class, 'destroy'])->name('captains.delete');
     });
+
+
+
+
+    //* Routes for NotificationsController 
+    Route::group(['prefix' => 'notifications'], function () {
+
+        Route::get('/overview', [NotificationController::class, 'index'])->name('notifications.overview');
+        // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
+        Route::get('/search', [NotificationController::class, 'search'])->name('notifications.search');
+        Route::get('/edit/{id}', [NotificationController::class, 'edit'])->name('notifications.edit');
+        Route::put('/update/', [NotificationController::class, 'update'])->name('notifications.update');
+        Route::post('/add/', [NotificationController::class, 'store'])->name('notifications.add');
+
+        // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
+        Route::delete('/delete', [NotificationController::class, 'destroy'])->name('notifications.delete');
+    });
+
+
+
+
+    //* Routes for AdminController 
+    Route::group(['prefix' => 'admins'], function () {
+        Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
+        // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
+        Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
+        // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
+        Route::delete('/delete', [AdminController::class, 'destroy'])->name('admins.delete');
+    });
 });
 
-//* Routes for AdminController 
-Route::group(['prefix' => 'admins'], function () {
-    Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
-    // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
-    Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
-    // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
-    Route::delete('/delete', [AdminController::class, 'destroy'])->name('admins.delete');
-});
+
 
 
 

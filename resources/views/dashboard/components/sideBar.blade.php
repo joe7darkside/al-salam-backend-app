@@ -31,7 +31,7 @@
 
 
                             <li class="sidebar-item ">
-                                <a href="" class='sidebar-link'>
+                                <a href="{{ route('notifications.overview') }}" class='sidebar-link'>
                                     <i class="bi bi-bell-fill"></i> <span>Notifications</span>
                                 </a>
                             </li>
