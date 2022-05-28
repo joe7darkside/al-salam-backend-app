@@ -128,8 +128,8 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{-- {{ $bill->user->first_name }}
-                                                        {{ $bill->user->last_name }} --}}
+                                                        {{ $bill->user->first_name }}
+                                                        {{ $bill->user->last_name }}
                                                     </span>
                                                 </td>
 
@@ -296,17 +296,19 @@
                             </div>
                         </div>
                         {{-- Email --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Gas bill</label>
-                                <input type="text" name="gas_bill" class="form-control">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Gas bill</label>
+                                    <input type="text" name="gas_bill" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        {{-- Password --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Electricity bil</label>
-                                <input type="text" name="electricity_bill" class="form-control">
+                            {{-- Password --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Electricity bil</label>
+                                    <input type="text" name="electricity_bill" class="form-control">
+                                </div>
                             </div>
                         </div>
                         {{-- Password conformition --}}
@@ -435,21 +437,22 @@
                         </div>
 
                         {{-- Password --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" id="password" class="form-control">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" name="password" id="password" class="form-control">
+                                </div>
+                            </div>
+                            {{-- Password conformition --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Password Confirmation</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
+                                        class="form-control">
+                                </div>
                             </div>
                         </div>
-                        {{-- Password conformition --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Password Confirmation</label>
-                                <input type="password" name="password_confirmation" id="password_confirmation"
-                                    class="form-control">
-                            </div>
-                        </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Update</button>
