@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+{{-- Header --}}
+@include('dashboard.notifications.header')
+@yield('header')
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-        notifications
-    </title>
-    <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
-    @include('dashboard.components.header')
-    @yield('header')
-</head>
-{{-- style="border: 0px; color: rgb(225, 255, 0)" --}}
-<style>
+{{-- Body --}}
+{{-- <style>
+    table {
+        width: 100px;
+        table-layout: fixed;
+    }
 
 
-</style>
+    td {
+        word-wrap: break-word;
+        width: 10px
+    }
+
+</style> --}}
 
 <body class="g-sidenav-show  bg-page main-scrollBar">
 
@@ -75,8 +77,14 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <h6>Notifications Table</h6>
+                        <div class=" row px-4 py-3" style="justify-content: space-between">
+                            <div class="col-auto">
+                                <h6>Notifications Table</h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600" data-toggle="modal"
+                                    data-target="#createModal">Create</a>
+                            </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -84,30 +92,30 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 #</th>
+
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 title en</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 title ar</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 description en</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 description ar</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                <a href="#" style="color:forestgreen; font-size: 15px"
-                                                    data-toggle="modal" data-target="#createModal">Create</a>
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+
 
                                             </th>
                                         </tr>
@@ -130,7 +138,6 @@
                                                         class="text-s font-weight-bold mb-0">{{ $notification->title_ar }}</span>
                                                 </td>
 
-
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $notification->description_en }}</span>
@@ -139,7 +146,6 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $notification->description_ar }}</span>
                                                 </td>
-
 
                                                 <td class="align-middle text-center">
                                                     <span
@@ -150,17 +156,16 @@
                                                         class="text-s font-weight-bold mb-0">{{ $notification->updated_at->diffForHumans() }}</span>
                                                 </td>
 
-
                                                 <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
-                                                            <div class="dropdown-content">
-                                                                {{-- <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
-                                                                {{-- <button value="{{ $captain->id }}"
-                                                                    class="infoBtn "
-                                                                    style="border: 0ch; color: blue"><i
-                                                                        class="bi bi-info-circle-fill"></i></button> --}}
+                                                            <div class="dropdown-content col-auto">
+
+
+
+                                                                <button value="{{ $notification->id }}"
+                                                                    class="sendBtn "><i
+                                                                        class="fa fa-paper-plane"></i></button>
 
                                                                 <button value="{{ $notification->id }}"
                                                                     class="editBtn "><i
@@ -189,48 +194,38 @@
         </div>
     </main>
 
-    <!--Start Send Modal -->
+    <!-- Send Modal -->
 
     @include('dashboard.notifications.modals.sendModal')
     @yield('sendModal')
 
-    <!--End Send Modal -->
 
 
-    <!--Start Create Modal -->
+    <!-- Create Modal -->
 
     @include('dashboard.notifications.modals.createModal')
     @yield('createModal')
 
-    <!--End Create Modal -->
 
-    <!--Start Update Modal -->
+    <!-- Update Modal -->
 
     @include('dashboard.notifications.modals.editModal')
     @yield('editModal')
 
-    {{-- End Update Modal --}}
 
 
-    <!--Start Delete Modal -->
+    <!-- Delete Modal -->
 
     @include('dashboard.notifications.modals.deleteModal')
     @yield('deleteModal')
 
-    {{-- End Delete Modal --}}
 
-    {{--  --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="{{ asset('js/dashboard/validation/validation.js') }}"></script>
+    {{-- Footer --}}
+    @include('dashboard.notifications.footer')
+    @yield('footer')
 
-    @include('dashboard.components.script')
-    @yield('script')
 
-    <script src="{{ asset('js/dashboard/modal/notifications.js') }}"></script>
+
 
 </body>
 

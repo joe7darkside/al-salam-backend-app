@@ -79,9 +79,29 @@ class NotificationController extends Controller
 
 
 
-        // return View::make('dashboard.captains.profile',  ['captain' => $captain]);
         return response()->json(['status' => 200, 'notification' => $notification]);
     }
+
+
+
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $notification = Notification::find($id);
+
+        return response()->json(['status' => 200, 'notification' => $notification]);
+    }
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -91,13 +111,26 @@ class NotificationController extends Controller
      */
     public function update(Request $request)
     {
-        $id = $request->input('notification_id');
+        $id = $request->input('_id');
         $notification = Notification::find($id);
+
         if ($notification) {
             $notification->update($request->all());
-            return redirect()->back()
-                ->with('updated', 'Notification updated successfully.');
+            return redirect()->back()->with('Result', 'Update Successfully.');
+        } else {
+
+            return redirect()->back()->with('Result', 'No data Updated.');
         }
+        // $id = $request->input('notification_id');
+        // $notification = Notification::find($id);
+        // if ($notification) {
+        //     $notification->update($request->all());
+        //     return redirect()->back()
+        //         ->with('updated', 'Notification updated successfully.');
+        // }
+
+        // return redirect()->back()
+        //     ->with('updated', 'No data updated.');
     }
 
     /**
@@ -131,20 +164,21 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function send($id)
+    public function send(Request $request)
     {
-        $notification = Notification::find($id);
+        $notification_id = $request->input('notification_id');
+        $notification = Notification::find($notification_id);
         $users = User::all();
         $title = $notification->title;
         $body = $notification->body;
-        $type = $notification->type;
+        // $type = $notification->type;
 
         foreach ($users as $user) {
             $user_app_token = $user->app_token;
-            send_notification_FCM($user_app_token, $title, $body);
+            // send_notification_FCM($user_app_token, $title, $body);
         }
 
-        redirect()->back()->with('sussess', 'Notification sent successfully');
+        return   redirect()->back()->with('success', 'Notification sent successfully');
         // return response()->json(['result' => 'Notification sent successfully'], 200);
     }
 

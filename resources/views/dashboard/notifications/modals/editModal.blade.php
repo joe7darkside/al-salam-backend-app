@@ -8,10 +8,12 @@
 
                 </div>
                 <div class="modal-body">
-                    <form id="editForm" action="{{ route('notifications.update') }}" method="POST">
-                        <input type="hidden" name="notification_id" id="notification_id">
+                    <form action="{{ route('notifications.update') }}" method="POST">
                         @csrf
                         @method('PUT')
+
+                        <input type="hidden" name="_id" id="_id">
+
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}

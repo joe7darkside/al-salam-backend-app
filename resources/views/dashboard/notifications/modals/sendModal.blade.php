@@ -3,11 +3,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Bill</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Send Notification</h5>
                 </div>
-                <form>
+                <form action="{{ route('notifications.send') }}">
                     @csrf
-
+                    <input type="hidden" name="notification_id" id="notification_id">
                     <div class="modal-body">
                         Confirm Send Notification?
                     </div>

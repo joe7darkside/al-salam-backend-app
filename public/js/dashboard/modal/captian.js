@@ -65,4 +65,13 @@ $(document).ready(function() {
             }
         });
     });
+
+
+    $(document).on('click', '.infoBtn', function() {
+
+        var captain_id = $(this).val();
+        // alert(captain_id);
+        $('#infoModal').modal('show');
+        // $('#delete_captain_id').val(captain_id);
+    });
 })

@@ -60,10 +60,16 @@
 
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="{{ asset('icons/iconic/css/material-design-iconic-font.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('icons/bootstrap-icons/bootstrap-icons.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/login.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/utils.css') }} ">
-    @include('dashboard.components.header')
-    @yield('header')
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }} ">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    {{-- @include('dashboard.components.header')
+    @yield('header') --}}
 </head>
 
 <body>

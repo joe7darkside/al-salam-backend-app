@@ -24,6 +24,7 @@ class CaptainAuthController extends Controller
             'email' => 'required|email|unique:captains|max:255',
             'vehicle' => 'required|max:255',
             'licence_plate' => 'required|max:255',
+            'img' => 'required|string|max:255',
             'password' => 'required|confirmed|max:255',
 
         ]);

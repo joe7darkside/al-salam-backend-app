@@ -157,8 +157,8 @@ class CaptainController extends Controller
         $trips = $captain->trip;
 
 
-        return View::make('dashboard.captains.profile',  ['captain' => $captain]);
-        // return response()->json(['captain' => $captain]);
+        // return View::make('dashboard.captains.profile',  ['captain' => $captain]);
+        return response()->json(['captain' => $captain]);
     }
 
 

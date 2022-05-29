@@ -22,7 +22,6 @@ class CreateAdminsTable extends Migration
             $table->string('rule');
             $table->string('password');
             $table->rememberToken();
-
             $table->timestamps();
         });
     }

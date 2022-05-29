@@ -108,13 +108,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'notifications'], function () {
 
         Route::get('/overview', [NotificationController::class, 'index'])->name('notifications.overview');
-        // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
+        Route::get('/send', [NotificationController::class, 'send'])->name('notifications.send');
         Route::get('/search', [NotificationController::class, 'search'])->name('notifications.search');
         Route::get('/edit/{id}', [NotificationController::class, 'edit'])->name('notifications.edit');
-        Route::put('/update/', [NotificationController::class, 'update'])->name('notifications.update');
+        Route::get('/show/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+        Route::put('/update', [NotificationController::class, 'update'])->name('notifications.update');
         Route::post('/add/', [NotificationController::class, 'store'])->name('notifications.add');
-
-        // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
         Route::delete('/delete', [NotificationController::class, 'destroy'])->name('notifications.delete');
     });
 

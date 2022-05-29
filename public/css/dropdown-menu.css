@@ -52,8 +52,11 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
-    background-color: rgb(250, 250, 250);
+    background-color: white;
     border-radius: 15px;
+    /* padding: 5px; */
+    right: -80px;
+    /* top: 30px; */
 }
 
 
@@ -66,9 +69,23 @@
     size: 15px;
 }
 
+.sendBtn {
+    border: none;
+    background-color: white;
+    color: dodgerblue;
+    size: 15px;
+}
+
 .deleteBtn {
     border: none;
     background-color: white;
     color: crimson;
+    size: 15px;
+}
+
+.infoBtn {
+    border: none;
+    background-color: white;
+    color: dodgerblue;
     size: 15px;
 }
