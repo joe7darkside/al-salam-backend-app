@@ -7,10 +7,11 @@
 
                 </div>
                 <div class="modal-body">
-                    <form id="editForm" action="{{ route('captains.update') }}" method="POST">
+                    <form id="editForm" action="{{ route('captains.update') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" id="captain_id" name="captain_id" value="">
+                        <input type="hidden" id="captain_id" name="captain_id"  >
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}
@@ -74,21 +75,20 @@
 
                         </div>
 
+                        {{-- Image --}}
+                        <div class=" col-12">
+                            <label>Image</label>
+                            <input class="form-control" type="file" name="img" id="img" >
+                        </div>
+
                         {{-- Password --}}
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="" class="form-control" required>
                             </div>
                         </div>
-                        {{-- Password conformition --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Password Confirmation</label>
-                                <input type="password" name="password_confirmation" id="password_confirmation"
-                                    class="form-control">
-                            </div>
-                        </div>
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

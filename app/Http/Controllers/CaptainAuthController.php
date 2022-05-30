@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Captain;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class CaptainAuthController extends Controller
 {
@@ -16,34 +17,55 @@ class CaptainAuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
 
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|unique:captains|max:11',
-            'email' => 'required|email|unique:captains|max:255',
-            'vehicle' => 'required|max:255',
-            'licence_plate' => 'required|max:255',
-            'img' => 'required|string|max:255',
-            'password' => 'required|confirmed|max:255',
+        // return response(['' => $request->password]);
 
-        ]);
-        if ($validator->fails()) {
-            redirect()->back()->with(['message', $validator->errors()->toJson()]);
-            // return response()->json($validator->errors()->toJson(), 400);
+        $allowedfileExtension = ['jpg', 'png', 'jpeg'];
+
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $file_size = $request->file('img')->getSize();
+            if ($file_size <= '2000000') {
+                $fields = Validator::make($request->all(), [
+                    'first_name' => 'required|string|max:255',
+                    'last_name' => 'required|string|max:255',
+                    'phone' => 'required|digits:11|unique:captains|max:11',
+                    'email' => 'required|email|unique:captains|max:255',
+                    'vehicle' => 'required|max:255',
+                    'licence_plate' => 'required|max:255',
+                    'password' => 'required|confirmed|max:255|min:8',
+                    'img' => 'required',
+
+                ]);
+                if ($fields->fails()) {
+                    redirect()->back()->with(['message', $fields->errors()->toJson()]);
+                }
+                $extenstion = $file->getClientOriginalExtension();
+                $check = in_array($extenstion, $allowedfileExtension);
+                if ($check) {
+                    $filename = time() . '.' . $extenstion;
+                    $file->move('uploads/images/captains/', $filename);
+
+                    Captain::create(array_merge(
+                        $fields->validated(),
+                        [
+                            'password' => Hash::make($request->password),
+                            'img' => 'uploads/images/captains/' . $filename,
+                        ]
+                    ));
+
+                    return redirect()->back()->with('Success', 'Captian added successfully');
+                    // return response(['Success' => 'Captian added successfully']);
+
+                }
+                return redirect()->back()->with('Error', 'Wrong file type, only (png, jpg,jpeg) are allowed');
+            }
+            return redirect()->back()->with('Error', 'Very large file, Max size allowed is 1.9 MB');
+            // return response(['result' => 'Very large file, Max size allowed is 1.9 mb']);
+
         }
-
-        $user = Captain::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password)]
-        ));
-        $token = auth()->guard('captain')->attempt($validator->validated());
-
-        // return response()->json([
-        //     'message' => 'Customer successfully registered',
-        //     'user' => $user
-        // ], 201);
-        return redirect()->back();
+        // return response(['result' => 'The image not found!']);
+        return redirect()->back()->with('Error', 'The image not found!');
     }
 
 

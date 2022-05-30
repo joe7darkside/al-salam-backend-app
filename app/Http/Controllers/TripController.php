@@ -234,4 +234,24 @@ class TripController extends Controller
         // return response()->json(['trips' => $trips]);
         return View::make('dashboard.trips.categorized',  ['trips' => $trips, 'admin' => $admin]);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function info($id)
+    {
+        $notification = Trip::find($id);
+
+        $notification->pickUp;
+        $notification->dropOf;
+        $notification->captain;
+        $notification->user;
+
+
+        return response()->json(['status' => 200, 'notification' => $notification]);
+    }
 }

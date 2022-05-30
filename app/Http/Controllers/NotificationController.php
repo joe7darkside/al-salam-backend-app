@@ -62,7 +62,7 @@ class NotificationController extends Controller
 
         ]);
         // return response()->json(['result' => 'works']);
-        return redirect()->back()->with('create', 'Notification created successfully.');
+        return redirect()->back()->with('Success', 'Notification Added successfully.');
     }
 
 
@@ -116,21 +116,11 @@ class NotificationController extends Controller
 
         if ($notification) {
             $notification->update($request->all());
-            return redirect()->back()->with('Result', 'Update Successfully.');
+            return redirect()->back()->with('Success', 'Update Successfully.');
         } else {
 
-            return redirect()->back()->with('Result', 'No data Updated.');
+            return redirect()->back()->with('Warning', 'No data Updated.');
         }
-        // $id = $request->input('notification_id');
-        // $notification = Notification::find($id);
-        // if ($notification) {
-        //     $notification->update($request->all());
-        //     return redirect()->back()
-        //         ->with('updated', 'Notification updated successfully.');
-        // }
-
-        // return redirect()->back()
-        //     ->with('updated', 'No data updated.');
     }
 
     /**
@@ -148,10 +138,10 @@ class NotificationController extends Controller
         if ($notification) {
             $notification->delete();
             return redirect()->back()
-                ->with(['Message' => 'Deleted Successfully.', 'admin' => $admin]);
+                ->with(['Success' => 'Deleted Successfully.']);
         } else {
             return redirect()->back()
-                ->with(['Message' => 'Record Faild to Deleted', 'admin' => $admin]);
+                ->with(['Error' => 'Record Faild to Deleted']);
             // return View::make('dashboard.admins.overview', ['admin' => $admin])
             //     ->with('Message', 'Record Faild to Deleted');
         }
@@ -178,7 +168,7 @@ class NotificationController extends Controller
             // send_notification_FCM($user_app_token, $title, $body);
         }
 
-        return   redirect()->back()->with('success', 'Notification sent successfully');
+        return   redirect()->back()->with('Success', 'Notification sent successfully');
         // return response()->json(['result' => 'Notification sent successfully'], 200);
     }
 

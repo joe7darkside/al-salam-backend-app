@@ -47,10 +47,10 @@ class BillController extends Controller
         if ($bill) {
             $bill->delete();
             return redirect()->back()
-                ->with(['Message' => 'Deleted Successfully.', 'admin' => $admin]);
+                ->with('Success', 'Bill Deleted successfully');
         } else {
             return redirect()->back()
-                ->with(['Message' => 'Record Faild to Deleted', 'admin' => $admin]);
+                ->with('Error', 'Record Faild to Deleted');
         }
     }
     // $bill = $User_bills->first();
@@ -141,25 +141,27 @@ class BillController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            "user_first_name" => "required",
-            "user_last_name" => "required",
+            "user_first_name" => "required|string",
+            "user_last_name" => "required|string",
             "Payment_date" => "required",
             // "month_name" => "required",
             "payment_status" => "required",
-            "water_bill" => "required",
-            "gas_bill" => "required",
-            "electricity_bill" => "required",
+            "water_bill" => "required|numeric",
+            "gas_bill" => "required|numeric",
+            "electricity_bill" => "required|numeric",
 
 
         ]);
-        $user_id = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
-            ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
-        // $user_id = $request->user()->id;
 
         if ($validator->fails()) {
             return redirect()->back()->with(['message', $validator->errors()->toJson()]);
             // return response()->json($validator->errors()->toJson(), 400);
         }
+        $user_id = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
+            ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
+        // $user_id = $request->user()->id;
+
+
 
         $date = Carbon::now();
         $monthName = $date->format('F');
@@ -189,7 +191,7 @@ class BillController extends Controller
             "cost" => $request->electricity_bill,
 
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Bill Added successfully');
         // return response()->json(['New bill' => $bill]);
     }
 
@@ -375,12 +377,71 @@ class BillController extends Controller
 
     public function editBill($id)
     {
+
         $bill = Bill::find($id);
 
-        $trips = $bill->trip;
+        $bill->waterBill;
+        $bill->gasBill;
+        $bill->electricityBill;
+
+        return response()->json(['status' => 200, 'bill' => $bill]);
+    }
 
 
-        // return View::make('dashboard.captains.profile',  ['captain' => $captain]);
-        return response()->json(['status' => 200, 'captain' => $captain]);
+
+    /**
+     * Return profile view with captain details
+     * @param Request $request
+     * @return View
+     */
+
+    public function updateBill(Request $request)
+    {
+        $data = $request->all();
+
+
+        $id = $request->input('bill_id');
+        $bill = Bill::find($id);
+
+        $bill_water_id = $bill->waterBill->id;
+        $bill_gas_id = $bill->gasBill->id;
+        $bill_electricity_id = $bill->electricityBill->id;
+
+        $bill_water = WaterBill::find($bill_water_id);
+        $bill_gas = GasBill::find($bill_gas_id);
+        $bill_electricity = ElectricityBill::find($bill_electricity_id);
+
+
+        $validator = Validator::make($data, [
+            "user_first_name" => "string",
+            "user_last_name" => "string",
+            "Payment_date" => "string",
+            "payment_status" => "string",
+            "water_bill" => "numeric",
+            "gas_bill" => "numeric",
+            "electricity_bill" => "numeric",
+
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with(['message', $validator->errors()->toJson()]);
+            // return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        if ($bill) {
+            $bill->update($request->all());
+            $bill_water->cost = $request->water_bill;
+            $bill_gas->cost = $request->bill_gas;
+            $bill_electricity->cost = $request->bill_electricity;
+            $bill_gas->save();
+            // return redirect()->back()->with('Success', 'Update Successfully.');
+            return response()->json(['Success' => 'Update Successfully.']);
+        } else {
+            return response()->json(['Warning' => 'No data Updated.']);
+
+            // return redirect()->back()->with('Warning', 'No data Updated.');
+        }
+        // return response()->json(['status' => 200, 'bill' => $bill]);
     }
 }

@@ -66,17 +66,27 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
+
+
+
         <div class="container-fluid py-4">
+            @if (session('Success'))
+                @include('dashboard.components.alerts')
+                @yield('success.alert')
+            @endif
+
+            @if (session('Error'))
+                @include('dashboard.components.alerts')
+                @yield('error.alert')
+            @endif
+
+
+            @if ($errors->any())
+                @include('dashboard.components.alerts')
+                @yield('validation')
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">

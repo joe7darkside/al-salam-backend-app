@@ -6,6 +6,7 @@ use App\Models\Captain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Hash;
 
 class CaptainController extends Controller
 {
@@ -22,17 +23,86 @@ class CaptainController extends Controller
     {
         $captain_id = $request->input('captain_id');
         $captain = Captain::find($captain_id);
+        // dd($captain_id);
+        $allowedfileExtension = ['jpg', 'png', 'jpeg'];
+
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $file_size = $request->file('img')->getSize();
+            if ($file_size <= '2000000') {
+                $fields = Validator::make($request->all(), [
+                    'first_name' => 'string|max:255',
+                    'last_name' => 'string|max:255',
+                    'phone' => 'digits:11|max:11',
+                    'email' => 'email|max:255',
+                    'vehicle' => 'max:255',
+                    'licence_plate' => 'max:255',
+                    'password' => 'max:255|min:8',
+                    'img' => '',
+
+                ]);
+                if ($fields->fails()) {
+                    redirect()->back()->with(['message', $fields->errors()->toJson()]);
+                }
+                $extenstion = $file->getClientOriginalExtension();
+                $check = in_array($extenstion, $allowedfileExtension);
+                if ($check) {
+                    $filename = time() . '.' . $extenstion;
+                    $file->move('uploads/images/captains/', $filename);
+
+
+                    if ($captain) {
+                        $captain->update(array_merge(
+                            $fields->validated(),
+                            [
+                                'password' => Hash::make($request->password),
+                                'img' => 'uploads/images/captains/' . $filename,
+                            ]
+                        ));
+                        // return response(['Success' => 'Updated Successfully']);
+                        return redirect()->back()->with('Success', 'Updated Successfully.');
+                    } else {
+                        // return response(['Success' => 'No data updated.']);
+                        return redirect()->back()->with('Warning', 'No data updated.');
+                    }
+
+                    return redirect()->back()->with('Success', 'Captian added successfully');
+                    // return response(['Success' => 'Captian added successfully']);
+                }
+                return redirect()->back()->with('Error', 'Wrong file type, only (png, jpg,jpeg) are allowed');
+                // return response(['result' => 'Very large file, Max size allowed is 1.9 mb']);
+
+            }
+            return redirect()->back()->with('Error', 'Very large file, Max size allowed is 1.9 MB');
+            // return response(['result' => 'Very large file, Max size allowed is 1.9 mb']);
+        }
+        $fields = Validator::make($request->all(), [
+            'first_name' => 'string|max:255',
+            'last_name' => 'string|max:255',
+            'phone' => 'digits:11|max:11',
+            'email' => 'email|max:255',
+            'vehicle' => 'max:255',
+            'licence_plate' => 'max:255',
+            'password' => 'max:255|min:8',
+            'img' => '',
+
+        ]);
+        if ($fields->fails()) {
+            redirect()->back()->with(['message', $fields->errors()->toJson()]);
+        }
 
         if ($captain) {
-            $captain->update($request->all());
-            return redirect()->back()->with('Message', 'Deleted Successfully.');
-            // return View::make('dashboard.captains.overview')
-            //     ->with('Message', 'updated successfully.');
+            $captain->update(array_merge(
+                $fields->validated(),
+                [
+                    'password' => Hash::make($request->password),
+                ]
+            ));
+            // return response(['Success' => 'Updated Successfully']);
+            return redirect()->back()->with('Success', 'Updated Successfully.');
         } else {
-
-            return redirect()->back()->with('Message', 'Deleted Successfully.');
-            // return View::make('dashboard.captains.overview')
-            //     ->with(['Message', 'No Data Updated', 'admin' => $request->user()->first_name]);
+            // return response(['Success' => 'No data updated.']);
+            return redirect()->back()->with('Warning', 'No data updated.');
         }
     }
 
@@ -51,11 +121,11 @@ class CaptainController extends Controller
             $captain->delete();
             // return response()->json(['result' => 'works']);
             return redirect()->back()
-                ->with('Message', 'Deleted Successfully.');
+                ->with('Success', 'Captain Deleted Successfully.');
         } else {
             // return response()->json(['result' => $captain]);
             return redirect()->back()
-                ->with('Message', 'Record Faild to Deleted');
+                ->with('Error', 'Record Faild to Deleted');
         }
     }
 
@@ -172,7 +242,7 @@ class CaptainController extends Controller
     {
         $captain = Captain::find($id);
 
-        $trips = $captain->trip;
+        // $trips = $captain->trip;
 
 
         // return View::make('dashboard.captains.profile',  ['captain' => $captain]);

@@ -65,9 +65,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/statusSearch/{status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
         Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
         Route::get('/search', [BillController::class, 'search'])->name('bills.search');
-        Route::delete('/bills/delete', [BillController::class, 'destroy'])->name('bills.delete');
-        Route::post('/bills/add', [BillController::class, 'addUserBill'])->name('bills.add');
-        Route::get('/bills/edit/{id}', [BillController::class, 'addUserBill'])->name('bills.edit');
+        Route::delete('/delete', [BillController::class, 'destroy'])->name('bills.delete');
+        Route::post('/add', [BillController::class, 'addUserBill'])->name('bills.add');
+        Route::get('/edit/{id}', [BillController::class, 'editBill'])->name('bills.edit');
+        Route::put('/update/', [BillController::class, 'updateBill'])->name('bills.update');
     });
 
     //* Routes for TripController 
@@ -76,7 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/categorized-tripss/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
         Route::get('/search', [TripController::class, 'search'])->name('trips.search');
         Route::get('/category-search/{category}', [TripController::class, 'categorizedSearch'])->name('trips.category.search');
+        Route::get('/info/{id}', [TripController::class, 'info'])->name('trips.show');
     });
+
 
     //* Routes for InvitationController 
     Route::group(['prefix' => 'invitations'], function () {

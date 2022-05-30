@@ -117,14 +117,14 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{ $trip->user->first_name }}
-                                                        {{ $trip->user->last_name }}
+                                                        {{-- {{ $trip->user->first_name }}
+                                                        {{ $trip->user->last_name }} --}}
                                                     </span>
                                                 </td>
 
                                                 <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->user->phone }}</span>
+                                                    {{-- <span
+                                                        class="text-s font-weight-bold mb-0">{{ $trip->user->phone }}</span> --}}
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
@@ -171,10 +171,52 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $trip->created_at->diffForHumans() }}</span>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->updated_at->diffForHumans() }}</span>
-                                                </td> --}}
+
+                                                <td class="align-middle text-center">
+                                                    <div class="dropdown">
+                                                        <i class="fa fa-ellipsis-v ">
+                                                            {{-- <div class="dropdown-content"> --}}
+                                                            {{-- <a href="">
+                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
+                                                            {{-- <button value="{{ $bill->id }}"
+                                                                    class="infoBtn "
+                                                                    style="border: 0ch; color: blue"><i
+                                                                        class="bi bi-info-circle-fill"></i></button> --}}
+
+                                                            {{-- <button value="{{ $bill->id }}"
+                                                                    class="editBtn "
+                                                                    style="border: 0ch; color: darkgoldenrod"><i
+                                                                        class="fa fa-pen "></i></button> --}}
+                                                            {{-- <a href="#edit{{ $captain->id }}"><i
+                                                                        class="fa-solid fa-pen update "
+                                                                        data-toggle="modal"></i></a> --}}
+                                                            {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
+                                                            {{-- <a href=""><i class="fa-solid fa-trash delete">
+                                                                        @method('DELETE')</i>
+                                                                </a> --}}
+                                                            {{-- <button value="{{ $bill->id }} "
+                                                                    class="deleteBtn"
+                                                                    style="border: 0ch; color: crimson"><i
+                                                                        class="fa fa-trash update "></i></button>
+                                                            </div> --}}
+                                                            <div class="dropdown-content col-auto"
+                                                                style="right: -100px;">
+
+                                                                <button value="{{ $trip->id }}"
+                                                                    class="infoBtn"><i
+                                                                        class="bi bi-info-circle-fill"></i></button>
+
+                                                                {{-- <button value="{{ $trip->id }}"
+                                                                    class="editBtn "><i
+                                                                        class="fa fa-pen"></i></button> --}}
+
+                                                                {{-- <button value="{{ $trip->id }} "
+                                                                    class="deleteBtn"><i
+                                                                        class="fa fa-trash update "></i></button> --}}
+                                                            </div>
+                                                        </i>
+                                                    </div>
+                                                </td>
                                                 {{-- <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
@@ -214,6 +256,8 @@
 
     @include('dashboard.components.script')
     @yield('script')
+
+
 </body>
 
 </html>

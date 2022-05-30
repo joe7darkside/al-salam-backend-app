@@ -9,24 +9,20 @@ $(document).ready(function() {
     });
     $(document).on('click', '.editBtn', function() {
         var bill_id = $(this).val();
-        // alert(captain_id);
+        // alert(bill_id);
         // console.log(captain_id);
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
             url: "/bills/edit/" + bill_id,
             success: function(response) {
+                $('#bill_id').val(bill_id);
 
+                $('#gas_bill').val(response.bill.gas_bill.cost);
+                $('#water_bill').val(response.bill.water_bill.cost);
+                $('#electricity_bill').val(response.bill.electricity_bill.cost);
                 $('#payment_date').val(response.bill.payment_date);
-                $('#last_name').val(response.bill.last_name);
-                $('#phone').val(response.bill.phone);
-                $('#email').val(response.bill.email);
-                $('#password').val(response.bill.password);
-                $('#vehicle').val(response.bill.vehicle);
-                $('#licence_plate').val(response.captain.vehicle);
-                $('#rate').val(response.captain.rate);
-                $('#captain_id').val(captain_id);
-
+                $('#payment_status').val(response.bill.payment_status);
 
             }
         });

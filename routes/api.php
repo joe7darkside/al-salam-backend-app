@@ -74,3 +74,6 @@ Route::group(['prefix' => 'captain', 'middleware' => ['assign.guard:captain', 'j
     Route::post('/refresh', [CaptainAuthController::class, 'refresh']);
     Route::post('/me', [CaptainAuthController::class, 'me']);
 });
+
+
+Route::post('captains/register', [CaptainAuthController::class, 'register'])->name('captains.register');

@@ -56,23 +56,37 @@
         </nav>
         <!-- End Navbar -->
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="container-fluid py-4">
+
+            @if (session('Success'))
+                @include('dashboard.components.alerts')
+                @yield('success.alert')
+            @endif
+
+            @if (session('Error'))
+                @include('dashboard.components.alerts')
+                @yield('error.alert')
+            @endif
+
+            @if ($errors->any())
+                @include('dashboard.components.alerts')
+                @yield('validation')
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <h6>Bills Table</h6>
+                        <div class=" row px-4 py-3" style="justify-content: space-between">
+                            <div class="col-auto">
+                                <h6>Bills Table</h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
+                                    data-toggle="modal" data-target="#createModal">Create</a>
+                            </div>
                         </div>
+                        {{-- <div class="card-header pb-0">
+                            <h6>Bills Table</h6>
+                        </div> --}}
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
 
@@ -113,8 +127,8 @@
                                                 Updated at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                <a href="#" style="color:forestgreen; font-size: 15px"
-                                                    data-toggle="modal" data-target="#createModal">Create</a>
+                                                {{-- <a href="#" style="color:forestgreen; font-size: 15px"
+                                                    data-toggle="modal" data-target="#createModal">Create</a> --}}
                                             </th>
                                         </tr>
                                     </thead>
@@ -171,28 +185,42 @@
                                                 <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
-                                                            <div class="dropdown-content">
-                                                                {{-- <a href="">
+                                                            {{-- <div class="dropdown-content"> --}}
+                                                            {{-- <a href="">
                                                                     <i class="bi bi-info-circle-fill send"></i></a> --}}
-                                                                {{-- <button value="{{ $bill->id }}"
+                                                            {{-- <button value="{{ $bill->id }}"
                                                                     class="infoBtn "
                                                                     style="border: 0ch; color: blue"><i
                                                                         class="bi bi-info-circle-fill"></i></button> --}}
 
-                                                                {{-- <button value="{{ $bill->id }}"
+                                                            {{-- <button value="{{ $bill->id }}"
                                                                     class="editBtn "
                                                                     style="border: 0ch; color: darkgoldenrod"><i
                                                                         class="fa fa-pen "></i></button> --}}
-                                                                {{-- <a href="#edit{{ $captain->id }}"><i
+                                                            {{-- <a href="#edit{{ $captain->id }}"><i
                                                                         class="fa-solid fa-pen update "
                                                                         data-toggle="modal"></i></a> --}}
-                                                                {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
-                                                                {{-- <a href=""><i class="fa-solid fa-trash delete">
+                                                            {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
+                                                            {{-- <a href=""><i class="fa-solid fa-trash delete">
                                                                         @method('DELETE')</i>
                                                                 </a> --}}
-                                                                <button value="{{ $bill->id }} "
+                                                            {{-- <button value="{{ $bill->id }} "
                                                                     class="deleteBtn"
                                                                     style="border: 0ch; color: crimson"><i
+                                                                        class="fa fa-trash update "></i></button>
+                                                            </div> --}}
+                                                            <div class="dropdown-content col-auto">
+
+                                                                <button value="{{ $bill->id }}"
+                                                                    class="sendBtn "><i
+                                                                        class="bi bi-info-circle-fill"></i></button>
+
+                                                                <button value="{{ $bill->id }}"
+                                                                    class="editBtn "><i
+                                                                        class="fa fa-pen"></i></button>
+
+                                                                <button value="{{ $bill->id }} "
+                                                                    class="deleteBtn"><i
                                                                         class="fa fa-trash update "></i></button>
                                                             </div>
                                                         </i>
@@ -223,247 +251,22 @@
 
 
 
-    <!--Start Create Modal -->
-
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Admin</h5>
-
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('bills.add') }}" method="POST">
-                        @csrf
-                        {{-- FIRST ROW --}}
-                        <div class="row">
-                            {{-- First name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>First Name </label>
-                                    <input type="text" name="user_first_name" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Last name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" name="user_last_name" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Second ROW --}}
-                        {{-- <div class="row"> --}}
-                        {{-- First name --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Payment date </label>
-                                <input type="text" name="Payment_date" class="form-control"
-                                    aria-describedby="emailHelp">
-
-                            </div>
-                        </div>
-                        {{-- Last name --}}
-                        {{-- <div class="col-6">
-                                <div class="form-group">
-                                    <label>Month Name</label>
-                                    <input type="text" name="month_name" class="form-control">
-                                </div>
-                            </div> --}}
-                        {{-- </div> --}}
-
-                        {{-- SECOND ROW --}}
-                        <div class="row">
-                            {{-- Phone --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Payment Status</label>
-                                    <input type="text" name="payment_status" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-
-                            {{-- Rule --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Water bill</label>
-                                    <input type="text" name="water_bill" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Email --}}
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Gas bill</label>
-                                    <input type="text" name="gas_bill" class="form-control">
-                                </div>
-                            </div>
-                            {{-- Password --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Electricity bil</label>
-                                    <input type="text" name="electricity_bill" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Password conformition --}}
-                        {{-- <div class="col-12">
-                            <div class="form-group">
-                                <label>user id</label>
-                                <input type="text" name="user_id" class="form-control">
-                            </div>
-                        </div> --}}
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!--End Create Modal -->
+    <!-- Create Modal -->
+    @include('dashboard.bills.modals.create')
+    @yield('createModal')
 
 
 
 
-    <!--Start Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Bill</h5>
-                </div>
-                <form action="{{ route('bills.delete') }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="delete_bill_id" id="delete_bill_id">
-                    <div class="modal-body">
-                        Confirm Delete Bill?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!--End Delete Modal -->
 
-    <!--Start Update Modal -->
-
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Captain</h5>
-
-                </div>
-                <div class="modal-body">
-                    <form id="editForm" action="{{ route('captains.update') }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" id="captain_id" name="captain_id" value="">
-                        {{-- FIRST ROW --}}
-                        <div class="row">
-                            {{-- First name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>First Name </label>
-                                    <input type="text" name="first_name" id="first_name" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Last name --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" name="last_name" id="last_name" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- SECOND ROW --}}
-                        <div class="row">
-                            {{-- Phone --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" name="phone" id="phone" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Email --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="text" name="email" id="email" class="form-control">
-                                </div>
-                            </div>
-
-                        </div>
+    <!-- Delete Modal -->
+    @include('dashboard.bills.modals.delete')
+    @yield('deleteModal')
 
 
-                        {{-- Thired ROW --}}
-                        <div class="row">
-                            {{-- vehicle --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>vehicle</label>
-                                    <input type="text" name="vehicle" id="vehicle" class="form-control"
-                                        aria-describedby="emailHelp">
-
-                                </div>
-                            </div>
-                            {{-- Email --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Licence plate</label>
-                                    <input type="text" name="licence_plate" id="licence_plate" class="form-control">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        {{-- Password --}}
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="password" id="password" class="form-control">
-                                </div>
-                            </div>
-                            {{-- Password conformition --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Password Confirmation</label>
-                                    <input type="password" name="password_confirmation" id="password_confirmation"
-                                        class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+    <!-- Update Modal -->
+    @include('dashboard.bills.modals.edit')
+    @yield('editModal')
 
 
 

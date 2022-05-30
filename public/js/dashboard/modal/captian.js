@@ -28,6 +28,8 @@ $(document).ready(function() {
         $('#deleteModal').modal('show');
         $('#delete_captain_id').val(captain_id);
     });
+
+
     $(document).on('click', '.editBtn', function() {
         var captain_id = $(this).val();
         // alert(captain_id);
@@ -37,7 +39,7 @@ $(document).ready(function() {
             type: "GET",
             url: "/captains/edit/" + captain_id,
             success: function(response) {
-
+                console.log(response.captain);
                 $('#first_name').val(response.captain.first_name);
                 $('#last_name').val(response.captain.last_name);
                 $('#phone').val(response.captain.phone);
@@ -46,6 +48,7 @@ $(document).ready(function() {
                 $('#vehicle').val(response.captain.vehicle);
                 $('#licence_plate').val(response.captain.vehicle);
                 $('#rate').val(response.captain.rate);
+                // $('#img').val(response.captain.img);
                 $('#captain_id').val(captain_id);
                 //    {
                 //     "id": 2,
