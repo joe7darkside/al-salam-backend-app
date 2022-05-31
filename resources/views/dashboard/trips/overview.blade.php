@@ -261,3 +261,12 @@
 </body>
 
 </html>
+{{-- @if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <h6>{{ $error }}</h6>
+        @endforeach
+    </ul>
+</div>
+@endif --}}

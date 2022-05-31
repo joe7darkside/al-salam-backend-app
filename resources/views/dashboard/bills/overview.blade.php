@@ -68,9 +68,19 @@
                 @yield('error.alert')
             @endif
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 @include('dashboard.components.alerts')
                 @yield('validation')
+            @endif --}}
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <h6>{{ $error }}</h6>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
             <div class="row">
                 <div class="col-12">

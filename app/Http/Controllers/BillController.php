@@ -397,22 +397,17 @@ class BillController extends Controller
 
     public function updateBill(Request $request)
     {
-        $data = $request->all();
 
 
         $id = $request->input('bill_id');
+
         $bill = Bill::find($id);
 
         $bill_water_id = $bill->waterBill->id;
         $bill_gas_id = $bill->gasBill->id;
         $bill_electricity_id = $bill->electricityBill->id;
 
-        $bill_water = WaterBill::find($bill_water_id);
-        $bill_gas = GasBill::find($bill_gas_id);
-        $bill_electricity = ElectricityBill::find($bill_electricity_id);
-
-
-        $validator = Validator::make($data, [
+        $validator = Validator::make($request->all(), [
             "user_first_name" => "string",
             "user_last_name" => "string",
             "Payment_date" => "string",
@@ -430,17 +425,36 @@ class BillController extends Controller
         }
 
         if ($bill) {
-            $bill->update($request->all());
-            $bill_water->cost = $request->water_bill;
-            $bill_gas->cost = $request->bill_gas;
-            $bill_electricity->cost = $request->bill_electricity;
-            $bill_gas->save();
-            // return redirect()->back()->with('Success', 'Update Successfully.');
-            return response()->json(['Success' => 'Update Successfully.']);
-        } else {
-            return response()->json(['Warning' => 'No data Updated.']);
 
-            // return redirect()->back()->with('Warning', 'No data Updated.');
+            $bill_cost = $request->water_bill + $request->gas_bill + $request->electricity_bill;
+
+            $bill->update([
+                'payment_date' => $request->payment_date,
+                'payment_status' => $request->payment_status,
+                'bill_cost' => $bill_cost,
+            ]);
+
+            WaterBill::where('id', $bill_water_id)
+                ->update([
+                    'cost' => $request->water_bill,
+                ]);
+
+            GasBill::where('id', $bill_gas_id)
+                ->update([
+                    'cost' => $request->gas_bill,
+                ]);
+
+            ElectricityBill::where('id', $bill_electricity_id)
+                ->update([
+                    'cost' => $request->electricity_bill,
+                ]);
+
+            return redirect()->back()->with('Success', 'Update Successfully.');
+            // return response()->json(['Success' => 'Update Successfully.']);
+        } else {
+            // return response()->json(['Warning' => 'No data Updated.']);
+
+            return redirect()->back()->with('Warning', 'No data Updated.');
         }
         // return response()->json(['status' => 200, 'bill' => $bill]);
     }
