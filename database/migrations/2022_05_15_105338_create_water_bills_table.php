@@ -16,7 +16,7 @@ class CreateWaterBillsTable extends Migration
         Schema::create('water_bills', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bill_id');
-            $table->bigInteger('cost');
+            $table->float('cost');
             $table->timestamps();
         });
     }

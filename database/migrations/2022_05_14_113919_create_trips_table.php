@@ -17,9 +17,9 @@ class CreateTripsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('captain_id');
-            $table->integer('cost');
+            $table->float('cost');
             $table->string('payment_method');
-            $table->boolean('payed')->default(false);
+            $table->boolean('canceled')->default(false);
             $table->timestamps();
         });
     }

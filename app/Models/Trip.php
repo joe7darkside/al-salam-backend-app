@@ -15,7 +15,8 @@ class Trip extends Model
         'captain_id',
         'cost',
         'payment_method',
-        'payed'
+        'canceled',
+
     ];
 
     public function pickUp()
