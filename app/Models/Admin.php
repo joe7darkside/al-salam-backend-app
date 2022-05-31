@@ -7,13 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-
 
     /**
      * The attributes that are mass assignable.
@@ -25,10 +22,8 @@ class Admin extends Authenticatable
         'last_name',
         'phone',
         'email',
-        'rule',
+        'role',
         'password',
-
-
     ];
 
     /**

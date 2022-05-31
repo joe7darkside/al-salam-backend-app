@@ -35,11 +35,11 @@
                     autofocus />
             </div>
 
-            <!-- Rule -->
+            <!-- role -->
             <div>
-                <x-label for="rule" :value="__('Rule')" />
+                <x-label for="role" :value="__('role')" />
 
-                <x-input id="rule" class="block mt-1 w-full" type="text" name="rule" :value="old('rule')" required
+                <x-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required
                     autofocus />
             </div>
 
@@ -138,10 +138,22 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="wrap-input100 validate-input m-b-23" data-validate="Rule is reauired">
-                                <span class="label-input100">Rule</span>
-                                <input class="input100" type="text" name="rule" placeholder="Type your rule">
-                                <span class="focus-input100" data-symbol="&#xf206;"></span>
+                            <div class="wrap-input100 validate-input m-b-20 m-t-7" data-validate="Role is reauired">
+                                <span class="label-input100">Phone</span>
+                                <select class="form-select" style="border: none" name="role" required>
+                                    {{-- <option>Select payment status</option> --}}
+                                    <option value="super">Super</option>
+                                    <option value="notifications">Notifications</option>
+                                    <option value="captains">Captains</option>
+                                    <option value="invitations">Invitations</option>
+                                    <option value="trips">Trips</option>
+                                    <option value="bills">Bills</option>
+                                    <option value="users">Users</option>
+
+                                </select>
+                                {{-- <span class="label-input100">role</span>
+                                <input class="input100" type="text" name="role" placeholder="Type your role">
+                                <span class="focus-input100" data-symbol="&#xf206;"></span> --}}
                             </div>
                         </div>
                     </div>

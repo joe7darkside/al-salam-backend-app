@@ -12,8 +12,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\CaptainAuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
-
+use App\Http\Controllers\PermissionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,13 +44,12 @@ use App\Http\Controllers\NotificationController;
 // Route::get('/search', [UserController::class, 'search'])->name('users.search');
 // Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return View::make('dashboard.home.index');
-    })->name('home');
+Route::group(['middleware' => 'auth',], function () {
+
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     //* Routes for UserController 
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'users', 'middleware' => 'role:users,super'], function () {
 
         Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
         Route::get('/search', [UserController::class, 'search'])->name('users.search');
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     //* Routes for BillController 
-    Route::group(['prefix' => 'bills'], function () {
+    Route::group(['prefix' => 'bills', 'middleware' => 'role:bills,super'], function () {
         Route::get('/overview', [BillController::class, 'getBills'])->name('bills.overView');
         Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
         Route::get('/paymentStatus/{status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     //* Routes for TripController 
-    Route::group(['prefix' => 'trips'], function () {
+    Route::group(['prefix' => 'trips', 'middleware' => 'role:trips,super'], function () {
         Route::get('/overview', [TripController::class, 'getTrips'])->name('trips.overView');
         Route::get('/categorized-tripss/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
         Route::get('/search', [TripController::class, 'search'])->name('trips.search');
@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //* Routes for InvitationController 
-    Route::group(['prefix' => 'invitations'], function () {
+    Route::group(['prefix' => 'invitations', 'middleware' => 'role:invitations,super'], function () {
         Route::get('/overview', [InvitationController::class, 'getInvitations'])->name('invitations.overView');
         Route::get('/categorized-invitations/{category}', [InvitationController::class, 'categorizedInvitations'])->name('invitations.category');
         Route::get('/search', [InvitationController::class, 'search'])->name('invitations.search');
@@ -92,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //* Routes for CaptainController 
-    Route::group(['prefix' => 'captains'], function () {
+    Route::group(['prefix' => 'captains', 'middleware' => 'role:captains,super'], function () {
         Route::post('/register', [CaptainAuthController::class, 'register'])->name('captains.register');
         Route::get('/overview', [CaptainController::class, 'getCaptains'])->name('captains.overView');
         // Route::get('/categorized-invitations/{category}', [CaptainController::class, 'categorizedInvitations'])->name('invitations.category');
@@ -108,7 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //* Routes for NotificationsController 
-    Route::group(['prefix' => 'notifications'], function () {
+    Route::group(['prefix' => 'notifications', 'middleware' => 'role:notifications,super'], function () {
 
         Route::get('/overview', [NotificationController::class, 'index'])->name('notifications.overview');
         Route::get('/send', [NotificationController::class, 'send'])->name('notifications.send');
@@ -124,7 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //* Routes for AdminController 
-    Route::group(['prefix' => 'admins'], function () {
+    Route::group(['prefix' => 'admins', 'middleware' => 'role:super,super'], function () {
         Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
         // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
         Route::get('/search', [AdminController::class, 'search'])->name('admins.search');

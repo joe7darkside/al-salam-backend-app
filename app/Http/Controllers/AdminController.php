@@ -97,7 +97,7 @@ class AdminController extends Controller
             $admins = Admin::where('first_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('phone', 'LIKE', '%' . $search_text . '%')
-                ->orWhere('rule', 'LIKE', '%' . $search_text . '%')
+                ->orWhere('role', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('email', 'LIKE', '%' . $search_text . '%')
                 ->orderBy('created_at', 'asc')
                 ->paginate(10);
@@ -138,7 +138,7 @@ class AdminController extends Controller
     public function categorizedAdmins($category)
     {
 
-        $admins = Admin::where('rule', 'LIKE', '%' . $category . '%')
+        $admins = Admin::where('role', 'LIKE', '%' . $category . '%')
             ->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['invitations' => $invitations]);
@@ -158,7 +158,7 @@ class AdminController extends Controller
         $search_text = $request->input('search');
 
         if (isset($search_text)) {
-            $admins = Admin::where('rule', 'LIKE', '%' . $category . '%')
+            $admins = Admin::where('role', 'LIKE', '%' . $category . '%')
                 ->where('first_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('last_name', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('phone', 'LIKE', '%' . $search_text . '%')
