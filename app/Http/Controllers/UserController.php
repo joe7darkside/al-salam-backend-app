@@ -163,4 +163,30 @@ class UserController extends Controller
 
         return response()->json(['User Cards' => $user_cards]);
     }
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request  $request)
+    {
+        $id = $request->input('delete_user_id');
+        $admin = $request->user()->first_name;
+        $notification = User::find($id);
+
+        if ($notification) {
+            $notification->delete();
+            return redirect()->route('users.overView')
+                ->with(['Success' => 'User Deleted Successfully.']);
+        } else {
+            return redirect()->back()
+                ->with(['Error' => 'Record Faild to Deleted']);
+            // return View::make('dashboard.admins.overview', ['admin' => $admin])
+            //     ->with('Message', 'Record Faild to Deleted');
+        }
+    }
 }

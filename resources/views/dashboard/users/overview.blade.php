@@ -58,6 +58,10 @@
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4 ">
+            @if (session('Success'))
+                @include('dashboard.components.alerts')
+                @yield('success.alert')
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">

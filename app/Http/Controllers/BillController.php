@@ -138,11 +138,12 @@ class BillController extends Controller
 
     public function addUserBill(Request $request)
     {
+        $id = $request->input('create_bill_id');
         $data = $request->all();
-
+        
         $validator = Validator::make($data, [
-            "user_first_name" => "required|string",
-            "user_last_name" => "required|string",
+            // "user_first_name" => "required|string",
+            // "user_last_name" => "required|string",
             "Payment_date" => "required",
             // "month_name" => "required",
             "payment_status" => "required",
@@ -157,8 +158,8 @@ class BillController extends Controller
             return redirect()->back()->with(['message', $validator->errors()->toJson()]);
             // return response()->json($validator->errors()->toJson(), 400);
         }
-        $user_id = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
-            ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
+        // $user_id = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
+        //     ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
         // $user_id = $request->user()->id;
 
 
@@ -168,7 +169,7 @@ class BillController extends Controller
 
         $bill_cost = $request->water_bill + $request->gas_bill + $request->electricity_bill;
         $bill = Bill::create([
-            "user_id" => $user_id->id,
+            "user_id" => $id,
             "Payment_date" => $request->Payment_date,
             "month_name" => $monthName,
             "payment_status" => $request->payment_status,

@@ -62,7 +62,9 @@
             </div>
         </nav>
         <!-- End Navbar -->
+
         <div class="container-fluid">
+
             <div class="page-header min-height-300 border-radius-xl mt-4"
                 style="background-image: url('/images/curved0.jpg'); background-position-y: 50%;">
                 <span class="mask bg-gradient-info opacity-6"></span>
@@ -92,11 +94,18 @@
                             </p> --}}
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                    <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                         <div class="nav-wrapper position-relative end-0">
                             <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                                 <li class="nav-item">
+                                    <button class="createBtn nav-link mb-0 px-0 py-1 active "
+                                        value="{{ $user->id }}" role="tab" aria-selected="true">
 
+                                        <i class="fa fa-paper-plane me-sm-1 text-gray-600 "></i>
+                                        <span class="ms-1">Bill</span>
+                                    </button>
+                                </li>
+                                <li>
                                     <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab"
                                         href="{{ route('users.send', ['id' => $user->id]) }}" role="tab"
                                         aria-selected="true">
@@ -106,11 +115,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#" role="tab"
-                                        aria-selected="false">
+                                    <button value="{{ $user->id }} " class="deleteBtn nav-link mb-0 px-0 py-1 "
+                                        data-bs-toggle="tab" href="#" role="tab" aria-selected="false">
                                         <i class="fa fa-trash me-sm-1 text-gray-600"></i>
                                         <span class="ms-1">Delete</span>
-                                    </a>
+                                    </button>
                                 </li>
 
                             </ul>
@@ -120,6 +129,10 @@
             </div>
         </div>
         <div class="container-fluid py-4">
+            @if (session('Success'))
+                @include('dashboard.components.alerts')
+                @yield('success.alert')
+            @endif
             <div class="row">
                 <div class="col-12 col-xl-4">
                     <div class="card h-60 ">
@@ -237,10 +250,23 @@
         </div>
 
     </div>
+    <!-- Create Modal -->
+    @include('dashboard.users.modals.create')
+    @yield('createModal')
 
+    @include('dashboard.users.modals.delete')
+    @yield('deleteModal')
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    {{-- <script src="{{ asset('js/dashboard/modal/bills.js') }}"></script> --}}
+    <script src="{{ asset('js/dashboard/modal/users.js') }}"></script>
 
     @include('dashboard.components.script')
     @yield('script')
+
+
 
 </body>
 

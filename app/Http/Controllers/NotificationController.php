@@ -49,7 +49,7 @@ class NotificationController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->with(['message', $validator->errors()->toJson()]);
+            return redirect()->back()->withErrors($validator);
             // return response()->json($validator->errors()->toJson(), 400);
         }
 

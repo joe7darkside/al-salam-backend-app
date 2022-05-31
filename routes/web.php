@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth',], function () {
         Route::get('/search', [UserController::class, 'search'])->name('users.search');
         Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
         Route::get('/send/{id}', [UserController::class, 'sendNotification'])->name('users.send');
+        Route::delete('/delete', [UserController::class, 'destroy'])->name('users.delete');
     });
 
     //* Routes for BillController 

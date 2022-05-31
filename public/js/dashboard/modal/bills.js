@@ -7,6 +7,20 @@ $(document).ready(function() {
         $('#deleteModal').modal('show');
         $('#delete_bill_id').val(bill_id);
     });
+
+    $(document).on('click', '.createBtn', function() {
+
+        var bill_id = $(this).val();
+        // alert(captain_id);
+        $('#createModal').modal('show');
+        $('#create_bill_id').val(bill_id);
+    });
+
+
+
+
+
+
     $(document).on('click', '.editBtn', function() {
         var bill_id = $(this).val();
         // alert(bill_id);

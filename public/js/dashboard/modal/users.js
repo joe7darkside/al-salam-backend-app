@@ -7,7 +7,14 @@ $(document).ready(function() {
         $('#deleteModal').modal('show');
         $('#delete_user_id').val(user_id);
     });
+    $(document).on('click', '.createBtn', function() {
 
+        var bill_id = $(this).val();
+        // alert(captain_id);
+        $('#createModal').modal('show');
+        $('#create_bill_id').val(bill_id);
+    });
+    // {{ route('user.delete') }}
     // $(document).on('click', '.sendBtn', function() {
 
     //     var user_id = $(this).val();

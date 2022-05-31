@@ -103,7 +103,13 @@
 <body>
 
     <div class="limiter">
-        <div class="container-login100" style="background-color: rgb(224, 230, 230)">
+        {{-- @if ($errors->any())
+            @include('dashboard.components.alerts')
+            @yield('validation')
+        @endif --}}
+
+        <div class="container-login100" style="background-color: rgb(229, 237, 237)">
+
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <form class="login100-form validate-form" action="{{ route('register.store') }}" method="POST">
                     @csrf
@@ -136,6 +142,9 @@
                                 <input class="input100" type="text" name="phone" placeholder="Type your phone">
                                 <span class="focus-input100" data-symbol="&#xf206;"></span>
                             </div>
+                            @error('phone')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-6">
                             <div class="wrap-input100 validate-input m-b-20 m-t-7" data-validate="Role is reauired">
@@ -161,6 +170,9 @@
                         <span class="label-input100">Email</span>
                         <input class="input100" type="text" name="email" placeholder="Type your email">
                         <span class="focus-input100" data-symbol="&#xf206;"></span>
+                        @error('email')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Password is required">
                         <span class="label-input100">Password</span>
