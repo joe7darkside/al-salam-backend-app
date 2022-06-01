@@ -14,6 +14,24 @@ $(document).ready(function() {
         $('#createModal').modal('show');
         $('#create_bill_id').val(bill_id);
     });
+
+
+
+    $(document).on('click', '.sendBtn', function() {
+
+        var user_id = $(this).val();
+        // alert(user_id);
+        $('#send_User_Modal').modal('show');
+        $('#send_user_id').val(user_id);
+    });
+
+    // $(document).on('click', '.createBtn', function() {
+    //     $('#createModal').modal('show');
+    //     // var bill_id = $(this).val();
+    //     // alert(captain_id);
+
+    //     // $('#create_bill_id').val(bill_id);
+    // });
     // {{ route('user.delete') }}
     // $(document).on('click', '.sendBtn', function() {
 

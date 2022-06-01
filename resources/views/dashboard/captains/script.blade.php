@@ -8,4 +8,5 @@
     <script src="{{ asset('/js/dashboard/soft-ui-dashboard.min.js?v=1.0.5') }}"></script>
     <script src="{{ asset('/js/sideBar/sideBar.js') }}"></script>
     <script src="{{ asset('js/dashboard/modal/captian.js') }}"></script>
+    <script src="{{ asset('/js/sideBar/sideBar.js') }}"></script>
 @endsection

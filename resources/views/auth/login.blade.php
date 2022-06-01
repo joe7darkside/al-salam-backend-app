@@ -87,12 +87,15 @@
                             <span class="text-danger" style="font-size: 10px">{{ $error }}</span>
                         @endforeach
                     @endif --}}
-
+                    @if ($errors->any())
+                        @include('dashboard.components.alerts')
+                        @yield('validation')
+                    @endif
                     <!-- Session Status -->
-                    <x-auth-session-status class="mb-4" :status="session('status')" />
+                    {{-- <x-auth-session-status class="mb-4" :status="session('status')" />
 
                     <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
 
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Email is reauired">
                         <span class="label-input100">Email</span>

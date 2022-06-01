@@ -10,6 +10,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\CaptainAuthController;
 use App\Http\Controllers\HomeController;
@@ -104,8 +105,10 @@ Route::group(['middleware' => 'auth',], function () {
         Route::put('/update', [CaptainController::class, 'updateCaptain'])->name('captains.update');
         Route::delete('/delete', [CaptainController::class, 'destroy'])->name('captains.delete');
     });
-
-
+    //* Routes for CaptainController 
+    Route::group(['prefix' => 'users', 'middleware' => 'role:users,super'], function () {
+        Route::post('/sendNotification', [UserController::class, 'send'])->name('users.Notification');
+    });
 
 
     //* Routes for NotificationsController 

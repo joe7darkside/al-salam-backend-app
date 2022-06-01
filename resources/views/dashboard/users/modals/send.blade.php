@@ -7,7 +7,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admins.send') }}" method="POST">
+                    <form action="{{ route('users.Notification') }}" method="POST">
                         @csrf
 
                         <input type="hidden" id="send_user_id" name="send_user_id">

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -34,6 +35,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'email|max:255',
+            'password' => 'string'
+        ]);
+
+        if ($validator->fails()) {
+          return  redirect()->back()->with(['errors', $validator->errors()]);
+            // return response()->json($validator->errors()->toJson(), 400);
+        }
         $request->authenticate();
 
         $request->session()->regenerate();

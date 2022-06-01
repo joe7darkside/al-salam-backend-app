@@ -84,13 +84,18 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab"
-                                        href="{{ route('users.send', ['id' => $user->id]) }}" role="tab"
-                                        aria-selected="true">
+                                    <button class="sendBtn nav-link mb-0 px-0 py-1 active " value="{{ $user->id }}"
+                                        role="tab" aria-selected="true">
 
                                         <i class="fa fa-paper-plane me-sm-1 text-gray-600 "></i>
                                         <span class="ms-1">Notification</span>
-                                    </a>
+                                    </button>
+                                    {{-- <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab"
+                                        href="{{ route('users.Notification') }}" role="tab" aria-selected="true">
+
+                                        <i class="fa fa-paper-plane me-sm-1 text-gray-600 "></i>
+                                        <span class="ms-1">Notification</span>
+                                    </a> --}}
                                 </li>
                                 <li class="nav-item">
                                     <button value="{{ $user->id }} " class="deleteBtn nav-link mb-0 px-0 py-1 ">
@@ -109,6 +114,25 @@
             @if (session('Success'))
                 @include('dashboard.components.alerts')
                 @yield('success.alert')
+            @endif
+
+            @if (session('Error'))
+                @include('dashboard.components.alerts')
+                @yield('error.alert')
+            @endif
+
+            @if (session('Send'))
+                @include('dashboard.components.alerts')
+                @yield('send.alert')
+            @endif
+            @if (session('Warning'))
+                @include('dashboard.components.alerts')
+                @yield('warning.alert')
+            @endif
+
+            @if ($errors->any())
+                @include('dashboard.components.alerts')
+                @yield('validation')
             @endif
             <div class="row">
                 <div class="col-12 col-xl-4">
@@ -221,12 +245,14 @@
 
     </div>
     <!-- Create Modal -->
-    @include('dashboard.bills.modals.create')
-    @yield('createModal')
+    {{-- @include('dashboard.bills.modals.create')
+    @yield('createModal') --}}
 
     @include('dashboard.users.modals.delete')
     @yield('deleteUserModal')
 
+    @include('dashboard.users.modals.send')
+    @yield('sendModal')
 
     @include('dashboard.users.script')
     @yield('script')

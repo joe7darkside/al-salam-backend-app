@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Captains</title>
 
-    <link rel="stylesheet" href="{{ asset('css/main.css') }} ">
+    @include('dashboard.components.header')
+    @yield('header')
+    {{-- <link rel="stylesheet" href="{{ asset('css/main.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }} ">
     <link rel="stylesheet" href="{{ asset('icons/iconic/css/material-design-iconic-font.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('icons/bootstrap-icons/bootstrap-icons.css') }} ">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/dropdown-menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropdown-menu.css') }}"> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> --}}
 
 
@@ -104,7 +106,7 @@
                             </div>
                             <div class="col-auto">
                                 <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
-                                    data-toggle="modal" data-target="#userCreateModal">Create</a>
+                                    data-toggle="modal" data-target="#createModal">Create</a>
                             </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">

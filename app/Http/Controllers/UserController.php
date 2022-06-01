@@ -189,4 +189,25 @@ class UserController extends Controller
             //     ->with('Message', 'Record Faild to Deleted');
         }
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function send(Request $request)
+    {
+        $id = $request->input('send_user_id');
+        $user = User::find($id);
+
+        if ($user) {
+            // $admin->update($request->all());
+            return redirect()->back()->with('Send', 'Message sent Successfully.');
+        } else {
+
+            return redirect()->back()->with('Error', 'No data sent.');
+        }
+    }
 }

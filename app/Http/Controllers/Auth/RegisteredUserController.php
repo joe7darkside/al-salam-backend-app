@@ -48,17 +48,17 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with(['errors', $validator->errors()]);
+            redirect()->back()->with(['errors', $validator->errors()]);
             // return response()->json($validator->errors()->toJson(), 400);
         }
-        $user = Admin::create([
+        $user = Admin::create(array_merge($validator->validated(), [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'phone' => $request->phone,
             'email' => $request->email,
             'role' => $request->role,
             'password' => Hash::make($request->password),
-        ]);
+        ]));
 
         event(new Registered($user));
 

@@ -7,9 +7,8 @@
 
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admins.store') }}" method="POST">
+                    <form action="{{ route('users.register') }}" method="POST">
                         @csrf
-                        {{-- <input type="text" id="admin_id" name="admin_id"> --}}
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}
@@ -41,32 +40,18 @@
                                 </div>
                             </div>
 
-                            {{-- Role --}}
+                            {{-- Email --}}
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>Role</label>
-                                    <select class="form-select" name="role" required>
-                                        <option value="super">Super</option>
-                                        <option value="notifications">Notifications</option>
-                                        <option value="captains">Captains</option>
-                                        <option value="invitations">Invitations</option>
-                                        <option value="trips">Trips</option>
-                                        <option value="bills">Bills</option>
-                                        <option value="users">Users</option>
-
-                                    </select>
-
+                                    <label>Email</label>
+                                    <input type="text" name="email" class="form-control" required>
                                 </div>
+
                             </div>
                         </div>
 
-                        {{-- Email --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="text" name="email" class="form-control" required>
-                            </div>
-                        </div>
+
+
                         {{-- Password --}}
                         <div class="col-12">
                             <div class="form-group">
