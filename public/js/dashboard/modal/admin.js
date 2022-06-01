@@ -1,31 +1,56 @@
 $(document).ready(function() {
 
+
+    //* Create modal 
+
+    $(document).on('click', '.createBtn', function() {
+
+        // var admin_id = $(this).val();
+        $('#createModal').modal('show');
+    });
+
+    //* Send modal 
+
+    $(document).on('click', '.sendBtn', function() {
+
+        var admin_id = $(this).val();
+        $('#sendModal').modal('show');
+        $('#send_admin_id').val(admin_id);
+    });
+
+
+
+
+    //* Delete modal 
+
     $(document).on('click', '.deleteBtn', function() {
 
         var admin_id = $(this).val();
-        // alert(captain_id);
         $('#deleteModal').modal('show');
         $('#delete_admin_id').val(admin_id);
     });
+
+
+    //* Edit modal
     $(document).on('click', '.editBtn', function() {
-        var bill_id = $(this).val();
+        var admin_id = $(this).val();
         // alert(captain_id);
         // console.log(captain_id);
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
-            url: "/bills/edit/" + bill_id,
+            url: "/admins/edit/" + admin_id,
             success: function(response) {
+                $('#admin_id').val(admin_id);
+                // console.log(response.admin);
+                $('#first_name').val(response.admin.first_name);
+                $('#last_name').val(response.admin.last_name);
+                $('#phone').val(response.admin.phone);
+                $('#email').val(response.admin.email);
+                $('#role').val(response.admin.role);
+                console.log(response.admin.first_name);
+                // $('#rate').val(response.captain.rate);
 
-                $('#payment_date').val(response.bill.payment_date);
-                $('#last_name').val(response.bill.last_name);
-                $('#phone').val(response.bill.phone);
-                $('#email').val(response.bill.email);
-                $('#password').val(response.bill.password);
-                $('#vehicle').val(response.bill.vehicle);
-                $('#licence_plate').val(response.captain.vehicle);
-                $('#rate').val(response.captain.rate);
-                $('#captain_id').val(captain_id);
 
 
             }

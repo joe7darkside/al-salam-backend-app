@@ -81,13 +81,11 @@
                                 <h6>Bills Table</h6>
                             </div>
                             <div class="col-auto">
-                                <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
-                                    data-toggle="modal" data-target="#createModal">Create</a>
+                                {{-- <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
+                                    data-toggle="modal" data-target="#createModal">Create</a> --}}
                             </div>
                         </div>
-                        {{-- <div class="card-header pb-0">
-                            <h6>Bills Table</h6>
-                        </div> --}}
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -102,18 +100,7 @@
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 total cost</th>
-                                            {{-- <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                water bill</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                gas bill</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                electricity bill</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment status</th> --}}
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 payment date</th>
@@ -125,8 +112,7 @@
                                                 Updated at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                {{-- <a href="#" style="color:forestgreen; font-size: 15px"
-                                                    data-toggle="modal" data-target="#createModal">Create</a> --}}
+
                                             </th>
                                         </tr>
                                     </thead>
@@ -149,22 +135,7 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $bill->bill_cost }}</span>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->waterBill->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->gasBill->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->electricityBill->cost }}</span>
-                                                </td> --}}
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_status }}</span>
-                                                </td> --}}
+
 
                                                 <td class="align-middle text-center">
                                                     <span
@@ -183,30 +154,6 @@
                                                 <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
-                                                            {{-- <div class="dropdown-content"> --}}
-                                                            {{-- <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
-                                                            {{-- <button value="{{ $bill->id }}"
-                                                                    class="infoBtn "
-                                                                    style="border: 0ch; color: blue"><i
-                                                                        class="bi bi-info-circle-fill"></i></button> --}}
-
-                                                            {{-- <button value="{{ $bill->id }}"
-                                                                    class="editBtn "
-                                                                    style="border: 0ch; color: darkgoldenrod"><i
-                                                                        class="fa fa-pen "></i></button> --}}
-                                                            {{-- <a href="#edit{{ $captain->id }}"><i
-                                                                        class="fa-solid fa-pen update "
-                                                                        data-toggle="modal"></i></a> --}}
-                                                            {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
-                                                            {{-- <a href=""><i class="fa-solid fa-trash delete">
-                                                                        @method('DELETE')</i>
-                                                                </a> --}}
-                                                            {{-- <button value="{{ $bill->id }} "
-                                                                    class="deleteBtn"
-                                                                    style="border: 0ch; color: crimson"><i
-                                                                        class="fa fa-trash update "></i></button>
-                                                            </div> --}}
                                                             <div class="dropdown-content col-auto">
 
                                                                 <button value="{{ $bill->id }}"
@@ -232,50 +179,38 @@
                                     </tbody>
                                 </table>
 
-
-
                                 <div class="float-start pagination-margin "> {{ $bills->links() }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            @include('dashboard.components.footer')
-            @yield('footer')
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 
 
 
-
+    {{-- Modals --}}
     <!-- Create Modal -->
     @include('dashboard.bills.modals.create')
     @yield('createModal')
-
-
-
-
 
     <!-- Delete Modal -->
     @include('dashboard.bills.modals.delete')
     @yield('deleteModal')
 
-
     <!-- Update Modal -->
     @include('dashboard.bills.modals.edit')
     @yield('editModal')
 
+    {{-- Modals --}}
 
-
-
-    @include('dashboard.components.script')
+    {{-- Script --}}
+    @include('dashboard.bills.script')
     @yield('script')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
 
-    <script src="{{ asset('js/dashboard/modal/bills.js') }}"></script>
 
 </body>
 

@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <form action="{{ route('bills.add') }}" method="POST">
                         @csrf
-                        <input type="text" id="create_bill_id" name="create_bill_id">
+                        <input type="hidden" id="create_bill_id" name="create_bill_id">
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}

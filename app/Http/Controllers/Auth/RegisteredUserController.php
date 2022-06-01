@@ -48,7 +48,7 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with(['message', $validator->errors()->toJson()]);
+            return redirect()->back()->with(['errors', $validator->errors()]);
             // return response()->json($validator->errors()->toJson(), 400);
         }
         $user = Admin::create([

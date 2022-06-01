@@ -78,6 +78,16 @@
                 @include('dashboard.components.alerts')
                 @yield('validation')
             @endif
+            @if (session('Warning'))
+                @include('dashboard.components.alerts')
+                @yield('warning.alert')
+            @endif
+
+            @if (session('Send'))
+                @include('dashboard.components.alerts')
+                @yield('send.alert')
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -120,7 +130,6 @@
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
 
-
                                             </th>
                                         </tr>
                                     </thead>
@@ -131,7 +140,6 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $notification->id }}</span>
                                                 </td>
-
 
                                                 <td class="align-middle text-center">
                                                     <span
@@ -165,8 +173,6 @@
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content col-auto">
 
-
-
                                                                 <button value="{{ $notification->id }}"
                                                                     class="sendBtn "><i
                                                                         class="fa fa-paper-plane"></i></button>
@@ -193,11 +199,12 @@
                 </div>
             </div>
 
-            @include('dashboard.components.footer')
-            @yield('footer')
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 
+    {{-- Modals --}}
     <!-- Send Modal -->
 
     @include('dashboard.notifications.modals.sendModal')
@@ -222,11 +229,11 @@
 
     @include('dashboard.notifications.modals.deleteModal')
     @yield('deleteModal')
+    {{-- Modals --}}
 
-
-    {{-- Footer --}}
-    @include('dashboard.notifications.footer')
-    @yield('footer')
+    {{-- Script --}}
+    @include('dashboard.notifications.script')
+    @yield('script')
 
 
 

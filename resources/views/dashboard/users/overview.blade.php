@@ -65,8 +65,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <h6>Users Table</h6>
+
+                        <div class=" row px-4 py-3" style="justify-content: space-between">
+                            <div class="col-auto">
+                                <h6>Users Table</h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
+                                    data-toggle="modal" data-target="#userCreateModal">Create</a>
+                            </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -160,13 +167,13 @@
                 </div>
             </div>
 
-            @include('dashboard.components.footer')
-            @yield('footer')
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 
     <!--Start Send Modal -->
-    <div class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -174,8 +181,7 @@
                 </div>
                 <form>
                     @csrf
-                    {{-- @method('DELETE') --}}
-                    {{-- <input type="hidden" name="" id=""> --}}
+                   
                     <div class="modal-body">
                         Confirm Send Notification?
                     </div>
@@ -186,16 +192,12 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--End Send Modal -->
+    @include('dashboard.users.modals.create')
+    @yield('userCreateModal')
 
-    <!--   Core JS Files   -->
-    {{-- <script src="{{ asset('/js/dashboard/core/popper.min.js') }}"></script>
-    <script src="{{ asset('/js/dashboard/core/bootstrap.min.js') }}"></script> --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    @include('dashboard.components.script')
+    @include('dashboard.users.script')
     @yield('script')
 </body>
 

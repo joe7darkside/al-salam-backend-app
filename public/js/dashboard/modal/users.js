@@ -3,8 +3,8 @@ $(document).ready(function() {
     $(document).on('click', '.deleteBtn', function() {
 
         var user_id = $(this).val();
-        // alert(captain_id);
-        $('#deleteModal').modal('show');
+        // alert(user_id);
+        $('#delete_User_Modal').modal('show');
         $('#delete_user_id').val(user_id);
     });
     $(document).on('click', '.createBtn', function() {

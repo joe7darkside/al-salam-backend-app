@@ -103,13 +103,13 @@
 <body>
 
     <div class="limiter">
-        {{-- @if ($errors->any())
-            @include('dashboard.components.alerts')
-            @yield('validation')
-        @endif --}}
+
 
         <div class="container-login100" style="background-color: rgb(229, 237, 237)">
-
+            @if ($errors->any())
+                @include('dashboard.components.alerts')
+                @yield('validation')
+            @endif
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <form class="login100-form validate-form" action="{{ route('register.store') }}" method="POST">
                     @csrf
@@ -142,15 +142,16 @@
                                 <input class="input100" type="text" name="phone" placeholder="Type your phone">
                                 <span class="focus-input100" data-symbol="&#xf206;"></span>
                             </div>
-                            @error('phone')
-                                <div class="error">{{ $message }}</div>
-                            @enderror
+                            {{-- @error('phone')
+                                <div class="error">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror --}}
                         </div>
                         <div class="col-6">
                             <div class="wrap-input100 validate-input m-b-20 m-t-7" data-validate="Role is reauired">
-                                <span class="label-input100">Phone</span>
+                                <span class="label-input100">Role</span>
                                 <select class="form-select" style="border: none" name="role" required>
-                                    {{-- <option>Select payment status</option> --}}
                                     <option value="super">Super</option>
                                     <option value="notifications">Notifications</option>
                                     <option value="captains">Captains</option>
@@ -160,12 +161,15 @@
                                     <option value="users">Users</option>
 
                                 </select>
-                                {{-- <span class="label-input100">role</span>
-                                <input class="input100" type="text" name="role" placeholder="Type your role">
-                                <span class="focus-input100" data-symbol="&#xf206;"></span> --}}
+
                             </div>
                         </div>
                     </div>
+                    {{-- @error('email')
+                        <div class="error">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @enderror --}}
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Email is reauired">
                         <span class="label-input100">Email</span>
                         <input class="input100" type="text" name="email" placeholder="Type your email">

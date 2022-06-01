@@ -23,59 +23,8 @@ class CaptainController extends Controller
     {
         $captain_id = $request->input('captain_id');
         $captain = Captain::find($captain_id);
-        // dd($captain_id);
-        $allowedfileExtension = ['jpg', 'png', 'jpeg'];
-
-        if ($request->hasFile('img')) {
-            $file = $request->file('img');
-            $file_size = $request->file('img')->getSize();
-            if ($file_size <= '2000000') {
-                $fields = Validator::make($request->all(), [
-                    'first_name' => 'string|max:255',
-                    'last_name' => 'string|max:255',
-                    'phone' => 'digits:11|max:11',
-                    'email' => 'email|max:255',
-                    'vehicle' => 'max:255',
-                    'licence_plate' => 'max:255',
-                    'password' => 'max:255|min:8',
-                    'img' => '',
-
-                ]);
-                if ($fields->fails()) {
-                    redirect()->back()->with(['message', $fields->errors()->toJson()]);
-                }
-                $extenstion = $file->getClientOriginalExtension();
-                $check = in_array($extenstion, $allowedfileExtension);
-                if ($check) {
-                    $filename = time() . '.' . $extenstion;
-                    $file->move('uploads/images/captains/', $filename);
 
 
-                    if ($captain) {
-                        $captain->update(array_merge(
-                            $fields->validated(),
-                            [
-                                'password' => Hash::make($request->password),
-                                'img' => 'uploads/images/captains/' . $filename,
-                            ]
-                        ));
-                        // return response(['Success' => 'Updated Successfully']);
-                        return redirect()->back()->with('Success', 'Updated Successfully.');
-                    } else {
-                        // return response(['Success' => 'No data updated.']);
-                        return redirect()->back()->with('Warning', 'No data updated.');
-                    }
-
-                    return redirect()->back()->with('Success', 'Captian added successfully');
-                    // return response(['Success' => 'Captian added successfully']);
-                }
-                return redirect()->back()->with('Error', 'Wrong file type, only (png, jpg,jpeg) are allowed');
-                // return response(['result' => 'Very large file, Max size allowed is 1.9 mb']);
-
-            }
-            return redirect()->back()->with('Error', 'Very large file, Max size allowed is 1.9 MB');
-            // return response(['result' => 'Very large file, Max size allowed is 1.9 mb']);
-        }
         $fields = Validator::make($request->all(), [
             'first_name' => 'string|max:255',
             'last_name' => 'string|max:255',
@@ -84,26 +33,37 @@ class CaptainController extends Controller
             'vehicle' => 'max:255',
             'licence_plate' => 'max:255',
             'password' => 'max:255|min:8',
-            'img' => '',
+            'img' => 'mimes:jpeg,png,jpg|max:1850',
 
         ]);
+
+        $file = $request->file('img');
+
         if ($fields->fails()) {
-            redirect()->back()->with(['message', $fields->errors()->toJson()]);
+            redirect()->back()->with(['Error', $fields->errors()->toJson()]);
         }
 
-        if ($captain) {
+        if ($request->hasFile('img')) {
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extenstion;
+            $file->move('uploads/images/captains/', $filename);
             $captain->update(array_merge(
                 $fields->validated(),
                 [
                     'password' => Hash::make($request->password),
+                    'img' => 'uploads/images/captains/' . $filename,
                 ]
             ));
-            // return response(['Success' => 'Updated Successfully']);
-            return redirect()->back()->with('Success', 'Updated Successfully.');
-        } else {
-            // return response(['Success' => 'No data updated.']);
-            return redirect()->back()->with('Warning', 'No data updated.');
+            return redirect()->back()->with('Warning', 'Updated Successfully.');
         }
+
+        $captain->update(array_merge(
+            $fields->validated(),
+            [
+                'password' => Hash::make($request->password),
+            ]
+        ));
+        return redirect()->back()->with('Warning', 'Updated Successfully.');
     }
 
     /**
@@ -121,7 +81,7 @@ class CaptainController extends Controller
             $captain->delete();
             // return response()->json(['result' => 'works']);
             return redirect()->back()
-                ->with('Success', 'Captain Deleted Successfully.');
+                ->with('Error', 'Captain Deleted Successfully.');
         } else {
             // return response()->json(['result' => $captain]);
             return redirect()->back()

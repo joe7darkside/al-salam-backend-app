@@ -16,6 +16,7 @@ class Trip extends Model
         'cost',
         'payment_method',
         'canceled',
+        'note',
 
     ];
 

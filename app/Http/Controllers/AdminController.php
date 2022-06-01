@@ -6,6 +6,9 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -30,29 +33,69 @@ class AdminController extends Controller
         // return response()->json(['admins' => $admins]);
     }
 
-
     /**
-     * Update the specified admin in storage.
+     * Handle an incoming registration request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
-
-    public function updateAdmin(Request $request, $id)
+    public function store(Request $request)
     {
 
-        $admin = Admin::find($id);
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|digits:11|max:11|unique:admins',
+            'email' => 'required|string|email|max:255|unique:admins',
+            'role' => 'required|string|max:255',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
-        if ($admin) {
-            $admin->update($request->all());
-            return View::make('dashboard.admins.overview')
-                ->with('Message', 'updated successfully.');
-        } else {
-            return View::make('dashboard.admins.overview')
-                ->with('Message', 'No Data Updated');
+        if ($validator->fails()) {
+            redirect()->back()->with(['Error', $validator->errors()->toJson()]);            // return response()->json($validator->errors()->toJson(), 400);
         }
+        $user = Admin::create(
+            array_merge(
+                $validator->validated(),
+                [
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'role' => $request->role,
+                    'password' => Hash::make($request->password),
+                ]
+            )
+
+        );
+
+
+        return redirect()->back()->with('Success', 'Created Successfully.');
     }
+    /**
+    //  * Update the specified admin in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+
+    // public function updateAdmin(Request $request, $id)
+    // {
+
+    //     $admin = Admin::find($id);
+
+    //     if ($admin) {
+    //         $admin->update($request->all());
+    //         return View::make('dashboard.admins.overview')
+    //             ->with('Message', 'updated successfully.');
+    //     } else {
+    //         return View::make('dashboard.admins.overview')
+    //             ->with('Message', 'No Data Updated');
+    //     }
+    // }
 
 
     /**
@@ -63,20 +106,23 @@ class AdminController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id=$request->input('delete_admin_id');
-        $admin = $request->user()->first_name;
+        $admin_id = $request->user()->id;
+        $id = $request->input('delete_admin_id');
         $adminData = Admin::find($id);
 
-        if ($adminData) {
-            $adminData->delete();
-            return redirect()->back()
-                ->with(['Message' => 'Deleted Successfully.', 'admin' => $admin]);
-        } else {
-            return redirect()->back()
-                ->with(['Message' => 'Record Faild to Deleted', 'admin' => $admin]);
-            // return View::make('dashboard.admins.overview', ['admin' => $admin])
-            //     ->with('Message', 'Record Faild to Deleted');
+        if ($admin_id != $id || $admin_id == 0) {
+
+
+            if ($adminData) {
+                $adminData->delete();
+                return redirect()->back()->with('Error', 'Admin Deleted Successfully.');
+            } else {
+
+                return redirect()->back()->with('Error', 'No data deleted.');
+            }
         }
+
+        return redirect()->back()->with('Error', "Can't delete this admin");
     }
 
 
@@ -176,5 +222,95 @@ class AdminController extends Controller
 
         // return response()->json(['invitations' => $invitations]);
         return View::make('dashboard.admins.categorized',  ['admins' => $admins]);
+    }
+
+
+
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $admin = Admin::find($id);
+
+
+
+        return response()->json(['status' => 200, 'admin' => $admin]);
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $id = $request->input('admin_id');
+        $admin = Admin::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'string|max:255',
+            'last_name' => 'string|max:255',
+            'phone' => 'digits:11|max:11',
+            'email' => 'string|email|max:255',
+            'role' => 'string|max:255',
+            'password' => ['required', Rules\Password::defaults()],
+        ]);
+
+        if ($admin) {
+
+            if ($validator->fails()) {
+                redirect()->back()->with(['Error', $validator->errors()->toJson()]);            // return response()->json($validator->errors()->toJson(), 400);
+            }
+            $admin->update(
+                array_merge(
+                    $validator->validated(),
+                    [
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'phone' => $request->phone,
+                        'email' => $request->email,
+                        'role' => $request->role,
+                        'password' => Hash::make($request->password),
+                    ]
+                )
+
+            );
+            // $admin->update($request->all());
+            return redirect()->back()->with('Warning', 'Update Successfully.');
+        } else {
+
+            return redirect()->back()->with('Error', 'No data Updated.');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function send(Request $request)
+    {
+        $id = $request->input('send_admin_id');
+        $admin = Admin::find($id);
+
+        if ($admin) {
+            // $admin->update($request->all());
+            return redirect()->back()->with('Send', 'Message sent Successfully.');
+        } else {
+
+            return redirect()->back()->with('Error', 'No data sent.');
+        }
     }
 }

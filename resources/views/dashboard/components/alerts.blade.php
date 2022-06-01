@@ -25,6 +25,22 @@
 
 
 
+
+@section('send.alert')
+    <div class="alert alert-info row mx-1" style="justify-content: space-between; ">
+        <div class="col-auto">
+            <strong>{{ session()->get('Send') }}</strong>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="close" data-dismiss="alert"
+                style="background-color: transparent; border: none;">&times;</button>
+        </div>
+    </div>
+@endsection
+
+
+
+
 @section('error.alert')
     <div class="alert alert-danger row mx-1" style="justify-content: space-between; ">
         <div class="col-auto">

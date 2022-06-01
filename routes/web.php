@@ -127,10 +127,12 @@ Route::group(['middleware' => 'auth',], function () {
     //* Routes for AdminController 
     Route::group(['prefix' => 'admins', 'middleware' => 'role:super,super'], function () {
         Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
-        // Route::get('/categorized-admin/{category}', [AdminController::class, 'categorizedInvitations'])->name('invitations.category');
+        Route::post('/store', [AdminController::class, 'store'])->name('admins.store');
         Route::get('/search', [AdminController::class, 'search'])->name('admins.search');
-        // Route::get('/category-search/{category}', [AdminController::class, 'categorizedSearch'])->name('invitations.category.search');
+        Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('admins.edit');
+        Route::put('/update', [AdminController::class, 'update'])->name('admins.update');
         Route::delete('/delete', [AdminController::class, 'destroy'])->name('admins.delete');
+        Route::post('/send', [AdminController::class, 'send'])->name('admins.send');
     });
 });
 

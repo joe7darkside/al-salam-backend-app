@@ -116,10 +116,10 @@ class NotificationController extends Controller
 
         if ($notification) {
             $notification->update($request->all());
-            return redirect()->back()->with('Success', 'Update Successfully.');
+            return redirect()->back()->with('Warning', 'Update Successfully.');
         } else {
 
-            return redirect()->back()->with('Warning', 'No data Updated.');
+            return redirect()->back()->with('Error', 'No data Updated.');
         }
     }
 
@@ -138,7 +138,7 @@ class NotificationController extends Controller
         if ($notification) {
             $notification->delete();
             return redirect()->back()
-                ->with(['Success' => 'Deleted Successfully.']);
+                ->with(['Error' => 'Deleted Successfully.']);
         } else {
             return redirect()->back()
                 ->with(['Error' => 'Record Faild to Deleted']);
@@ -168,7 +168,7 @@ class NotificationController extends Controller
             // send_notification_FCM($user_app_token, $title, $body);
         }
 
-        return   redirect()->back()->with('Success', 'Notification sent successfully');
+        return  redirect()->back()->with('Send', 'Notification sent successfully');
         // return response()->json(['result' => 'Notification sent successfully'], 200);
     }
 

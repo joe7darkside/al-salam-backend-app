@@ -80,7 +80,12 @@
                                                 phone</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                cost</th>
+                                                cost (IQD)</th>
+
+
+                                            <th
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                status</th>
 
                                             {{-- <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
@@ -99,12 +104,10 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
-                                            {{-- <th
+
+                                            <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                Updated at</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                            </th> --}}
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,22 +133,26 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $trip->cost }}</span>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->watertrip->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->gastrip->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->electricitytrip->cost }}</span>
-                                                </td> --}}
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->payment_status }}</span>
-                                                </td> --}}
+                                                @switch($trip->canceled)
+                                                    @case(0)
+                                                        <td class="align-middle text-center">
+                                                            <span class="text-s font-weight-bold mb-0 text-red-600"
+                                                                style="color: rgb(207, 12, 51) ">Canceled</span>
+                                                        </td>
+                                                    @break
+
+                                                    @case(1)
+                                                        <td class="align-middle text-center">
+                                                            <span class="text-s font-weight-bold mb-0 text-green-600"
+                                                                style="color:rgb(9, 180, 9) ">Complete
+                                                            </span>
+                                                        </td>
+                                                    @break
+
+                                                    @default
+                                                @endswitch
+
+
 
                                                 <td class="align-middle text-center">
                                                     @switch($trip->payment_method)
@@ -175,30 +182,7 @@
                                                 <td class="align-middle text-center">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
-                                                            {{-- <div class="dropdown-content"> --}}
-                                                            {{-- <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
-                                                            {{-- <button value="{{ $bill->id }}"
-                                                                    class="infoBtn "
-                                                                    style="border: 0ch; color: blue"><i
-                                                                        class="bi bi-info-circle-fill"></i></button> --}}
 
-                                                            {{-- <button value="{{ $bill->id }}"
-                                                                    class="editBtn "
-                                                                    style="border: 0ch; color: darkgoldenrod"><i
-                                                                        class="fa fa-pen "></i></button> --}}
-                                                            {{-- <a href="#edit{{ $captain->id }}"><i
-                                                                        class="fa-solid fa-pen update "
-                                                                        data-toggle="modal"></i></a> --}}
-                                                            {{-- {{ route('captains.delete', ['captain' => $captain]) }} --}}
-                                                            {{-- <a href=""><i class="fa-solid fa-trash delete">
-                                                                        @method('DELETE')</i>
-                                                                </a> --}}
-                                                            {{-- <button value="{{ $bill->id }} "
-                                                                    class="deleteBtn"
-                                                                    style="border: 0ch; color: crimson"><i
-                                                                        class="fa fa-trash update "></i></button>
-                                                            </div> --}}
                                                             <div class="dropdown-content col-auto"
                                                                 style="right: -100px;">
 
@@ -217,29 +201,11 @@
                                                         </i>
                                                     </div>
                                                 </td>
-                                                {{-- <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <i class="fa fa-ellipsis-v ">
-                                                            <div class="dropdown-content">
-                                                                <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a>
-
-                                                                <a href=""><i class="fa-solid fa-trash delete">
-                                                                        @method('DELETE')</i>
-                                                                </a>
-                                                            </div>
-                                                        </i>
-                                                    </div>
-
-
-                                                </td> --}}
 
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-
-
 
                                 <div class="float-start pagination-margin "> {{ $trips->links() }}</div>
                             </div>
@@ -248,8 +214,8 @@
                 </div>
             </div>
 
-            @include('dashboard.components.footer')
-            @yield('footer')
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 

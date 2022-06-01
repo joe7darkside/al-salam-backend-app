@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body class="g-sidenav-show bg-page">
 
 
 
@@ -81,6 +81,14 @@
                 @yield('error.alert')
             @endif
 
+            @if (session('Send'))
+                @include('dashboard.components.alerts')
+                @yield('send.alert')
+            @endif
+            @if (session('Warning'))
+                @include('dashboard.components.alerts')
+                @yield('warning.alert')
+            @endif
 
             @if ($errors->any())
                 @include('dashboard.components.alerts')
@@ -96,7 +104,7 @@
                             </div>
                             <div class="col-auto">
                                 <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
-                                    data-toggle="modal" data-target="#createModal">Create</a>
+                                    data-toggle="modal" data-target="#userCreateModal">Create</a>
                             </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
@@ -127,8 +135,6 @@
                                                 Updated at</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                {{-- <a href="#" style="color:forestgreen; font-size: 15px"
-                                                    data-toggle="modal" data-target="#createModal">Create</a> --}}
 
                                             </th>
                                         </tr>
@@ -157,7 +163,6 @@
                                                         class="text-s font-weight-bold mb-0">{{ $captain->email }}</span>
                                                 </td>
 
-
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $captain->created_at->diffForHumans() }}</span>
@@ -170,12 +175,7 @@
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                {{-- <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
-                                                                {{-- <button value="{{ $captain->id }}"
-                                                                    class="infoBtn "
-                                                                    style="border: 0ch; color: blue"><i
-                                                                        class="bi bi-info-circle-fill"></i></button> --}}
+
                                                                 <button value="{{ $captain->id }}"
                                                                     class="infoBtn "><i
                                                                         class="bi bi-info-circle-fill"></i></button>
@@ -189,54 +189,27 @@
                                                             </div>
                                                         </i>
                                                     </div>
-
-
                                                 </td>
 
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-
-
-
                                 <div class="float-start pagination-margin "> {{ $captains->links() }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="footer pt-3  ">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-s text-muted text-lg-start">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>, Aswar
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                <li class="nav-item">
-                                    Al Salam App
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-
         </div>
     </main>
 
 
-
+    {{-- Modals --}}
     <!-- Create Modal -->
     @include('dashboard.captains.modals.create')
     @yield('createModal')
+
 
     <!-- Update Modal -->
     @include('dashboard.captains.modals.edit')
@@ -248,30 +221,15 @@
     @yield('deleteModal')
 
 
-
-    <!-- Delete Modal -->
+    <!-- Info Modal -->
     @include('dashboard.captains.modals.info')
     @yield('infoModal')
 
+    {{-- Modals --}}
 
-
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script> --}}
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script> --}}
-
-    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="/js/dashboard/modal/modal.js"></script> --}}
-
-    {{-- @include('dashboard.components.script')
-    @yield('script') --}}
-
-
+    {{-- Script --}}
     @include('dashboard.captains.script')
     @yield('script')
 </body>
-
-
 
 </html>

@@ -64,7 +64,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" name="email" class="form-control" required>
+                                <input type="text" name="email"  class="form-control" required>
                             </div>
                         </div>
                         {{-- Password --}}

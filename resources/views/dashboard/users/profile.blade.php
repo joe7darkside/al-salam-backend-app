@@ -12,27 +12,6 @@
     <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
 </head>
 
-{{-- <style>
-    body::-webkit-scrollbar {
-        width: 12px;
-        /* width of the entire scrollbar */
-    }
-
-    body::-webkit-scrollbar-track {
-        background: orange;
-        /* color of the tracking area */
-    }
-
-    body::-webkit-scrollbar-thumb {
-        background-color: blue;
-        /* color of the scroll thumb */
-        border-radius: 20px;
-        /* roundness of the scroll thumb */
-        border: 3px solid orange;
-        /* creates padding around scroll thumb */
-    }
-
-</style> --}}
 
 <body class="g-sidenav-show bg-gray-100">
     @include('dashboard.components.sideBar')
@@ -65,8 +44,7 @@
 
         <div class="container-fluid">
 
-            <div class="page-header min-height-300 border-radius-xl mt-4"
-                style="background-image: url('/images/curved0.jpg'); background-position-y: 50%;">
+            <div class="page-header min-height-300 border-radius-xl mt-4" style=" background-position-y: 50%;">
                 <span class="mask bg-gradient-info opacity-6"></span>
             </div>
             <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
@@ -115,8 +93,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <button value="{{ $user->id }} " class="deleteBtn nav-link mb-0 px-0 py-1 "
-                                        data-bs-toggle="tab" href="#" role="tab" aria-selected="false">
+                                    <button value="{{ $user->id }} " class="deleteBtn nav-link mb-0 px-0 py-1 ">
                                         <i class="fa fa-trash me-sm-1 text-gray-600"></i>
                                         <span class="ms-1">Delete</span>
                                     </button>
@@ -195,13 +172,7 @@
 
                                             @default
                                         @endswitch
-                                        {{-- @if ($trip->payment_method == 0)
-                                            <a class="delete pe-3 ps-0 mb-0 ms-auto">Cash</a>
-                                        @if
-                                            <a class="profile pe-3 ps-0 mb-0 ms-auto">Visa card</a>
-                                        @else
-                                            <a class="profile pe-3 ps-0 mb-0 ms-auto">Al salam card</a>
-                                        @endif --}}
+
 
                                     </li>
                                 @endforeach
@@ -244,28 +215,21 @@
                 </div>
 
             </div>
-            @include('dashboard.components.footer')
-            @yield('footer')
+
 
         </div>
 
     </div>
     <!-- Create Modal -->
-    @include('dashboard.users.modals.create')
+    @include('dashboard.bills.modals.create')
     @yield('createModal')
 
     @include('dashboard.users.modals.delete')
-    @yield('deleteModal')
+    @yield('deleteUserModal')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    {{-- <script src="{{ asset('js/dashboard/modal/bills.js') }}"></script> --}}
-    <script src="{{ asset('js/dashboard/modal/users.js') }}"></script>
 
-    @include('dashboard.components.script')
+    @include('dashboard.users.script')
     @yield('script')
-
 
 
 </body>
