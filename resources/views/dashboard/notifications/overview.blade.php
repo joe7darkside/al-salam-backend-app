@@ -6,19 +6,6 @@
 @yield('header')
 
 {{-- Body --}}
-{{-- <style>
-    table {
-        width: 100px;
-        table-layout: fixed;
-    }
-
-
-    td {
-        word-wrap: break-word;
-        width: 10px
-    }
-
-</style> --}}
 
 <body class="g-sidenav-show  bg-page main-scrollBar">
 

@@ -41,12 +41,12 @@ class RegisteredUserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255|unique:admins',
+            'phone' => 'required|max:11|digits:11|unique:admins',
             'email' => 'required|string|email|max:255|unique:admins',
             'role' => 'required|string|max:255',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+       
         if ($validator->fails()) {
             redirect()->back()->with(['errors', $validator->errors()]);
             // return response()->json($validator->errors()->toJson(), 400);

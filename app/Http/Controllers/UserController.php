@@ -63,48 +63,23 @@ class UserController extends Controller
      * @return View|Object 
      */
 
-    public function userProfile($id)
+    public function userProfile($id, Request $request)
     {
 
-        $user_trips = array();
-        $captains = array();
+        $admin_name = $request->user()->first_name;
+
         $user = User::find($id);
 
         $user->bill;
 
         $user->invitaion;
 
-        $trips =  $user->trip;
+        $user->trip;
 
-        // foreach ($trips as $key => $trip) {
-
-        //     $user_trips[] = $trip;
-        // }
-
-        // foreach ($trips as $key => $trip) {
-
-        //     $trip_captain = Captain::where('id', 'LIKE', '%' . $trip->trip_captain . '%');
-        //     $captains[] = $trip_captain;
-        // }
-
-
-
-        // foreach ($bills as $key => $bill) {
-        //     $waterBill =  $bill->waterBill;
-        //     $gasBill = $bill->gasBill;
-        //     $electricityBill = $bill->electricityBill;
-        // }
-
-        // return response()->json([
-        //     'user' => $user,
-        // ]);
         return View::make('dashboard.users.profile', [
-            'user' => $user,
+            'user' => $user, 'admin_name' => $admin_name
         ]);
     }
-
-
-
 
     /**
      * Send notification & return Profile view 
@@ -181,7 +156,7 @@ class UserController extends Controller
         if ($notification) {
             $notification->delete();
             return redirect()->route('users.overView')
-                ->with(['Success' => 'User Deleted Successfully.']);
+                ->with(['Error' => 'User Deleted Successfully.']);
         } else {
             return redirect()->back()
                 ->with(['Error' => 'Record Faild to Deleted']);

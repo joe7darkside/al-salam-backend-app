@@ -7,7 +7,8 @@
 
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('users.register') }}" method="POST">
+                    {{-- users.register --}}
+                    <form action="" method="POST">
                         @csrf
                         {{-- FIRST ROW --}}
                         <div class="row">

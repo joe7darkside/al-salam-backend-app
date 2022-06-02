@@ -13,7 +13,7 @@
     @yield('header')
 </head>
 
-<body class="g-sidenav-show  bg-page">
+<body class="g-sidenav-show main-scrollBar bg-page">
 
     @include('dashboard.components.sideBar')
     @yield('sideBar')

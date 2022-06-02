@@ -79,24 +79,24 @@
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <form class="login100-form validate-form" action="{{ route('login.store') }}" method="POST">
                     @csrf
+
                     <span class="login100-form-title p-b-49">
                         Login
                     </span>
-                    {{-- @if ($errors)
-                        @foreach ($errors as $error)
-                            <span class="text-danger" style="font-size: 10px">{{ $error }}</span>
-                        @endforeach
-                    @endif --}}
-                    @if ($errors->any())
-                        @include('dashboard.components.alerts')
-                        @yield('validation')
-                    @endif
-                    <!-- Session Status -->
-                    {{-- <x-auth-session-status class="mb-4" :status="session('status')" />
+                    <div>
+                        @if ($errors->any())
+                            <div class="text-s text-danger" style="justify-content: center; ">
 
-                    <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
 
+                                </ul>
+
+                            </div>
+                        @endif
+                    </div>
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Email is reauired">
                         <span class="label-input100">Email</span>
                         <input class="input100" type="text" name="email" placeholder="Type your email">

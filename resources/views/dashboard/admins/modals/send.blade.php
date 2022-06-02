@@ -1,5 +1,5 @@
 @section('sendModal')
-    <div class="modal fade" id="send_User_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="sendModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -10,7 +10,7 @@
                     <form action="{{ route('admins.send') }}" method="POST">
                         @csrf
 
-                        <input type="hidden" id="send_user_id" name="send_user_id">
+                        <input type="hidden" id="send_admin_id" name="send_admin_id">
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}

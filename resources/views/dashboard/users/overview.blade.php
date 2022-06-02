@@ -13,7 +13,12 @@
     @yield('header')
 </head>
 
+<style>
+    .nohover a:hover {
+        background-color: transparent;
+    }
 
+</style>
 
 <body class="g-sidenav-show  bg-page main-scrollBar">
 
@@ -62,6 +67,25 @@
                 @include('dashboard.components.alerts')
                 @yield('success.alert')
             @endif
+
+            @if (session('Error'))
+                @include('dashboard.components.alerts')
+                @yield('error.alert')
+            @endif
+
+            @if (session('Send'))
+                @include('dashboard.components.alerts')
+                @yield('send.alert')
+            @endif
+            @if (session('Warning'))
+                @include('dashboard.components.alerts')
+                @yield('warning.alert')
+            @endif
+
+            @if ($errors->any())
+                @include('dashboard.components.alerts')
+                @yield('validation')
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -81,10 +105,10 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 USER</th>
                                             <th
-                                                class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2">
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Phone</th>
                                             {{-- <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
@@ -101,61 +125,58 @@
                                     <tbody>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
+                                                <td class="align-middle text-center">
+                                                    {{-- <div>
                                                             <img src="../assets/img/team-2.jpg"
                                                                 class="avatar avatar-sm me-3" alt="user1">
                                                         </div> --}}
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $user->first_name }}
-                                                                {{ $user->last_name }}
-                                                            </h6>
-                                                            <p class="text-s text-secondary mb-0">
-                                                                {{ $user->email }}
-                                                            </p>
-                                                        </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ $user->first_name }}
+                                                            {{ $user->last_name }}
+                                                        </h6>
+                                                        <span class="text-s text-secondary mb-0">
+                                                            {{ $user->email }}
+                                                        </span>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <p class="text-s font-weight-bold mb-0">{{ $user->phone }}</p>
-                                                </td>
-                                                {{-- <td class="align-middle text-center text-sm">
-                                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                                </td> --}}
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-secondary text-s font-weight-bold">{{ $user->created_at->diffForHumans() }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $user->phone }}</span>
+                                                </td>
+
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $user->created_at->diffForHumans() }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-secondary text-s font-weight-bold">{{ $user->updated_at->diffForHumans() }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $user->updated_at->diffForHumans() }}</span>
                                                 </td>
                                                 <td class="align-middle">
-                                                    {{-- <button class=" btn btn-link text-secondary mb-0"> --}}
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                <a href="#" data-toggle="modal"
-                                                                    data-target="#sendModal"><i
-                                                                        class="fa-solid fa-paper-plane send"></i></a>
-                                                                <a
-                                                                    href="{{ route('users.profile', ['id' => $user->id]) }}"><i
-                                                                        class="fa-solid fa-address-card profile"></i></a>
-                                                                {{-- <a href=""><i class="fa-solid fa-trash delete"></i></a> --}}
+
+
+
+                                                                {{-- <button value="{{ $user->id }} "
+                                                                    class="deleteBtn "><i
+                                                                        class="fa fa-trash update "></i></button> --}}
+
+
+                                                                <button class="showBtn ">
+                                                                    <a class="nohover"
+                                                                        href="{{ route('users.profile', ['id' => $user->id]) }}"><i
+                                                                            class=" fa fa-address-card profile  "></i></a>
+                                                                </button>
+
                                                             </div>
                                                         </i>
                                                     </div>
 
-                                                    {{-- </button> --}}
+
                                                 </td>
-                                                {{-- <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </td> --}}
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -174,6 +195,9 @@
 
     @include('dashboard.users.modals.create')
     @yield('createModal')
+
+    @include('dashboard.users.modals.delete')
+    @yield('deleteUserModal')
 
     @include('dashboard.users.script')
     @yield('script')

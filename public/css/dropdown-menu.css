@@ -76,6 +76,13 @@
     size: 15px;
 }
 
+.showBtn {
+    border: none;
+    background-color: white;
+    color: dodgerblue;
+    size: 15px;
+}
+
 .deleteBtn {
     border: none;
     background-color: white;

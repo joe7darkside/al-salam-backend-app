@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    {{-- <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} "> --}}
     @include('dashboard.components.header')
     @yield('header')
 
@@ -15,20 +14,7 @@
 
 </body>
 
-{{-- <style>
-    canvas {
-        border-color: aquamarine;
-
-        color: #2d19c7;
-        /* width:200px;
-    height:200px; */
-    }
-
-    ​
-
-</style> --}}
-
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show bg-page main-scrollBar  bg-gray-100">
     @include('dashboard.components.sideBar')
     @yield('sideBar')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -60,13 +46,14 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Bills</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            $5,000
+                                            5,000 IQD
                                             {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div
+                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="bi bi-cash-stack"></i>
                                     </div>
                                 </div>
@@ -88,7 +75,8 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div
+                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="bi bi-people-fill"></i>
                                         {{-- class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i> --}}
@@ -112,7 +100,8 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div
+                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="fa fa-suitcase-rolling"></i>
                                         {{-- class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i> --}}
@@ -136,7 +125,8 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div
+                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="bi bi-person-lines-fill"></i>
                                         {{-- <div
                                         class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
@@ -152,7 +142,7 @@
 
             </div>
             <div class="row mt-4">
-                <div class="col-lg-5 mb-lg-0 mb-4">
+                <div class="col-lg-6 mb-lg-0 mb-4 pb-3">
                     <div class="card z-index-2">
                         <div class="card-body p-3">
                             <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
@@ -192,12 +182,12 @@
                                                     </g>
                                                 </svg> --}}
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Customers</p>
+                                            <p class="text-s mt-1 mb-0 font-weight-bold">Customers</p>
                                         </div>
-                                        <h4 class="font-weight-bolder">36K</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        <h5 class="font-weight-bolder">{{ $customers }}</h5>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar bg-dark w-100" role="progressbar"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                     <div class="col-3 py-3 ps-0">
@@ -228,12 +218,12 @@
                                                     </g>
                                                 </svg> --}}
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Captains</p>
+                                            <p class="text-s mt-1 mb-0 font-weight-bold">Captains</p>
                                         </div>
-                                        <h4 class="font-weight-bolder">2K</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        <h5 class="font-weight-bolder">{{ $captains }}</h5>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar bg-dark w-100" role="progressbar"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
 
@@ -270,47 +260,15 @@
                                                     </g>
                                                 </svg> --}}
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Trips</p>
+                                            <p class="text-s mt-1 mb-0 font-weight-bold">Trips</p>
                                         </div>
-                                        <h4 class="font-weight-bolder">1.02K</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 py-3 ps-0">
-                                        <div class="d-flex mb-2">
-                                            <div
-                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
-                                                <svg width="10px" height="10px" viewBox="0 0 43 36" version="1.1"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>credit-card</title>
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <g transform="translate(-2169.000000, -745.000000)"
-                                                            fill="#FFFFFF" fill-rule="nonzero">
-                                                            <g transform="translate(1716.000000, 291.000000)">
-                                                                <g transform="translate(453.000000, 454.000000)">
-                                                                    <path class="color-background"
-                                                                        d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                                        opacity="0.593633743"></path>
-                                                                    <path class="color-background"
-                                                                        d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                                                    </path>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-                                            </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Bills</p>
-                                        </div>
-                                        <h4 class="font-weight-bolder">35K $</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        <h5 class="font-weight-bolder">{{ $trips }}</h5>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar bg-dark w-100" role="progressbar"
+                                                aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
+
                                     <div class="col-3 py-3 ps-0">
                                         <div class="d-flex mb-2">
                                             <div
@@ -342,12 +300,46 @@
                                                     </g>
                                                 </svg> --}}
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Invitations</p>
+                                            <p class="text-s mt-1 mb-0 font-weight-bold">Invitations</p>
                                         </div>
-                                        <h4 class="font-weight-bolder">1.43K</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-50" role="progressbar"
+                                        <h5 class="font-weight-bolder">{{ $invitations }}</h5>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar bg-dark w-100" role="progressbar"
                                                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3 py-3 ps-0">
+                                        <div class="d-flex mb-2">
+                                            <div
+                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                                <svg width="10px" height="10px" viewBox="0 0 43 36" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>credit-card</title>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <g transform="translate(-2169.000000, -745.000000)"
+                                                            fill="#FFFFFF" fill-rule="nonzero">
+                                                            <g transform="translate(1716.000000, 291.000000)">
+                                                                <g transform="translate(453.000000, 454.000000)">
+                                                                    <path class="color-background"
+                                                                        d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                                                        opacity="0.593633743"></path>
+                                                                    <path class="color-background"
+                                                                        d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                                                    </path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <p class="text-s mt-1 mb-0 font-weight-bold">Bills</p>
+                                        </div>
+                                        <h5 class="font-weight-bolder">{{ $bills_cost }} IQD</h5>
+                                        <div class="progress w-100">
+                                            <div class="progress-bar bg-dark w-100" role="progressbar"
+                                                aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -355,7 +347,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <div class="card z-index-2">
                         <div class="card-header pb-0">
                             <h6>Bills overview</h6>
@@ -366,8 +358,7 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="chart">
-                                <canvas id="chart-line" class="chart-canvas " style="color: blue"
-                                    height="370"></canvas>
+                                <canvas id="chart-line" class="chart-canvas " height="370"></canvas>
                             </div>
                         </div>
                     </div>
@@ -375,15 +366,15 @@
             </div>
             <div class="row my-4">
                 <div class="col-lg-5 col-md-6 mb-md-0 mb-4">
-                    <div class="card">
+                    <div class="card card-body ">
                         <div class="card-header pb-0">
                             <div class="row">
                                 <div class="col-lg-6 col-7">
-                                    <h6>New Customers</h6>
-                                    <p class="text-sm mb-0">
-                                        {{-- <i class="fa fa-check text-info" aria-hidden="true"></i> --}}
+                                    <h6>Latest Customers</h6>
+                                    {{-- <p class="text-sm mb-0">
+                                        <i class="fa fa-check text-info" aria-hidden="true"></i>
                                         <span class="font-weight-bold ms-1">Latest 5</span>
-                                    </p>
+                                    </p> --}}
                                 </div>
                                 <div class="col-lg-6 col-5 my-auto text-end">
                                     <div class="dropdown float-lg-end pe-4">
@@ -410,13 +401,13 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                                 Full Name</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
                                                 Phone</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                                 Email</th>
                                             {{-- <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -424,237 +415,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($customers_latest as $customer)
+                                            <tr>
 
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                                        <img src="../assets/img/small-logos/logo-atlassian.svg"
-                                                            class="avatar avatar-sm me-3" alt="atlassian">
-                                                    </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">joe saleh</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">07719787837</span>
-                                                {{-- <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Romina Hadid">
-                                                        <img src="../assets/img/team-2.jpg" alt="team5">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Jessica Doe">
-                                                        <img src="../assets/img/team-4.jpg" alt="team6">
-                                                    </a>
-                                                </div> --}}
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-xs font-weight-bold"> jo2014saleh@gmail.com</span>
-                                            </td>
-                                            {{-- <td class="align-middle">
-                                                <div class="progress-wrapper w-75 mx-auto">
-                                                    <div class="progress-info">
-                                                        <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">10%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-info w-10"
-                                                            role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                                        <img src="../assets/img/small-logos/logo-slack.svg"
-                                                            class="avatar avatar-sm me-3" alt="team7">
-                                                    </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">joe saleh</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">07719787837</span>
-                                                {{-- <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Romina Hadid">
-                                                        <img src="../assets/img/team-3.jpg" alt="team8">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Jessica Doe">
-                                                        <img src="../assets/img/team-1.jpg" alt="team9">
-                                                    </a>
-                                                </div> --}}
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-xs font-weight-bold"> jo2014saleh@gmail.com </span>
-                                            </td>
-                                            {{-- <td class="align-middle">
-                                                <div class="progress-wrapper w-75 mx-auto">
-                                                    <div class="progress-info">
-                                                        <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">100%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-success w-100"
-                                                            role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                                        <img src="../assets/img/small-logos/logo-spotify.svg"
-                                                            class="avatar avatar-sm me-3" alt="spotify">
-                                                    </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">joe saleh</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">07719787837</span>
-                                                {{-- <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Ryan Tompson">
-                                                        <img src="../assets/img/team-4.jpg" alt="user1">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Romina Hadid">
-                                                        <img src="../assets/img/team-3.jpg" alt="user2">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Alexander Smith">
-                                                        <img src="../assets/img/team-4.jpg" alt="user3">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Jessica Doe">
-                                                        <img src="../assets/img/team-1.jpg" alt="user4">
-                                                    </a>
-                                                </div> --}}
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-xs font-weight-bold">jo2014saleh@gmail.com</span>
-                                            </td>
-                                            {{-- <td class="align-middle">
-                                                <div class="progress-wrapper w-75 mx-auto">
-                                                    <div class="progress-info">
-                                                        <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">100%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-success w-100"
-                                                            role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                                        <img src="../assets/img/small-logos/logo-jira.svg"
-                                                            class="avatar avatar-sm me-3" alt="jira">
-                                                    </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">joe saleh</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">07719787837</span>
-                                                {{-- <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Ryan Tompson">
-                                                        <img src="../assets/img/team-4.jpg" alt="user5">
-                                                    </a>
-                                                </div> --}}
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-xs font-weight-bold"> jo2014saleh@gmail.com </span>
-                                            </td>
-                                            {{-- <td class="align-middle">
-                                                <div class="progress-wrapper w-75 mx-auto">
-                                                    <div class="progress-info">
-                                                        <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">25%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-info w-25"
-                                                            role="progressbar" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="25"></div>
-                                                    </div>
-                                                </div>
-                                            </td> --}}
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    {{-- <div>
-                                                        <img src="../assets/img/small-logos/logo-invision.svg"
-                                                            class="avatar avatar-sm me-3" alt="invision">
-                                                    </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">joe saleh</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">07719787837</span>
-                                                {{-- <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Ryan Tompson">
-                                                        <img src="../assets/img/team-1.jpg" alt="user6">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Jessica Doe">
-                                                        <img src="../assets/img/team-4.jpg" alt="user7">
-                                                    </a>
-                                                </div> --}}
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-xs font-weight-bold"> jo2014saleh@gmail.com </span>
-                                            </td>
-                                            {{-- <td class="align-middle">
-                                                <div class="progress-wrapper w-75 mx-auto">
-                                                    <div class="progress-info">
-                                                        <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">40%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-info w-40"
-                                                            role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                                                            aria-valuemax="40"></div>
-                                                    </div>
-                                                </div>
-                                            </td> --}}
-                                        </tr>
+                                                <td class="align-middle text-center text-s">
+                                                    <span
+                                                        class="text-xs font-weight-bold">{{ $customer->first_name }}</span>
+
+                                                </td>
+                                                <td class="align-middle text-center text-s">
+                                                    <span
+                                                        class="text-xs font-weight-bold">{{ $customer->phone }}</span>
+
+                                                </td>
+                                                <td class="align-middle text-center text-s">
+                                                    <span class="text-xs font-weight-bold">
+                                                        {{ $customer->email }}</span>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -664,120 +444,34 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="card h-100">
                         <div class="card-header pb-0">
-                            <h6>New Trips</h6>
+                            <h6>Latest Trips</h6>
                             {{-- <p class="text-sm">
                                 <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                 <span class="font-weight-bold">24%</span> this month
                             </p> --}}
-                            <p class="text-sm">
-                                {{-- <i class="fa fa-arrow-up text-success" aria-hidden="true"></i> --}}
+                            {{-- <p class="text-sm">
+                                <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                 <span class="font-weight-bold">Latest 5</span>
-                            </p>
+                            </p> --}}
                         </div>
-                        <div class="card-body p-3">
+                        <div class="card-body p-2">
                             <div class="timeline timeline-one-side">
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$20</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+                                @foreach ($trips_latest as $trip)
+                                    {{-- @endforeach --}}
+                                    <div class="timeline-block mb-3">
+                                        <span class="timeline-step">
+                                            <i class="ni ni-bell-55 text-success text-gradient"></i>
+                                        </span>
+                                        <div class="timeline-content">
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0">{{ $trip->cost }} IQD
+                                            </h6>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                {{ $trip->created_at->format('d M H:i ') }}
+
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$20</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$20</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$20</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 9:20 am</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$10</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">12 DEC 8:20 PM</p>
-                                    </div>
-                                </div>
-                                {{-- <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$30</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">3 DEC 3:20 PM</p>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-html5 text-danger text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-cart text-info text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April
-                                        </h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-credit-card text-warning text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order
-                                            #4395133</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-key-25 text-primary text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for
-                                            development</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-money-coins text-dark text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
-                                    </div>
-                                </div> --}}
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -787,103 +481,56 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card h-100">
                         <div class="card-header pb-0">
-                            <h6>New Invitations</h6>
+                            <h6>Latest Invitations</h6>
                             {{-- <p class="text-sm">
                                 <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                 <span class="font-weight-bold">24%</span> this month
                             </p> --}}
-                            <p class="text-sm">
-                                {{-- <i class="fa fa-arrow-up text-success" aria-hidden="true"></i> --}}
+                            {{-- <p class="text-sm">
+                                <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                                 <span class="font-weight-bold">Latest 5</span>
-                            </p>
+                            </p> --}}
                         </div>
                         <div class="card-body p-3">
                             <div class="timeline timeline-one-side">
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <div class="row" style="justify-content: space-between;">
-                                            <div class="col-4">
-                                                <h6 class="text-dark text-sm font-weight-bold mb-0">Ali ahmed</h6>
-                                            </div>
+                                @foreach ($invitation_latest as $invitation)
+                                    <div class="timeline-block mb-3">
+                                        <span class="timeline-step">
+                                            <i class="ni ni-bell-55 text-success text-gradient"></i>
+                                        </span>
+                                        <div class="timeline-content">
+                                            <div class="row" style="justify-content: space-between;">
+                                                <div class="col-5">
+                                                    <h6 class="text-dark text-sm font-weight-bold mb-0">
+                                                        {{ $invitation->visiter_name }}</h6>
+                                                </div>
 
-                                            <div class="col-4">
-                                                <h6 class="text-danger text-sm font-weight-bold mb-0">Denied</h6>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <div class="row" style="justify-content: space-between;">
-                                            <div class="col-4">
-                                                <h6 class="text-dark text-sm font-weight-bold mb-0">Ali ahmed</h6>
-                                            </div>
+                                                @switch($invitation->permission)
+                                                    @case(0)
+                                                        <div class="col-4">
+                                                            <h6 class="text-danger text-sm font-weight-bold mb-0 align-middle">
+                                                                Denied</h6>
+                                                        </div>
+                                                    @break
 
-                                            <div class="col-4">
-                                                <h6 class="text-danger text-sm font-weight-bold mb-0">Denied</h6>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <div class="row" style="justify-content: space-between;">
-                                            <div class="col-4">
-                                                <h6 class="text-dark text-sm font-weight-bold mb-0">Ali ahmed</h6>
-                                            </div>
+                                                    @case(1)
+                                                        <div class="col-4">
+                                                            <h6
+                                                                class="text-success text-sm font-weight-bold mb-0 align-middle">
+                                                                Approved</h6>
+                                                        </div>
+                                                    @break
 
-                                            <div class="col-4">
-                                                <h6 class="text-success text-sm font-weight-bold mb-0">Approved</h6>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <div class="row" style="justify-content: space-between;">
-                                            <div class="col-4">
-                                                <h6 class="text-dark text-sm font-weight-bold mb-0">Ali ahmed</h6>
-                                            </div>
+                                                    @default
+                                                @endswitch
 
-                                            <div class="col-4">
-                                                <h6 class="text-danger text-sm font-weight-bold mb-0">Denied</h6>
                                             </div>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                {{ $invitation->created_at->format('d M H:i ') }}
+                                            </p>
                                         </div>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
                                     </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <div class="row" style="justify-content: space-between;">
-                                            <div class="col-4">
-                                                <h6 class="text-dark text-sm font-weight-bold mb-0">Ali ahmed</h6>
-                                            </div>
-
-                                            <div class="col-4">
-                                                <h6 class="text-success text-sm font-weight-bold mb-0">Approved</h6>
-                                            </div>
-                                        </div>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
+                                @endforeach
 
                             </div>
                         </div>
@@ -891,138 +538,11 @@
                 </div>
             </div>
 
-
-
-
-            {{-- <footer class="footer pt-3  ">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="copyright text-center text-sm text-muted text-lg-start">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>,
-                                made with <i class="fa fa-heart"></i> by
-                                <a href="https://www.creative-tim.com" class="font-weight-bold"
-                                    target="_blank">Creative Tim</a>
-                                for a better web.
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                        target="_blank">Creative Tim</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                        target="_blank">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                        target="_blank">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                        target="_blank">License</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer> --}}
             @include('dashboard.components.footer')
             @yield('footer')
         </div>
     </main>
-    {{-- <div class="fixed-plugin">
-        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-            <i class="fa fa-cog py-2"> </i>
-        </a>
-        <div class="card shadow-lg ">
-            <div class="card-header pb-0 pt-3 ">
-                <div class="float-start">
-                    <h5 class="mt-3 mb-0">Soft UI Configurator</h5>
-                    <p>See our dashboard options.</p>
-                </div>
-                <div class="float-end mt-4">
-                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="fa fa-close"></i>
-                    </button>
-                </div>
-                <!-- End Toggle Button -->
-            </div>
-            <hr class="horizontal dark my-1">
-            <div class="card-body pt-sm-3 pt-0">
-                <!-- Sidebar Backgrounds -->
-                <div>
-                    <h6 class="mb-0">Sidebar Colors</h6>
-                </div>
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <div class="badge-colors my-2 text-start">
-                        <span class="badge filter bg-gradient-primary active" data-color="primary"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-dark" data-color="dark"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-info" data-color="info"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-success" data-color="success"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-warning" data-color="warning"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-danger" data-color="danger"
-                            onclick="sidebarColor(this)"></span>
-                    </div>
-                </a>
-                <!-- Sidenav Type -->
-                <div class="mt-3">
-                    <h6 class="mb-0">Sidenav Type</h6>
-                    <p class="text-sm">Choose between 2 different sidenav types.</p>
-                </div>
-                <div class="d-flex">
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
-                        onclick="sidebarType(this)">Transparent</button>
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
-                        onclick="sidebarType(this)">White</button>
-                </div>
-                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-                <!-- Navbar Fixed -->
-                <div class="mt-3">
-                    <h6 class="mb-0">Navbar Fixed</h6>
-                </div>
-                <div class="form-check form-switch ps-0">
-                    <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
-                        onclick="navbarFixed(this)">
-                </div>
-                <hr class="horizontal dark my-sm-4">
-                <a class="btn bg-gradient-dark w-100"
-                    href="https://www.creative-tim.com/product/soft-ui-dashboard">Free Download</a>
-                <a class="btn btn-outline-dark w-100"
-                    href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard">View
-                    documentation</a>
-                <div class="w-100 text-center">
-                    <a class="github-button" href="https://github.com/creativetimofficial/soft-ui-dashboard"
-                        data-icon="octicon-star" data-size="large" data-show-count="true"
-                        aria-label="Star creativetimofficial/soft-ui-dashboard on GitHub">Star</a>
-                    <h6 class="mt-3">Thank you for sharing!</h6>
-                    <a href="https://twitter.com/intent/tweet?text=Check%20Soft%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
-                        class="btn btn-dark mb-0 me-2" target="_blank">
-                        <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/soft-ui-dashboard"
-                        class="btn btn-dark mb-0 me-2" target="_blank">
-                        <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!--   Core JS Files   -->
-    {{-- <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script> --}}
+
     <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script>
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
@@ -1194,21 +714,10 @@
             },
         });
     </script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
     @include('dashboard.components.script')
     @yield('script')
+
 </body>
 
 </html>

@@ -3,7 +3,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Bill</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete User!</h5>
                 </div>
                 <form action="{{ route('users.delete') }}" method="POST">
                     @csrf

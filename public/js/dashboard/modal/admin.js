@@ -18,7 +18,7 @@ $(document).ready(function() {
         $('#send_admin_id').val(admin_id);
     });
 
-
+    // users.profile
 
 
     //* Delete modal 
@@ -30,6 +30,31 @@ $(document).ready(function() {
         $('#delete_admin_id').val(admin_id);
     });
 
+    //* Edit modal
+    $(document).on('click', '.editBtn', function() {
+        var admin_id = $(this).val();
+        // alert(captain_id);
+        // console.log(captain_id);
+        $('#editModal').modal('show');
+        $.ajax({
+            type: "GET",
+            url: "/admins/edit/" + admin_id,
+            success: function(response) {
+                $('#admin_id').val(admin_id);
+                // console.log(response.admin);
+                $('#first_name').val(response.admin.first_name);
+                $('#last_name').val(response.admin.last_name);
+                $('#phone').val(response.admin.phone);
+                $('#email').val(response.admin.email);
+                $('#role').val(response.admin.role);
+                console.log(response.admin.first_name);
+                // $('#rate').val(response.captain.rate);
+
+
+
+            }
+        });
+    });
 
     //* Edit modal
     $(document).on('click', '.editBtn', function() {

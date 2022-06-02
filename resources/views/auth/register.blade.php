@@ -106,18 +106,30 @@
 
 
         <div class="container-login100" style="background-color: rgb(229, 237, 237)">
-            @if ($errors->any())
-                @include('dashboard.components.alerts')
-                @yield('validation')
-            @endif
+
             <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
                 <form class="login100-form validate-form" action="{{ route('register.store') }}" method="POST">
                     @csrf
                     <span class="login100-form-title p-b-49">
                         Register
                     </span>
+                    {{-- <div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger text-s" style="justify-content: center; ">
+
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+
+                                </ul>
+
+                            </div>
+                        @endif
+                    </div> --}}
                     <div class="row ">
                         <div class="col-6">
+
                             <div class="wrap-input100 validate-input m-b-23" data-validate="First Name is reauired">
                                 <span class="label-input100">First Name</span>
                                 <input class="input100" type="text" name="first_name"
@@ -134,16 +146,19 @@
                             </div>
                         </div>
                     </div>
-
+                    @error('phone')
+                        <div class=" text-s text-danger">{{ $message }}</div>
+                    @enderror
                     <div class="row">
                         <div class="col-6">
+
                             <div class="wrap-input100 validate-input m-b-23" data-validate="Phone is reauired">
                                 <span class="label-input100">Phone</span>
                                 <input class="input100" type="text" name="phone" placeholder="Type your phone">
                                 <span class="focus-input100" data-symbol="&#xf206;"></span>
                             </div>
                             {{-- @error('phone')
-                                <div class="error">
+                                <div class="alert alert-danger text-s">
                                     <p>{{ $message }}</p>
                                 </div>
                             @enderror --}}
@@ -165,19 +180,19 @@
                             </div>
                         </div>
                     </div>
-                    {{-- @error('email')
-                        <div class="error">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @enderror --}}
+
+                    @error('email')
+                        <div class=" text-s text-danger">{{ $message }}</div>
+                    @enderror
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Email is reauired">
                         <span class="label-input100">Email</span>
                         <input class="input100" type="text" name="email" placeholder="Type your email">
                         <span class="focus-input100" data-symbol="&#xf206;"></span>
-                        @error('email')
-                            <div class="error">{{ $message }}</div>
-                        @enderror
+
                     </div>
+                    @error('password')
+                        <div class=" text-s text-danger">{{ $message }}</div>
+                    @enderror
                     <div class="wrap-input100 validate-input m-b-23" data-validate="Password is required">
                         <span class="label-input100">Password</span>
                         <input class="input100" type="password" name="password" placeholder="Type your password">
