@@ -8,6 +8,7 @@
     <title>
         Users
     </title>
+    
     <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
     @include('dashboard.components.header')
     @yield('header')

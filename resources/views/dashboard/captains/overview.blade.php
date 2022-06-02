@@ -9,13 +9,6 @@
 
     @include('dashboard.components.header')
     @yield('header')
-    {{-- <link rel="stylesheet" href="{{ asset('css/main.css') }} ">
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }} ">
-    <link rel="stylesheet" href="{{ asset('icons/iconic/css/material-design-iconic-font.min.css') }} ">
-    <link rel="stylesheet" href="{{ asset('icons/bootstrap-icons/bootstrap-icons.css') }} ">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/dropdown-menu.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> --}}
 
 
 
@@ -24,7 +17,7 @@
 
 </head>
 
-<body class="g-sidenav-show bg-page">
+<body class="g-sidenav-show bg-page main-scrollBar">
 
 
 

@@ -19,6 +19,7 @@ class CaptainFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'vehicle' => $this->faker->name(),
+            'img' => $this->faker->name(),
             'rate' => $this->faker->numberBetween(1, 5),
             'licence_plate' => $this->faker->name(),
             'password' => $this->faker->password(),

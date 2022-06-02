@@ -6,14 +6,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        bills
+        Bills
     </title>
 
     @include('dashboard.components.header')
     @yield('header')
 </head>
 
-<body class="g-sidenav-show  bg-page">
+<body class="g-sidenav-show  bg-page main-scrollBar">
 
     @include('dashboard.components.sideBar')
     @yield('sideBar')

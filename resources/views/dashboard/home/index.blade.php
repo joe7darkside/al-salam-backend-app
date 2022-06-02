@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    {{-- <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} "> --}}
+    <link rel="stylesheet" href="{{ asset('css/dropdown-menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
     @include('dashboard.components.header')
     @yield('header')
 
@@ -46,8 +47,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Bills</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            5,000 IQD
-                                            {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
+                                            {{ $new_bills }} IQD
                                         </h5>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">New Customers</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            200
+                                            {{ $new_customers }}
                                             {{-- <span class="text-success text-sm font-weight-bolder">+3%</span> --}}
                                         </h5>
                                     </div>
@@ -94,7 +94,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Trips</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            62
+                                            {{ $new_trips }}
                                             {{-- <span class="text-danger text-sm font-weight-bolder">-2%</span> --}}
                                         </h5>
                                     </div>
@@ -119,7 +119,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Invitations</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            102
+                                            {{ $new_invitations }}
                                             {{-- <span class="text-success text-sm font-weight-bolder">+2%</span> --}}
                                         </h5>
                                     </div>
@@ -364,19 +364,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row my-4">
-                <div class="col-lg-5 col-md-6 mb-md-0 mb-4">
+            <div class="row my-4 ">
+                <div class="col-lg-6 col-md-6 mb-4 ">
                     <div class="card card-body ">
                         <div class="card-header pb-0">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
+                            <div class="row ">
+                                <div class="col-lg-6 col-7 ">
                                     <h6>Latest Customers</h6>
                                     {{-- <p class="text-sm mb-0">
                                         <i class="fa fa-check text-info" aria-hidden="true"></i>
                                         <span class="font-weight-bold ms-1">Latest 5</span>
                                     </p> --}}
                                 </div>
-                                <div class="col-lg-6 col-5 my-auto text-end">
+                                <div class="col-lg-6 col-5 my-auto text-end ">
                                     <div class="dropdown float-lg-end pe-4">
                                         <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
                                             aria-expanded="false">
@@ -441,7 +441,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6 mb-4 ">
                     <div class="card h-100">
                         <div class="card-header pb-0">
                             <h6>Latest Trips</h6>
@@ -463,7 +463,8 @@
                                             <i class="ni ni-bell-55 text-success text-gradient"></i>
                                         </span>
                                         <div class="timeline-content">
-                                            <h6 class="text-dark text-sm font-weight-bold mb-0">{{ $trip->cost }} IQD
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0">{{ $trip->cost }}
+                                                IQD
                                             </h6>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 {{ $trip->created_at->format('d M H:i ') }}
@@ -478,7 +479,7 @@
                 </div>
 
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 mb-4 ">
                     <div class="card h-100">
                         <div class="card-header pb-0">
                             <h6>Latest Invitations</h6>
@@ -620,18 +621,26 @@
         gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
         gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
 
+
         var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
         gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
         gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
         gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
 
+
+        var gradientStroke3 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke3.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke3.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke3.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
         new Chart(ctx2, {
             type: "line",
             data: {
                 labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
-                        label: "Mobile apps",
+                        label: "Electricity",
                         tension: 0.4,
                         borderWidth: 0,
                         pointRadius: 0,
@@ -644,15 +653,28 @@
 
                     },
                     {
-                        label: "Websites",
+                        label: "Gas",
                         tension: 0.4,
                         borderWidth: 0,
                         pointRadius: 0,
-                        borderColor: "#3A416F",
+                        borderColor: "#112B3C",
                         borderWidth: 3,
                         backgroundColor: gradientStroke2,
                         fill: true,
                         data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+                        maxBarThickness: 6
+                    },
+
+                    {
+                        label: "Water",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        borderColor: "#2155CD",
+                        borderWidth: 3,
+                        backgroundColor: gradientStroke3,
+                        fill: true,
+                        data: [10, 70, 50, 100, 190, 390, 240, 270, 500],
                         maxBarThickness: 6
                     },
                 ],
@@ -714,7 +736,6 @@
             },
         });
     </script>
-    <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
     @include('dashboard.components.script')
     @yield('script')
 
