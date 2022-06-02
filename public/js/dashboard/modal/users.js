@@ -25,7 +25,13 @@ $(document).ready(function() {
         $('#send_user_id').val(user_id);
     });
 
+    $(document).on('click', '.createBillBtn', function() {
 
+        var bill_id = $(this).val();
+        // alert(captain_id);
+        $('#createBillModal').modal('show');
+        $('#create_bill_id').val(bill_id);
+    });
 
     $(document).on('click', '.editBtn', function() {
         var bill_id = $(this).val();
