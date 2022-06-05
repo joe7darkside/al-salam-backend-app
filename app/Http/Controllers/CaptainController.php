@@ -185,10 +185,10 @@ class CaptainController extends Controller
         $captain = Captain::find($id);
 
         $trips = $captain->trip;
+        
+        $trips_count = $trips->count();
 
-
-        // return View::make('dashboard.captains.profile',  ['captain' => $captain]);
-        return response()->json(['captain' => $captain]);
+        return response()->json(['captain' => $captain, 'trips' => $trips_count]);
     }
 
 

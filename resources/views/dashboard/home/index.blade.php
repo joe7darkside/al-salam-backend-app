@@ -67,7 +67,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">New Customers</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Customers</p>
                                         <h5 class="font-weight-bolder mb-0">
                                             {{ $new_customers }}
                                             {{-- <span class="text-success text-sm font-weight-bolder">+3%</span> --}}
@@ -184,7 +184,7 @@
                                             </div>
                                             <p class="text-s mt-1 mb-0 font-weight-bold">Customers</p>
                                         </div>
-                                        <h5 class="font-weight-bolder">{{ $customers }}</h5>
+                                        <h5 class="font-weight-bolder">{{ $overview_customer }}</h5>
                                         <div class="progress w-100">
                                             <div class="progress-bar bg-dark w-100" role="progressbar"
                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
@@ -220,7 +220,7 @@
                                             </div>
                                             <p class="text-s mt-1 mb-0 font-weight-bold">Captains</p>
                                         </div>
-                                        <h5 class="font-weight-bolder">{{ $captains }}</h5>
+                                        <h5 class="font-weight-bolder">{{ $overview_captains }}</h5>
                                         <div class="progress w-100">
                                             <div class="progress-bar bg-dark w-100" role="progressbar"
                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
@@ -262,7 +262,7 @@
                                             </div>
                                             <p class="text-s mt-1 mb-0 font-weight-bold">Trips</p>
                                         </div>
-                                        <h5 class="font-weight-bolder">{{ $trips }}</h5>
+                                        <h5 class="font-weight-bolder">{{ $overview_trip }}</h5>
                                         <div class="progress w-100">
                                             <div class="progress-bar bg-dark w-100" role="progressbar"
                                                 aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
@@ -302,7 +302,7 @@
                                             </div>
                                             <p class="text-s mt-1 mb-0 font-weight-bold">Invitations</p>
                                         </div>
-                                        <h5 class="font-weight-bolder">{{ $invitations }}</h5>
+                                        <h5 class="font-weight-bolder">{{ $overview_invitation }}</h5>
                                         <div class="progress w-100">
                                             <div class="progress-bar bg-dark w-100" role="progressbar"
                                                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -336,7 +336,7 @@
                                             </div>
                                             <p class="text-s mt-1 mb-0 font-weight-bold">Bills</p>
                                         </div>
-                                        <h5 class="font-weight-bolder">{{ $bills_cost }} IQD</h5>
+                                        <h5 class="font-weight-bolder">{{ $overview_bill }} IQD</h5>
                                         <div class="progress w-100">
                                             <div class="progress-bar bg-dark w-100" role="progressbar"
                                                 aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
@@ -415,7 +415,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($customers_latest as $customer)
+                                        @foreach ($table_customer as $customer)
                                             <tr>
 
                                                 <td class="align-middle text-center text-s">
@@ -456,7 +456,7 @@
                         </div>
                         <div class="card-body p-2">
                             <div class="timeline timeline-one-side">
-                                @foreach ($trips_latest as $trip)
+                                @foreach ($table_trip as $trip)
                                     {{-- @endforeach --}}
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step">
@@ -494,7 +494,7 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="timeline timeline-one-side">
-                                @foreach ($invitation_latest as $invitation)
+                                @foreach ($table_invitation as $invitation)
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step">
                                             <i class="ni ni-bell-55 text-success text-gradient"></i>
@@ -545,197 +545,7 @@
     </main>
 
     <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script>
-    <script>
-        var ctx = document.getElementById("chart-bars").getContext("2d");
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Sales",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "#fff",
-                    data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-                    maxBarThickness: 6
-                }, ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                        },
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: 500,
-                            beginAtZero: true,
-                            padding: 15,
-                            font: {
-                                size: 14,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                            color: "#fff"
-                        },
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false
-                        },
-                        ticks: {
-                            display: false
-                        },
-                    },
-                },
-            },
-        });
-
-
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-
-        var gradientStroke3 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke3.addColorStop(1, 'rgba(203,12,159,0.2)');
-        gradientStroke3.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke3.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                        label: "Electricity",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#cb0c9f",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke1,
-                        fill: true,
-                        data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                        maxBarThickness: 6
-
-                    },
-                    {
-                        label: "Gas",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#112B3C",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke2,
-                        fill: true,
-                        data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-                        maxBarThickness: 6
-                    },
-
-                    {
-                        label: "Water",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#2155CD",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke3,
-                        fill: true,
-                        data: [10, 70, 50, 100, 190, 390, 240, 270, 500],
-                        maxBarThickness: 6
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#b2b9bf',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#b2b9bf',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-    </script>
+   <script src="{{ asset('/js/dashboard/chart/chart.js') }}" ></script>
     @include('dashboard.components.script')
     @yield('script')
 

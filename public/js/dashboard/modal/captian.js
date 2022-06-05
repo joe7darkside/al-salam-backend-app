@@ -50,20 +50,7 @@ $(document).ready(function() {
                 $('#rate').val(response.captain.rate);
                 // $('#img').val(response.captain.img);
                 $('#captain_id').val(captain_id);
-                //    {
-                //     "id": 2,
-                //     "first_name": "Cristal Stark II",
-                //     "last_name": "Isac Dooley",
-                //     "phone": "+1.551.571.9027",
-                //     "email": "trent80@hotmail.com",
-                //     "password": "=\\7|\"$mt&|<qH[,C{~{M",
-                //     "vehicle": "Dr. Tre Kiehn",
-                //     "licence_plate": "Shanny Grimes I",
-                //     "rate": 2,
-                //     "created_at": "2022-05-26T22:31:41.000000Z",
-                //     "updated_at": "2022-05-26T22:31:41.000000Z",
-                //     "trip": []
-                // }
+
 
             }
         });
@@ -71,10 +58,29 @@ $(document).ready(function() {
 
 
     $(document).on('click', '.infoBtn', function() {
-
         var captain_id = $(this).val();
-        // alert(captain_id);
         $('#infoModal').modal('show');
-        // $('#delete_captain_id').val(captain_id);
+        $.ajax({
+            type: "GET",
+            url: "/captains/profile/" + captain_id,
+            success: function(response) {
+
+                $('#info').append(JSON.stringify(response.captain.first_name));
+                // $('#first_name').append();
+
+                // console.log(response);
+                // $('#first_name').val(response.captain.first_name);
+                // $('#last_name').val(response.captain.last_name);
+                // $('#phone').val(response.captain.phone);
+                // $('#email').val(response.captain.email);
+                // $('#vehicle').val(response.captain.vehicle);
+                // $('#licence_plate').val(response.captain.licence_plate);
+                // $('#rate').val(response.captain.rate);
+                // // $('#img').val(response.captain.img);
+                // $('#trip').val(response.captain.trip);
+                // $('#captain_show_id').val(captain_id);
+            }
+        });
     });
+
 })
