@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\VisaCard;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
@@ -55,6 +56,17 @@ class UserController extends Controller
         return View::make('dashboard.users.overview', ['users' => $users, 'admin' => $admin]);
     }
 
+
+    public function update(Request $request)
+    {
+        $user_id = $request->user()->id;
+
+        $user = User::find($user_id);
+
+        $user->update($request->all());
+
+        return response(['Updated' => 'Information updatedd successfuly', 'statusCode' => 200],);
+    }
 
 
     /**
@@ -122,7 +134,6 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-
         return response()->json(['User' => $user]);
     }
 
@@ -136,7 +147,7 @@ class UserController extends Controller
         $user_id = $request->user()->id;
         $user_cards = User::find($user_id)->VisaCard;
 
-        return response()->json(['User Cards' => $user_cards]);
+        return response()->json($user_cards);
     }
 
 
@@ -147,7 +158,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request  $request)
+    public function destroy(Request $request)
     {
         $id = $request->input('delete_user_id');
         $admin = $request->user()->first_name;
@@ -164,6 +175,9 @@ class UserController extends Controller
             //     ->with('Message', 'Record Faild to Deleted');
         }
     }
+
+
+    
 
     /**
      * Update the specified resource in storage.

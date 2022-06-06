@@ -31,11 +31,11 @@ class AuthController extends Controller
 
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
-            'app_token' => 'required',
-
+            'phone' => 'required|digits:11|unique:users|max:11',
+            'email' => 'required|email|unique:users|max:255',
+            'password' => 'required|confirmed|max:255',
+            'app_token' => '',
+           
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);

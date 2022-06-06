@@ -11,7 +11,7 @@ class VisaCardController extends Controller
     {
         $user_id = $request->user()->id;
 
-        $card =  VisaCard::create([
+        VisaCard::create([
             'user_id' => $user_id,
             'card_number' => $request->card_number,
             'expire' => $request->expire,
@@ -20,6 +20,26 @@ class VisaCardController extends Controller
 
         ]);
 
-        return  response()->json(['new card' => $card]);
+        return  response()->json(['VisaCard add successfuly', 'statusCode' => 200]);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCard($id)
+    {
+        $visaCard = VisaCard::find($id);
+
+        if ($visaCard) {
+            $visaCard->delete();
+            return response()->json(['VisaCard deleted successfuly', 'statusCode' => 200]);
+        } else {
+
+            return response()->json('Something went wrong');
+        }
     }
 }

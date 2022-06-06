@@ -37,14 +37,16 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/me', [AuthController::class, 'me']);
 });
 
-Route::group(['middleware' => ['assign.guard:api', 'jwt.auth']], function () {
-    Route::get('/user/cards', [UserController::class, 'getVisaCard']);
-    Route::get('/user/info', [UserController::class, 'getUserInfo']);
-    Route::post('/visa-card/create', [VisaCardController::class, 'addVisaCard']);
+Route::group( ['prefix' => 'user','middleware' => ['assign.guard:api', 'jwt.auth']], function () {
+    Route::get('/cards', [UserController::class, 'getVisaCard']);
+    Route::get('/info', [UserController::class, 'getUserInfo']);
+    Route::put('/update',[UserController::class,'update']);
+    Route::post('/visa-card/add', [VisaCardController::class, 'addVisaCard']);
+    Route::delete('/visa-card/delete/{id}',[VisaCardController::class,'deleteCard']);
     Route::post('/invitation/create', [InvitationController::class, 'addInvitation']);
-    Route::get('/user/invitaions', [InvitationController::class, 'getUserInvitaions']);
-    Route::get('/user/trips', [TripController::class, 'getUserTrip']);
-    Route::get('/user/pre-trips', [TripController::class, 'getUserPreTrip']);
+    Route::get('/invitaions', [InvitationController::class, 'getUserInvitaions']);
+    Route::get('/trips', [TripController::class, 'getUserTrip']);
+    Route::get('/pre-trips', [TripController::class, 'getUserPreTrip']);
     Route::post('/trips/add-preTrip', [TripController::class, 'addTrip']);
     Route::post('/trips/add-pick-up', [TripController::class, 'addPickUpPoint']);
     Route::post('/trips/add-drop-of', [TripController::class, 'addDropOfPoint']);

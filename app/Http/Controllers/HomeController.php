@@ -49,7 +49,7 @@ class HomeController extends Controller
         $table_invitation = $tables_data[2];
 
         $monthly_bills = $this->totalMonthlyBills();
-        return response()->json(['Results' => $monthly_bills]);
+        // return response()->json(['Results' => $monthly_bills]);
 
 
         return View::make('dashboard.home.index', [
@@ -96,12 +96,12 @@ class HomeController extends Controller
         $bills_per_month = array();
         $monthFormat = $this->monthFormat();
         foreach ($monthFormat as  $month) {
-            $bills_per_month = array_merge($bills_per_month, Bill::where('created_at', 'LIKE', '%' . $month . '%')
-                ->get());
+            // $bills_per_month = array_merge($bills_per_month, Bill::where('created_at', 'LIKE', '%' . $month . '%')
+            //     ->get());
         }
         $c = count($bills_per_month);
-        for ($i = 0; $i < $c; $i++)
-            echo $bills_per_month[$i];
+        // for ($i = 0; $i < $c; $i++)
+        //     echo $bills_per_month[$i];
 
         // $bills_per_month=$bills_per_month;
         // dd($bills_per_month[1]);
