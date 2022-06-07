@@ -25,8 +25,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'app_token',
-        
-     
+
+
     ];
 
     /**
@@ -98,5 +98,10 @@ class User extends Authenticatable implements JWTSubject
     public function bill()
     {
         return $this->hasMany(Bill::class, 'user_id');
+    }
+
+    public function guest()
+    {
+        return $this->hasMany(Guest::class, 'user_id');
     }
 }

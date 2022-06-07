@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class InvitationFactory extends Factory
+class GuestFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +14,10 @@ class InvitationFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(0, 10),
-            'guest_id' => $this->faker->numberBetween(0, 10),
-            'permission' => $this->faker->numberBetween(0, 2),
+            'full_name' => $this->faker->name(),
+            'phone' => $this->faker->phoneNumber(),
+            'email' => $this->faker->email(),
+
         ];
     }
 }

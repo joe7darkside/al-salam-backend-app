@@ -2,39 +2,95 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guest;
 use App\Models\invitation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
 
-class invitationController extends Controller
+class InvitationController extends Controller
 {
-    public function addinvitation(Request $request)
+    public function addInvitation(Request $request)
     {
-        $user_id = $request->user()->id;
 
-        $invitation = Invitation::create([
-            'user_id' => $user_id,
-            'visiter_name' => $request->visiter_name,
-            'permission' => true,
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'user_first_name' => 'required|string|max:255',
+            'user_last_name' => 'required|string|max:255',
+            'guest_name' => 'required|string|max:255',
+            'phone' => 'required|digits:11|max:11',
+            'email' => 'required|email|max:255',
+            'visit_date' => 'required',
         ]);
 
-        return response()->json(['invitation' => $invitation]);
+        if ($validator->fails()) {
+            redirect()->back()->with(['message', $validator->errors()->toJson()]);
+            // return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
+            ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
+
+        if (!$user) {
+
+            return redirect()->back()->with('Error', 'User not found');
+            // return response()->json('User not found');
+        }
+
+        $guest = Guest::where('full_name', 'LIKE', '%' . $request->guest_name . '%')->first();
+
+        if (!$guest) {
+            $guest = Guest::create(
+                array_merge(
+                    $validator->validated(),
+                    [
+                        'user_id' => $user->id,
+                        'full_name' => $request->guest_name,
+                        'phone' => $request->phone,
+                        'email' => $request->email,
+                        'last_visit' => '',
+                        'visits' => 0,
+                    ]
+                )
+            );
+        }
+        Invitation::create([
+            'user_id' => $user->id,
+            'guest_id' => $guest->id,
+            'permission' => 0,
+
+
+        ]);
+        $last_invitation =  Invitation::where('guest_id', 'LIKE', '%' . $guest->id . '%')
+            ->where('permission', 'LIKE', '%' . 1 . '%')
+            ->latest('created_at')
+            ->first();
+
+        if ($last_invitation) {
+            $guest_update = Guest::find($guest->id);
+            $guest_update->update(['last_visit' => $last_invitation->created_at]);
+        }
+        return redirect()->back()->with('Success', 'Invitation add successfuly');
     }
 
 
     public function getUserInvitaions(Request $request)
     {
+
         $user_id = $request->user()->id;
-        $user_invitation = User::find($user_id)->invitaion;
 
-        return response()->json(['User invitaion' => $user_invitation], 200);
+        $user_invitation = Invitation::where('user_id', 'LIKE', $user_id)
+            ->where('permission', 'LIKE', 0)
+            ->get();
+
+        foreach ($user_invitation as $invitation) {
+            $guests[] =  $invitation->guest;
+        }
+        return response()->json($user_invitation);
     }
-
-
-
-
 
 
     /**
@@ -155,5 +211,21 @@ class invitationController extends Controller
 
         // return response()->json(['invitations' => $invitations]);
         return View::make('dashboard.invitations.categorized',  ['invitations' => $invitations, 'admin' => $admin, 'category' => $category, 'category_name' => $category_name]);
+    }
+
+
+
+
+    public function invitaionUpdate($id, Request $request)
+    {
+        $invitation = Invitation::find($id);
+
+        if ($invitation) {
+
+            $invitation->update($request->all());
+
+            return response()->json('Submitted');
+        }
+        return response()->json('Nothing happend');
     }
 }
