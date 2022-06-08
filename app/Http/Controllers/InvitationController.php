@@ -152,6 +152,7 @@ class InvitationController extends Controller
      * @return View|array
      */
 
+     
     public function categorizedInvitations($category, Request $request)
     {
         $admin = $request->user()->first_name;

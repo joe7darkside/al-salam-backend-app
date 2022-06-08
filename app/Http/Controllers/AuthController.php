@@ -35,7 +35,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|confirmed|max:255',
             'app_token' => '',
-           
+
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
@@ -67,7 +67,7 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
         if (!$token = auth()->guard('api')->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['statusCode' => 401], 401);
         }
         return $this->respondWithToken($token);
     }
@@ -91,7 +91,7 @@ class AuthController extends Controller
     {
         auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['statusCode' => 200], 200);
     }
 
 
@@ -116,10 +116,10 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
-        ]);
+        return response()->json(
+            ['Token' => $token, 'statusCode' => 200],
+            200
+
+        );
     }
 }

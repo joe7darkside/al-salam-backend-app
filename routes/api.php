@@ -57,7 +57,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['assign.guard:api', 'jwt.auth
     Route::get('/trips/captain-details/{id}', [TripController::class, 'getCaptainDetails']);
     Route::get('/captain/trips/{id}', [CaptainController::class, 'getCaptainTrips']);
     Route::get('/bills/monthly-bills', [BillController::class, 'getMonthlyBills']);
-    Route::get('/bills/user/bills', [BillController::class, 'getUserBills']);
+    Route::get('/bills', [BillController::class, 'getUserBills']);
     Route::post('/bills/create', [BillController::class, 'addUserBill']);
 });
 

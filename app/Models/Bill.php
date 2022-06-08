@@ -14,8 +14,9 @@ class Bill extends Model
         'user_id',
         'Payment_date',
         'payment_status',
+        'payment_due',
         'bill_cost',
-        'month_name'
+        'month_name',
     ];
 
     public function waterBill()

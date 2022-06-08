@@ -117,7 +117,7 @@ class BillController extends Controller
         $user_bills = Bill::where('user_id', 'LIKE', '%' . $user_id . '%')
             ->with(['waterBill', 'gasBill', 'electricityBill'])->get();
 
-        return response()->json(['User bills' => $user_bills]);
+        return response()->json($user_bills);
 
         // $user_bills = User::find($user_id)->bill;
         // $months_name = array();
@@ -140,10 +140,9 @@ class BillController extends Controller
     {
         $id = $request->input('create_bill_id');
         $data = $request->all();
-        
+
         $validator = Validator::make($data, [
-            // "user_first_name" => "required|string",
-            // "user_last_name" => "required|string",
+         
             "Payment_date" => "required",
             // "month_name" => "required",
             "payment_status" => "required",
