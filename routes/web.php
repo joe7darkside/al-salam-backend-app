@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BillController;
+// use App\Http\Controllers\BillController;
 use App\Http\Controllers\CaptainController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TripController;
@@ -16,6 +16,7 @@ use App\Http\Controllers\CaptainAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Admin\BillController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,16 +62,17 @@ Route::group(['middleware' => 'auth',], function () {
 
     //* Routes for BillController 
     Route::group(['prefix' => 'bills', 'middleware' => 'role:bills,super'], function () {
-        Route::get('/overview', [BillController::class, 'getBills'])->name('bills.overView');
-        Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorizedBills'])->name('bills.categorized');
-        Route::get('/paymentStatus/{status}', [BillController::class, 'paymentStatusBills'])->name('bills.paymentStatus');
-        Route::get('/statusSearch/{status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
-        Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
+        Route::get('/overview', [BillController::class, 'get'])->name('bills.overView');
         Route::get('/search', [BillController::class, 'search'])->name('bills.search');
+        Route::post('/add', [BillController::class, 'add'])->name('bills.add');
+        Route::get('/edit/{id}', [BillController::class, 'edit'])->name('bills.edit');
+        Route::put('/update/', [BillController::class, 'update'])->name('bills.update');
         Route::delete('/delete', [BillController::class, 'destroy'])->name('bills.delete');
-        Route::post('/add', [BillController::class, 'addUserBill'])->name('bills.add');
-        Route::get('/edit/{id}', [BillController::class, 'editBill'])->name('bills.edit');
-        Route::put('/update/', [BillController::class, 'updateBill'])->name('bills.update');
+        Route::get('/paymentStatus/{status}', [BillController::class, 'getPaymentStatusBills'])->name('bills.paymentStatus');
+        Route::get('/statusSearch/{status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
+
+        // Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorized'])->name('bills.categorized');
+        // Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
     });
 
     //* Routes for TripController 
@@ -108,6 +110,9 @@ Route::group(['middleware' => 'auth',], function () {
     //* Routes for CaptainController 
     Route::group(['prefix' => 'users', 'middleware' => 'role:users,super'], function () {
         Route::post('/sendNotification', [UserController::class, 'send'])->name('users.Notification');
+        Route::post('/create', [UserController::class, 'create'])->name('users.create');
+        Route::get('/edit/{id}', [UserController::class, 'editUser'])->name('users.edit');
+        Route::put('/update', [UserController::class, 'updateUser'])->name('users.update');
     });
 
 

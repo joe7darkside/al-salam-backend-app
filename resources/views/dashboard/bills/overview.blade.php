@@ -57,21 +57,29 @@
         <!-- End Navbar -->
 
         <div class="container-fluid py-4">
-
             @if (session('Success'))
-                @include('dashboard.components.alerts')
-                @yield('success.alert')
-            @endif
+            @include('dashboard.components.alerts')
+            @yield('success.alert')
+        @endif
 
-            @if (session('Error'))
-                @include('dashboard.components.alerts')
-                @yield('error.alert')
-            @endif
+        @if (session('Error'))
+            @include('dashboard.components.alerts')
+            @yield('error.alert')
+        @endif
 
-            @if ($errors->any())
-                @include('dashboard.components.alerts')
-                @yield('validation')
-            @endif
+        @if (session('Send'))
+            @include('dashboard.components.alerts')
+            @yield('send.alert')
+        @endif
+        @if (session('Warning'))
+            @include('dashboard.components.alerts')
+            @yield('warning.alert')
+        @endif
+
+        @if ($errors->any())
+            @include('dashboard.components.alerts')
+            @yield('validation')
+        @endif
 
             <div class="row">
                 <div class="col-12">
@@ -81,8 +89,8 @@
                                 <h6>Bills Table</h6>
                             </div>
                             <div class="col-auto">
-                                {{-- <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
-                                    data-toggle="modal" data-target="#createModal">Create</a> --}}
+                                <a href="#" style="color:forestgreen; font-size: 16px; font-weight: 600"
+                                    data-toggle="modal" data-target="#createModal">Create</a>
                             </div>
                         </div>
 
@@ -103,7 +111,7 @@
 
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment date</th>
+                                                payment due</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
@@ -139,7 +147,7 @@
 
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_date }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_due }}</span>
                                                 </td>
 
 

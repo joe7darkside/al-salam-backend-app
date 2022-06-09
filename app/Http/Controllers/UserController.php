@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\VisaCard;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -66,6 +67,49 @@ class UserController extends Controller
         $user->update($request->all());
 
         return response(['Updated' => 'Information updatedd successfuly', 'statusCode' => 200],);
+    }
+
+    public function updateUser(Request $request)
+    {
+        $id = $request->input('user_edit_id');
+        $user = User::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'string|max:255',
+            'last_name' => 'string|max:255',
+            'phone' => 'digits:11|max:11',
+            'email' => 'string|email|max:255',
+            'unit' => '',
+            'block' => '',
+            'password' => 'string|min:8',
+        ]);
+
+        if ($user) {
+
+            if ($validator->fails()) {
+                redirect()->back()->with(['Error', $validator->errors()->toJson()]);            // return response()->json($validator->errors()->toJson(), 400);
+            }
+            $user->update(
+                array_merge(
+                    $validator->validated(),
+                    [
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'phone' => $request->phone,
+                        'email' => $request->email,
+                        'block' => $request->block,
+                        'unit' => $request->unit,
+                        'password' => Hash::make($request->password),
+                    ]
+                )
+
+            );
+            // $admin->update($request->all());
+            return redirect()->back()->with('Warning', 'Update Successfully.');
+        } else {
+
+            return redirect()->back()->with('Error', 'No data Updated.');
+        }
     }
 
 
@@ -177,7 +221,7 @@ class UserController extends Controller
     }
 
 
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -198,5 +242,60 @@ class UserController extends Controller
 
             return redirect()->back()->with('Error', 'No data sent.');
         }
+    }
+
+
+    /**
+     * Register a User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|digits:11|unique:users|max:11',
+            'email' => 'required|email|unique:users|max:255',
+            'password' => 'required|confirmed|max:255',
+            'unit' => 'required|unique:users',
+            'block' => 'required',
+            'app_token' => '',
+
+        ]);
+        if ($validator->fails()) {
+            response()->json($validator->errors()->toJson(), 400);
+        }
+        $user = User::create(array_merge(
+            $validator->validated(),
+            ['password' => bcrypt($request->password)]
+        ));
+        // $token = auth()->guard('api')->attempt($validator->validated());
+        return redirect()->back()->with('Success', 'User successfully registered');
+        // return response()->json([
+        //     'message' => 'User successfully registered',
+        //     'userToken' => $this->respondWithToken($token)
+        // ], 200);
+    }
+
+
+    /**
+     * Return profile view with user details
+     * @param Request $request
+     * @return View
+     */
+
+    public function editUser($id)
+    {
+        $user = User::find($id);
+
+        // $trips = $user->trip;
+
+
+        // return View::make('dashboard.users.profile',  ['user' => $user]);
+        return response()->json(['status' => 200, 'user' => $user]);
     }
 }

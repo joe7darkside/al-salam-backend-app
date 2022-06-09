@@ -16,7 +16,9 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('payment_date');
+            $table->string("payment_from");
+            $table->string("payment_to");
+            $table->string('payment_date')->nullable();
             $table->string('payment_due');
             $table->string('month_name');
             $table->double('bill_cost');

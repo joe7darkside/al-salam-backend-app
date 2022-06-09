@@ -11,6 +11,7 @@
 
     @include('dashboard.components.header')
     @yield('header')
+    
 </head>
 
 <body class="g-sidenav-show  bg-page">
@@ -77,23 +78,10 @@
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 total cost</th>
-                                            {{-- <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                water bill</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                gas bill</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                electricity bill</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment status</th> --}}
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment date</th>
-
-
+                                                payment due</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
@@ -124,26 +112,11 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $bill->bill_cost }}</span>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->waterBill->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->gasBill->cost }}</span>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->electricityBill->cost }}</span>
-                                                </td> --}}
-                                                {{-- <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_status }}</span>
-                                                </td> --}}
+
 
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_date }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $bill->payment_due }}</span>
                                                 </td>
 
 
@@ -158,16 +131,19 @@
                                                 <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
-                                                            <div class="dropdown-content">
-                                                                <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a>
-                                                                <a href="#"><i class="fa-solid fa-pen edit"></i></a>
+                                                            <div class="dropdown-content col-auto">
 
-                                                                <a
-                                                                    href="{{ route('bills.delete', ['bill' => $bill]) }}"><i
-                                                                        class="fa-solid fa-trash delete">
-                                                                        @method('DELETE')</i>
-                                                                </a>
+                                                                <button value="{{ $bill->id }}"
+                                                                    class="sendBtn "><i
+                                                                        class="bi bi-info-circle-fill"></i></button>
+
+                                                                <button value="{{ $bill->id }}"
+                                                                    class="editBtn "><i
+                                                                        class="fa fa-pen"></i></button>
+
+                                                                <button value="{{ $bill->id }} "
+                                                                    class="deleteBtn"><i
+                                                                        class="fa fa-trash update "></i></button>
                                                             </div>
                                                         </i>
                                                     </div>
@@ -194,7 +170,22 @@
         </div>
     </main>
 
+    {{-- Modals --}}
+    <!-- Create Modal -->
+    @include('dashboard.bills.modals.create')
+    @yield('createModal')
 
+    <!-- Delete Modal -->
+    @include('dashboard.bills.modals.delete')
+    @yield('deleteModal')
+
+    <!-- Update Modal -->
+    @include('dashboard.bills.modals.edit')
+    @yield('editModal')
+
+    {{-- Modals --}}
+
+    {{-- Script --}}
     @include('dashboard.components.script')
     @yield('script')
 </body>

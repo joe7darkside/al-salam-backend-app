@@ -8,7 +8,7 @@
     <title>
         Users
     </title>
-    
+
     <link rel="stylesheet" href="{{ asset('css/scrollBar.css') }} ">
     @include('dashboard.components.header')
     @yield('header')
@@ -18,7 +18,6 @@
     .nohover a:hover {
         background-color: transparent;
     }
-
 </style>
 
 <body class="g-sidenav-show  bg-page main-scrollBar">
@@ -95,10 +94,11 @@
                             <div class="col-auto">
                                 <h6>Users Table</h6>
                             </div>
-                            {{-- <div class="col-auto">
-                                <a href="#" class="createBtn" style="color:forestgreen; font-size: 16px; font-weight: 600"
-                                    data-toggle="modal" data-target="#createBtn">Create</a>
-                            </div> --}}
+                            <div class="col-auto">
+                                <a href="#" class="createBtn"
+                                    style="color:forestgreen; font-size: 16px; font-weight: 600" data-toggle="modal"
+                                    data-target="#createBtn">Create</a>
+                            </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -107,7 +107,10 @@
                                         <tr>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                USER</th>
+                                                 Name</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                Email</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Phone</th>
@@ -127,18 +130,24 @@
                                         @foreach ($users as $user)
                                             <tr>
                                                 <td class="align-middle text-center">
+                                                    <span class="text-s font-weight-bold mb-0">{{ $user->first_name }}
+                                                        {{ $user->last_name }}</span>
                                                     {{-- <div>
                                                             <img src="../assets/img/team-2.jpg"
                                                                 class="avatar avatar-sm me-3" alt="user1">
                                                         </div> --}}
-                                                    <div class="d-flex flex-column justify-content-center">
+                                                    {{-- <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">{{ $user->first_name }}
                                                             {{ $user->last_name }}
                                                         </h6>
                                                         <span class="text-s text-secondary mb-0">
                                                             {{ $user->email }}
                                                         </span>
-                                                    </div>
+                                                    </div> --}}
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $user->email }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span

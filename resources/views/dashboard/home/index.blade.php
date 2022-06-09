@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="bi bi-cash-stack"></i>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="bi bi-people-fill"></i>
                                         {{-- class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i> --}}
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="fa fa-suitcase-rolling"></i>
                                         {{-- class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i> --}}
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
-                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="bi bi-person-lines-fill"></i>
                                         {{-- <div
                                         class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
@@ -158,7 +158,7 @@
                                     <div class="col-3 py-3 ps-0">
                                         <div class="d-flex mb-2">
                                             <div
-                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                                                 <i class="align-middle bi bi-people-fill text-white"
                                                     style="height: 5px; width: 10px;"></i>
                                                 {{-- <svg width="10px" height="10px" viewBox="0 0 40 44" version="1.1"
@@ -193,7 +193,7 @@
                                     <div class="col-3 py-3 ps-0">
                                         <div class="d-flex mb-2">
                                             <div
-                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
 
                                                 <i class="align-middle  bi bi-person-lines-fill text-white"
                                                     style="height: 5px; width: 10px;"></i>
@@ -230,7 +230,7 @@
                                     <div class="col-3 py-3 ps-0">
                                         <div class="d-flex mb-2">
                                             <div
-                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                                                 <i class="align-middle fa fa-suitcase-rolling text-white"
                                                     style="height: 5px; width: 10px;"></i>
                                                 {{-- <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1"
@@ -272,7 +272,7 @@
                                     <div class="col-3 py-3 ps-0">
                                         <div class="d-flex mb-2">
                                             <div
-                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                                                 <i class="align-middle bi bi-envelope-fill text-white"
                                                     style="height: 5px; width: 10px;"></i>
                                                 {{-- <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1"
@@ -312,7 +312,7 @@
                                     <div class="col-3 py-3 ps-0">
                                         <div class="d-flex mb-2">
                                             <div
-                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
+                                                class="icon icon-shape icon-xs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                                                 <svg width="10px" height="10px" viewBox="0 0 43 36" version="1.1"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink">

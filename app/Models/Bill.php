@@ -12,6 +12,8 @@ class Bill extends Model
 
     protected $fillable = [
         'user_id',
+        'payment_from',
+        'payment_to',
         'Payment_date',
         'payment_status',
         'payment_due',

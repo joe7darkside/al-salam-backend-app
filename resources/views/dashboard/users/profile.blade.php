@@ -75,14 +75,14 @@
                     <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                         <div class="nav-wrapper position-relative end-0">
                             <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <button class="createBillBtn nav-link mb-0 px-0 py-1 active "
                                         value="{{ $user->id }}" role="tab" aria-selected="true">
 
                                         <i class="fa fa-money me-sm-1 text-gray-600 "></i>
                                         <span class="ms-1">Bill</span>
                                     </button>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <button class="sendBtn nav-link mb-0 px-0 py-1 active " value="{{ $user->id }}"
                                         role="tab" aria-selected="true">
@@ -90,10 +90,9 @@
                                         <i class="fa fa-paper-plane me-sm-1 text-gray-600 "></i>
                                         <span class="ms-1">Notification</span>
                                     </button>
-                                    {{-- <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab"
-                                        href="{{ route('users.Notification') }}" role="tab" aria-selected="true">
 
-                                        <i class="fa fa-paper-plane me-sm-1 text-gray-600 "></i>
+
+                                    {{-- <i class="fa fa-paper-plane me-sm-1 text-gray-600 "></i>
                                         <span class="ms-1">Notification</span>
                                     </a> --}}
                                 </li>
@@ -101,6 +100,13 @@
                                     <button value="{{ $user->id }} " class="deleteBtn nav-link mb-0 px-0 py-1 ">
                                         <i class="fa fa-trash me-sm-1 text-gray-600"></i>
                                         <span class="ms-1">Delete</span>
+                                    </button>
+                                </li>
+
+                                <li class="nav-item">
+                                    <button value="{{ $user->id }} " class="editBtn nav-link mb-0 px-0 py-1 ">
+                                        <i class="fa fa-pen me-sm-1 text-gray-600"></i>
+                                        <span class="ms-1">Edit</span>
                                     </button>
                                 </li>
 
@@ -148,7 +154,8 @@
 
                                         <div class="d-flex align-items-start flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{ $invite->visiter_name }}</h6>
-                                            <p class="mb-0 text-xs">{{ $invite->created_at->format('d M H:i ') }}</p>
+                                            <p class="mb-0 text-xs">{{ $invite->created_at->format('d M H:i ') }}
+                                            </p>
                                         </div>
                                         @if ($invite->permission == 0)
                                             <a class="delete pe-3 ps-0 mb-0 ms-auto">Denied</a>
@@ -177,7 +184,8 @@
 
                                         <div class="d-flex align-items-start flex-column justify-content-center">
                                             <p class="mb-0 text-s">{{ $trip->cost }} IQD</p>
-                                            <p class="mb-0 text-s">{{ $trip->created_at->format('d M H:i ') }} </p>
+                                            <p class="mb-0 text-s">{{ $trip->created_at->format('d M H:i ') }}
+                                            </p>
                                         </div>
                                         @switch($trip->payment_method)
                                             @case(0)
@@ -239,12 +247,14 @@
 
     </div>
     <!-- Create Modal -->
-    @include('dashboard.users.modals.createBill')
-    @yield('createBillModal')
+    {{-- @include('dashboard.users.modals.createBill')
+    @yield('createBillModal') --}}
 
     @include('dashboard.users.modals.delete')
     @yield('deleteUserModal')
-
+    @include('dashboard.users.modals.edit')
+    @yield('editModal')
+    
     @include('dashboard.users.modals.send')
     @yield('sendModal')
 

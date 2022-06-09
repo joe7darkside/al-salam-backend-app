@@ -27,6 +27,8 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+
+
         $validator = Validator::make($request->all(), [
 
             'first_name' => 'required|string|max:255',
@@ -34,6 +36,8 @@ class AuthController extends Controller
             'phone' => 'required|digits:11|unique:users|max:11',
             'email' => 'required|email|unique:users|max:255',
             'password' => 'required|confirmed|max:255',
+            'unit' => 'required||max:10',
+            'block' => 'required||max:10',
             'app_token' => '',
 
         ]);

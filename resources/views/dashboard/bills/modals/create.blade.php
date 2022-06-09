@@ -9,90 +9,72 @@
                 <div class="modal-body">
                     <form action="{{ route('bills.add') }}" method="POST">
                         @csrf
-                        <input type="hidden" id="create_bill_id" name="create_bill_id">
-                        {{-- FIRST ROW --}}
+
                         <div class="row">
-                            {{-- First name --}}
-                            {{-- <div class="col-6">
+                            {{-- Block Number --}}
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label>First Name </label>
-                                    <input type="text" name="user_first_name" class="form-control" required>
-
+                                    <label>Block Number </label>
+                                    <input type="text" name="block" class="form-control" required>
                                 </div>
-                            </div> --}}
-                            {{-- Last name --}}
-                            {{-- <div class="col-6">
+                            </div>
+
+                            {{-- Unit Number --}}
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" name="user_last_name" class="form-control" required>
+                                    <label>Unit Number</label>
+                                    <input type="text" name="unit" class="form-control" required>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
+                        <div class="row">
 
-                            {{-- Second ROW --}}
-                            {{-- Payment date --}}
-                            <div class="col-12">
+                            {{-- Bill from --}}
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label>Payment date </label>
-                                    <input type="date" name="Payment_date" class="form-control" required>
-
+                                    <label>Bill from </label>
+                                    <input type="date" name="payment_from" class="form-control" required>
+                                </div>
+                            </div>
+                            {{-- Bill to --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Bill to</label>
+                                    <input type="date" name="payment_to" class="form-control" required>
                                 </div>
                             </div>
 
-
-                            {{-- SECOND ROW --}}
-                            <div class="row">
-
-                                {{-- Payment Status --}}
-                                <div class="col-6">
-
-                                    <div class="form-group">
-                                        <label for="floatingSelectGrid">Payment Status</label>
-                                        <select class="form-select" id="floatingSelectGrid" name="payment_status"
-                                            required>
-                                            {{-- <option>Select payment status</option> --}}
-                                            <option value="0">Unpaid</option>
-                                            <option value="1">Paid</option>
-
-                                        </select>
-
-                                    </div>
-
-                                </div>
-
-                                {{-- Water bill --}}
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Water bill</label>
-                                        <input type="text" name="water_bill" class="form-control" required>
-                                    </div>
+                        </div>
+                        {{-- Gas bill --}}
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Gas bill</label>
+                                    <input type="number" name="gas_bill" class="form-control" required>
                                 </div>
                             </div>
-
-                            {{-- Thired ROW --}}
-
-                            {{-- Gas bill --}}
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Gas bill</label>
-                                        <input type="text" name="gas_bill" class="form-control" required>
-                                    </div>
-                                </div>
-                                {{-- Electricity bill --}}
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Electricity bill</label>
-                                        <input type="text" name="electricity_bill" class="form-control" required>
-                                    </div>
+                            {{-- Electricity bill --}}
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Electricity bill</label>
+                                    <input type="number" name="electricity_bill" class="form-control" required>
                                 </div>
                             </div>
-
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        {{-- Water bill --}}
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Water bill</label>
+                                    <input type="number" name="water_bill" class="form-control" required>
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
                     </form>
                 </div>
 
