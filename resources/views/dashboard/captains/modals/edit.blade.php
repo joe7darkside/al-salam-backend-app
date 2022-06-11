@@ -81,14 +81,6 @@
                             <input class="form-control" type="file" name="img" id="img" >
                         </div>
 
-                        {{-- Password --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" id="" class="form-control" required>
-                            </div>
-                        </div>
-
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

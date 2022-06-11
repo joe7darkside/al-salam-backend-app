@@ -24,7 +24,7 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-s">invitations
+                        <li class="breadcrumb-item text-s">Invitations
                         </li>
                         <li class="breadcrumb-item text-s text-dark active" aria-current="page">{{ $category_name }}
                         </li>
@@ -62,7 +62,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>invitations Table</h6>
+                            <h6>Invitations Table</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -214,8 +214,8 @@
                 </div>
             </div>
 
-            @include('dashboard.components.footer')
-            @yield('footer')
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 

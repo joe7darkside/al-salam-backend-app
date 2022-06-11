@@ -9,7 +9,6 @@
                 <div class="modal-body">
                     <form action="{{ route('admins.store') }}" method="POST">
                         @csrf
-                        {{-- <input type="text" id="admin_id" name="admin_id"> --}}
                         {{-- FIRST ROW --}}
                         <div class="row">
                             {{-- First name --}}
@@ -37,7 +36,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="text" name="phone" class="form-control" required>
+                                    <input type="number" name="phone" class="form-control" required>
                                 </div>
                             </div>
 

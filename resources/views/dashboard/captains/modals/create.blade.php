@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Admin</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Captain</h5>
 
                 </div>
 
@@ -37,7 +37,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="text" name="phone" class="form-control" aria-describedby="emailHelp"
+                                    <input type="number" name="phone" class="form-control" aria-describedby="emailHelp"
                                         required>
 
                                 </div>

@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Admin</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Admin</h5>
 
                 </div>
                 <div class="modal-body">
@@ -19,7 +19,6 @@
                                     <label>First Name </label>
                                     <input type="text" name="first_name" id="first_name" class="form-control"
                                         aria-describedby="emailHelp" required>
-
                                 </div>
                             </div>
                             {{-- Last name --}}
@@ -32,16 +31,14 @@
                         </div>
 
                         {{-- SECOND ROW --}}
-
                         {{-- Phone --}}
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="text" name="phone" id="phone" class="form-control" required>
+                                    <input type="number" name="phone" id="phone" class="form-control" required>
                                 </div>
                             </div>
-
                             {{-- Role --}}
                             <div class="col-6">
                                 <div class="form-group">
@@ -56,7 +53,6 @@
                                         <option value="users">Users</option>
 
                                     </select>
-
                                 </div>
                             </div>
                         </div>
@@ -68,13 +64,7 @@
                                 <input type="text" name="email" id="email" class="form-control" required>
                             </div>
                         </div>
-                        {{-- Password --}}
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" required>
-                            </div>
-                        </div>
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

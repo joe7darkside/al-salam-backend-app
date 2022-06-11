@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class AppTokenController extends Controller
 {
+
+    /**
+     * Store the AppToken in the DB on start.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
     public function store(Request $request)
     {
         $token = AppToken::where('token', 'LIKE', $request->token)->first();
@@ -20,6 +28,12 @@ class AppTokenController extends Controller
     }
 
 
+    /**
+     * Add user id to AppToken DB.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
     public function update(Request $request)
     {

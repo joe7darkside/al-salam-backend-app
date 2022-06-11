@@ -26,7 +26,6 @@ class User extends Authenticatable implements JWTSubject
         'block',
         'unit',
         'password',
-        'app_token',
 
 
     ];
@@ -106,8 +105,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Guest::class, 'user_id');
     }
-
-
 
     public function appToken()
     {

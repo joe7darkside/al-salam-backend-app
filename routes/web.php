@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
 // use App\Http\Controllers\BillController;
 use App\Http\Controllers\CaptainController;
 use App\Http\Controllers\InvitationController;
@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\CaptainAuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Admin\BillController;
