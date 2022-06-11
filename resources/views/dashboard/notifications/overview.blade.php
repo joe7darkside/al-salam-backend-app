@@ -96,18 +96,18 @@
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 #</th>
 
+                                            {{-- <th
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                title en</th> --}}
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                title en</th>
+                                                title </th>
+                                            {{-- <th
+                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                description en</th> --}}
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                title ar</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                description en</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                description ar</th>
+                                                description </th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
@@ -128,22 +128,22 @@
                                                         class="text-s font-weight-bold mb-0">{{ $notification->id }}</span>
                                                 </td>
 
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $notification->title_en }}</span>
-                                                </td>
+                                                </td> --}}
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-s font-weight-bold mb-0">{{ $notification->title_ar }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $notification->title }}</span>
                                                 </td>
 
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $notification->description_en }}</span>
-                                                </td>
+                                                </td> --}}
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-s font-weight-bold mb-0">{{ $notification->description_ar }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $notification->description }}</span>
                                                 </td>
 
                                                 <td class="align-middle text-center">

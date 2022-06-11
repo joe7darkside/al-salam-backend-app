@@ -29,5 +29,18 @@
     "dependencies": {
         "bootstrap-icons": "^1.8.3",
         "vue-router": "^4.0.15"
+    },
+
+    "autoload": {
+        "files": [
+            "app/Helpers/Notifications.php"
+        ],
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
     }
 }

@@ -18,10 +18,10 @@ $(document).ready(function() {
             url: "/notifications/edit/" + notification_id,
             success: function(response) {
                 console.log(response.notification.id);
-                $('#title_en').val(response.notification.title_en);
-                $('#title_ar').val(response.notification.title_ar);
-                $('#description_en').val(response.notification.description_en);
-                $('#description_ar').val(response.notification.description_ar);
+                $('#title').val(response.notification.title);
+                // $('#title_ar').val(response.notification.title_ar);
+                $('#description').val(response.notification.description);
+                // $('#description_ar').val(response.notification.description_ar);
                 $('#_id').val(response.notification.id);
 
 

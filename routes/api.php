@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppTokenController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CaptainAuthController;
@@ -29,7 +30,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 Route::group(['prefix' => 'auth'], function () {
-
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -38,6 +38,8 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['assign.guard:api', 'jwt.auth']], function () {
+    
+    Route::put('appToken/update',[AppTokenController::class,'update']);
     Route::get('/cards', [UserController::class, 'getVisaCard']);
     Route::get('/info', [UserController::class, 'getUserInfo']);
     Route::put('/update', [UserController::class, 'update']);
@@ -78,6 +80,9 @@ Route::group(['prefix' => 'captain', 'middleware' => ['assign.guard:captain', 'j
     Route::post('/refresh', [CaptainAuthController::class, 'refresh']);
     Route::post('/me', [CaptainAuthController::class, 'me']);
 });
+Route::post('appToken/store',[AppTokenController::class,'store']);
+
+// Route::post('captains/register', [CaptainAuthController::class, 'register'])->name('captains.register');
 
 
-Route::post('captains/register', [CaptainAuthController::class, 'register'])->name('captains.register');
+

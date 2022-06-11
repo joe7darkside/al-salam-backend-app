@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\AppToken;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -42,23 +43,18 @@ class NotificationController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            "title_en" => "required",
-            "title_ar" => "required",
-            "description_en" => "required",
-            "description_ar" => "required",
+            "title" => "required",
+            "description" => "required",
 
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-            // return response()->json($validator->errors()->toJson(), 400);
         }
 
         Notification::create([
             'admin_id' => $admin_id,
-            'title_en' => $request->title_en,
-            'title_ar' => $request->title_ar,
-            'description_en' => $request->description_en,
-            'description_ar' => $request->description_ar,
+            'title' => $request->title,
+            'description' => $request->description,
 
         ]);
         // return response()->json(['result' => 'works']);
@@ -151,25 +147,41 @@ class NotificationController extends Controller
     /**
      * push notification to mobile app.
      *
-     * @param  int  $id
+     * @param  Response  $request
      * @return \Illuminate\Http\Response
      */
     public function send(Request $request)
     {
         $notification_id = $request->input('notification_id');
         $notification = Notification::find($notification_id);
-        $users = User::all();
         $title = $notification->title;
-        $body = $notification->body;
-        // $type = $notification->type;
+        $body = $notification->description;
+        $app_tokens = AppToken::all();
 
-        foreach ($users as $user) {
-            $user_app_token = $user->app_token;
-            // send_notification_FCM($user_app_token, $title, $body);
+
+        foreach ($app_tokens as $token) {
+            $this->send_notification_FCM($token->token, $title, $body);
         }
 
         return  redirect()->back()->with('Send', 'Notification sent successfully');
-        // return response()->json(['result' => 'Notification sent successfully'], 200);
+    }
+
+
+
+    public function UserNotification(Request $request)
+    {
+        $id=$request->input('send_user_id');
+        $user = User::find($id)->appToken;
+
+        // dd($user->token);
+
+        $title = $request->title;
+        $description = $request->description;
+
+        $this->send_notification_FCM($user->token, $title, $description);
+
+
+        return  redirect()->back()->with('Send', 'Notification sent successfully');
     }
 
 
@@ -196,5 +208,70 @@ class NotificationController extends Controller
 
         // return response()->json(['trips' => $trips]);
         return View::make('dashboard.notifications.overview',  ['notifications' => $notifications, 'admin' => $admin]);
+    }
+
+
+
+
+
+    /**
+     * Return JSON response 
+     * @param string $app_token
+     * @param string $title
+     * @param string $body
+     * @return Response|JSON
+     */
+
+    function send_notification_FCM($app_token, $title, $body)
+    {
+
+        $SERVER_API_KEY = env('FCM_KEY');
+
+
+        $data = [
+
+            "registration_ids" => [
+                $app_token
+            ],
+
+            "notification" => [
+
+                "title" => $title,
+
+                "body" => $body,
+
+                "sound" => "default" // required for sound on ios
+
+            ],
+
+        ];
+
+        $dataString = json_encode($data);
+
+        $headers = [
+
+            'Authorization: key=' . $SERVER_API_KEY,
+
+            'Content-Type: application/json',
+
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+        $response = curl_exec($ch);
+
+        return $response;
     }
 }

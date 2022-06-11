@@ -19,8 +19,8 @@
                             {{-- First name --}}
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>Title EN</label>
-                                    <input type="text" name="title_en" id="title_en" class="form-control"
+                                    <label>Title </label>
+                                    <input type="text" name="title" id="title" class="form-control"
                                         aria-describedby="emailHelp" required>
 
                                 </div>
@@ -28,33 +28,15 @@
                             {{-- Last name --}}
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>Title AR</label>
-                                    <input type="text" name="title_ar" id="title_ar" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- SECOND ROW --}}
-                        <div class="row">
-                            {{-- Phone --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Description EN</label>
-                                    <input type="text" name="description_en" id="description_en" class="form-control"
+                                    <label>Description </label>
+                                    <input type="text" name="description" id="description" class="form-control"
                                         aria-describedby="emailHelp" required>
 
                                 </div>
                             </div>
-                            {{-- Email --}}
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Description AR</label>
-                                    <input type="text" name="description_ar" id="description_ar" class="form-control"
-                                        required>
-                                </div>
-                            </div>
-
                         </div>
+
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-warning">Update</button>

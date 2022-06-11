@@ -109,7 +109,6 @@ Route::group(['middleware' => 'auth',], function () {
     });
     //* Routes for CaptainController 
     Route::group(['prefix' => 'users', 'middleware' => 'role:users,super'], function () {
-        Route::post('/sendNotification', [UserController::class, 'send'])->name('users.Notification');
         Route::post('/create', [UserController::class, 'create'])->name('users.create');
         Route::get('/edit/{id}', [UserController::class, 'editUser'])->name('users.edit');
         Route::put('/update', [UserController::class, 'updateUser'])->name('users.update');
@@ -119,6 +118,7 @@ Route::group(['middleware' => 'auth',], function () {
     //* Routes for NotificationsController 
     Route::group(['prefix' => 'notifications', 'middleware' => 'role:notifications,super'], function () {
 
+        Route::post('/sendNotification', [NotificationController::class, 'UserNotification'])->name('notifications.user');
         Route::get('/overview', [NotificationController::class, 'index'])->name('notifications.overview');
         Route::get('/send', [NotificationController::class, 'send'])->name('notifications.send');
         Route::get('/search', [NotificationController::class, 'search'])->name('notifications.search');

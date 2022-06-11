@@ -106,4 +106,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Guest::class, 'user_id');
     }
+
+
+
+    public function appToken()
+    {
+        return $this->hasOne(AppToken::class, 'user_id');
+    }
 }
