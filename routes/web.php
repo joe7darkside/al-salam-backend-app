@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth',], function () {
     //* Routes for TripController 
     Route::group(['prefix' => 'trips', 'middleware' => 'role:trips,super'], function () {
         Route::get('/overview', [TripController::class, 'getTrips'])->name('trips.overView');
-        Route::get('/categorized-tripss/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
+        Route::get('/categorized-trips/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
         Route::get('/search', [TripController::class, 'search'])->name('trips.search');
         Route::get('/category-search/{category}', [TripController::class, 'categorizedSearch'])->name('trips.category.search');
         Route::get('/info/{id}', [TripController::class, 'info'])->name('trips.show');

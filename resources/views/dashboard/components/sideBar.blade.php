@@ -265,6 +265,12 @@
                                     <li class="submenu-item ">
                                         <a href="{{ route('trips.overView') }}">Overview</a>
                                     </li>
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('trips.category', ['category' => 1]) }}">Complete</a>
+                                    </li>
+                                    <li class="submenu-item ">
+                                        <a href="{{ route('trips.category', ['category' => 0]) }}">Canceled</a>
+                                    </li>
 
                                 </ul>
                             </li>

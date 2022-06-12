@@ -77,7 +77,7 @@
 
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                phone</th>
+                                                Captain</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 cost (IQD)</th>
@@ -85,20 +85,12 @@
 
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                status</th>
+                                                payment method </th>
 
-                                            {{-- <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                gas trip</th>
-                                            <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                electricity trip</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment status</th> --}}
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment method</th>
+                                                status </th>
 
 
                                             <th
@@ -120,37 +112,20 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{-- {{ $trip->user->first_name }}
-                                                        {{ $trip->user->last_name }} --}}
+                                                        {{ $trip->user->first_name }}
+                                                        {{ $trip->user->last_name }}
                                                     </span>
                                                 </td>
 
                                                 <td class="align-middle text-center">
-                                                    {{-- <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->user->phone }}</span> --}}
+                                                    <span
+                                                        class="text-s font-weight-bold mb-0">{{ $trip->captain->first_name }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $trip->cost }}</span>
                                                 </td>
-                                                @switch($trip->canceled)
-                                                    @case(0)
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-s font-weight-bold mb-0 text-red-600"
-                                                                style="color: rgb(207, 12, 51) ">Canceled</span>
-                                                        </td>
-                                                    @break
 
-                                                    @case(1)
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-s font-weight-bold mb-0 text-green-600"
-                                                                style="color:rgb(9, 180, 9) ">Complete
-                                                            </span>
-                                                        </td>
-                                                    @break
-
-                                                    @default
-                                                @endswitch
 
 
 
@@ -173,7 +148,24 @@
 
                                                 </td>
 
+                                                @switch($trip->canceled)
+                                                    @case(0)
+                                                        <td class="align-middle text-center">
+                                                            <span class="text-s font-weight-bold mb-0 text-red-600"
+                                                                style="color: rgb(207, 12, 51) ">Canceled</span>
+                                                        </td>
+                                                    @break
 
+                                                    @case(1)
+                                                        <td class="align-middle text-center">
+                                                            <span class="text-s font-weight-bold mb-0 text-green-600"
+                                                                style="color:rgb(9, 180, 9) ">Complete
+                                                            </span>
+                                                        </td>
+                                                    @break
+
+                                                    @default
+                                                @endswitch
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $trip->created_at->diffForHumans() }}</span>

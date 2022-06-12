@@ -18,10 +18,10 @@ class TripController extends Controller
 
         $user_trips = User::find($user_id)->trip;
 
-        foreach ($user_trips as $key => $trip) {
+        foreach ($user_trips as  $trip) {
             $trip_id = $trip;
-            $trip_pick_up = $trip_id->pickUp;
-            $trip_drop_of = $trip_id->dropOf;
+            $trip_id->pickUp;
+            $trip_id->dropOf;
         }
 
 
@@ -162,22 +162,36 @@ class TripController extends Controller
         $admin = $request->user()->first_name;
         $search_text = $request->input('search');
 
+        // $user = User::with('Profile')->where('status', 1)->whereHas('Profile', function($q){
+        //     $q->where('gender', 'Male');
+        // })->get();
+
 
         if (isset($search_text)) {
-            $trips = Trip::where('cost', 'LIKE', '%' . $search_text . '%')
+            $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])
+                ->where('cost', 'LIKE', '%' . $search_text . '%')
                 ->orWhere('payment_method', 'LIKE', '%' . $search_text . '%')
-                ->with(['user', 'captain', 'pickUp', 'dropOf'])
+                ->orWhereHas('user', function ($q) use ($search_text) {
+                    $q->where('first_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                })
+                ->orWhereHas('captain', function ($q) use ($search_text) {
+                    $q->where('first_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                })
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             $trips->appends($request->all());
 
-            // return response()->json(['trips' => $trips]);
             return View::make('dashboard.trips.overview',  ['trips' => $trips, 'admin' => $admin]);
         }
         $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])->orderBy('created_at', 'desc')->paginate(10);
 
-        // return response()->json(['trips' => $trips]);
         return View::make('dashboard.trips.overview',  ['trips' => $trips, 'admin' => $admin]);
     }
 
@@ -196,9 +210,23 @@ class TripController extends Controller
             ->with(['user', 'captain', 'pickUp', 'dropOf'])
             ->orderBy('created_at', 'desc')->paginate(10);
 
-        // return response()->json(['trips' => $trips]);
+        switch ($category) {
+            case 1:
+                $category_name = "Complete";
+                break;
+            case 0:
+                $category_name = "Canceled";
+                break;
+
+            default:
+
+                break;
+        }
+
         return View::make('dashboard.trips.categorized', [
             'trips' => $trips,
+            'category_name' => $category_name,
+            'category' => $category,
             'admin' => $admin
         ]);
     }
@@ -215,24 +243,61 @@ class TripController extends Controller
     {
         $search_text = $request->input('search');
         $admin = $request->user()->first_name;
+
+        switch ($category) {
+            case 1:
+                $category_name = "Complete";
+                break;
+            case 0:
+                $category_name = "Canceled";
+                break;
+
+            default:
+
+                break;
+        }
+
+
         if (isset($search_text)) {
-            $trips = Trip::where('payment_method', 'LIKE', '%' . $category . '%')
-                ->Where('cost', 'LIKE', '%' . $search_text . '%')
-                ->orWhere('captain_id', 'LIKE', '%' . $search_text . '%')
-                ->with(['user', 'captain', 'pickUp', 'dropOf'])
+            $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])
+                ->where('payment_method', 'LIKE', '%' . $category . '%')
+                ->where('cost', 'LIKE', '%' . $search_text . '%')
+                ->orWhereHas('user', function ($q) use ($search_text) {
+                    $q->where('first_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                })
+                ->orWhereHas('captain', function ($q) use ($search_text) {
+                    $q->where('first_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                })
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             $trips->appends($request->all());
 
+
             // return response()->json(['trips' => $trips]);
-            return View::make('dashboard.trips.categorized',  ['trips' => $trips, 'admin' => $admin]);
+            return View::make('dashboard.trips.categorized',  [
+                'trips' => $trips,
+                'admin' => $admin,
+                'category' => $category,
+                'category_name' => $category_name
+            ]);
         }
         $trips = Trip::with(['user', 'captain', 'pickUp', 'dropOf'])
             ->orderBy('created_at', 'desc')->paginate(10);
 
         // return response()->json(['trips' => $trips]);
-        return View::make('dashboard.trips.categorized',  ['trips' => $trips, 'admin' => $admin]);
+        return View::make('dashboard.trips.categorized',  [
+            'trips' => $trips,
+            'admin' => $admin,
+            'category' => $category,
+            'category_name' => $category_name
+        ]);
     }
 
     /**

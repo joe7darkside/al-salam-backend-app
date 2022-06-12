@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppTokenController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CaptainAuthController;
 use App\Http\Controllers\CaptainController;
@@ -48,7 +48,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['assign.guard:api', 'jwt.auth
     Route::post('/invitation/create', [InvitationController::class, 'addInvitation']);
     Route::get('/invitaions', [InvitationController::class, 'getUserInvitaions']);
     Route::put('/invitaions/action/{id}', [InvitationController::class, 'invitaionUpdate']);
-
     Route::get('/trips', [TripController::class, 'getUserTrip']);
     Route::get('/pre-trips', [TripController::class, 'getUserPreTrip']);
     Route::post('/trips/add-preTrip', [TripController::class, 'addTrip']);

@@ -103,12 +103,14 @@ class InvitationController extends Controller
     {
         $admin = $request->user()->first_name;
 
-        $invitations = Invitation::orderBy('created_at', 'desc')->with('user')->paginate(10);
+        $invitations = Invitation::orderBy('created_at', 'desc')
+            ->with(['user', 'guest'])->paginate(10);
 
         // return response()->json([
         //     'invitations' => $invitations,
         //     'admin' => $admin
         // ]);
+
         return View::make('dashboard.invitations.overview', [
             'invitations' => $invitations,
             'admin' => $admin
@@ -128,9 +130,20 @@ class InvitationController extends Controller
         $admin = $request->user()->first_name;
 
         if (isset($search_text)) {
-            $invitations = Invitation::where('visiter_name', 'LIKE', '%' . $search_text . '%')
-                ->orWhere('permission', 'LIKE', '%' . $search_text . '%')
-                ->with('user')
+            $invitations = Invitation::with('user')
+                // ->where('visiter_name', 'LIKE', '%' . $search_text . '%')
+                ->where('permission', 'LIKE', '%' . $search_text . '%')
+                ->orWhereHas('user', function ($q) use ($search_text) {
+                    $q->where('first_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                })
+                ->orWhereHas('guest', function ($q) use ($search_text) {
+                    $q->where('full_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                })
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
@@ -152,7 +165,7 @@ class InvitationController extends Controller
      * @return View|array
      */
 
-     
+
     public function categorizedInvitations($category, Request $request)
     {
         $admin = $request->user()->first_name;

@@ -11,10 +11,10 @@
 
     @include('dashboard.components.header')
     @yield('header')
-    
+
 </head>
 
-<body class="g-sidenav-show  bg-page">
+<body class="g-sidenav-show  bg-page main-scrollBar">
 
     @include('dashboard.components.sideBar')
     @yield('sideBar')
@@ -57,6 +57,29 @@
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
+            @if (session('Success'))
+                @include('dashboard.components.alerts')
+                @yield('success.alert')
+            @endif
+
+            @if (session('Error'))
+                @include('dashboard.components.alerts')
+                @yield('error.alert')
+            @endif
+
+            @if (session('Send'))
+                @include('dashboard.components.alerts')
+                @yield('send.alert')
+            @endif
+            @if (session('Warning'))
+                @include('dashboard.components.alerts')
+                @yield('warning.alert')
+            @endif
+
+            @if ($errors->any())
+                @include('dashboard.components.alerts')
+                @yield('validation')
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -143,7 +166,7 @@
 
                                                                 <button value="{{ $bill->id }} "
                                                                     class="deleteBtn"><i
-                                                                        class="fa fa-trash update "></i></button>
+                                                                        class="fa fa-trash  "></i></button>
                                                             </div>
                                                         </i>
                                                     </div>
@@ -170,7 +193,7 @@
         </div>
     </main>
 
-    {{-- Modals --}}
+  {{-- Modals --}}
     <!-- Create Modal -->
     @include('dashboard.bills.modals.create')
     @yield('createModal')
@@ -186,7 +209,7 @@
     {{-- Modals --}}
 
     {{-- Script --}}
-    @include('dashboard.components.script')
+    @include('dashboard.bills.script')
     @yield('script')
 </body>
 

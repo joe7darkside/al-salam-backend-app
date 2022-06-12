@@ -134,8 +134,8 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{ $bill->user->first_name }}
-                                                        {{ $bill->user->last_name }}
+                                                        {{-- {{ $bill->user->first_name }}
+                                                        {{ $bill->user->last_name }} --}}
                                                     </span>
                                                 </td>
 

@@ -122,7 +122,7 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{ $invitation->visiter_name }}
+                                                        {{ $invitation->guest }}
 
                                                     </span>
                                                 </td>
@@ -134,7 +134,11 @@
                                                         @break
 
                                                         @case(1)
-                                                            <span class="text-s font-weight-bold mb-0">approved</span>
+                                                            <span class="text-s font-weight-bold mb-0">Approved</span>
+                                                        @break
+
+                                                        @case(2)
+                                                            <span class="text-s font-weight-bold mb-0">Pandding</span>
                                                         @break
 
                                                         @default

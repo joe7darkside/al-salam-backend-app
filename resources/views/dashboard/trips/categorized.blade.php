@@ -26,7 +26,8 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-s">Trips
                         </li>
-                        <li class="breadcrumb-item text-s text-dark active" aria-current="page">Overview</li>
+                        <li class="breadcrumb-item text-s text-dark active" aria-current="page">{{ $category_name }}
+                        </li>
                     </ol>
                 </nav>
                 {{-- Search bar --}}
@@ -36,7 +37,8 @@
                         <div class="input-group">
                             <span class="input-group-text text-body"><i class="fas fa-search"
                                     aria-hidden="true"></i></span>
-                            <form action="{{ route('trips.search') }}" method="get">
+                            <form action="{{ route('trips.category.search', ['category' => $category]) }}"
+                                method="get">
                                 @csrf
                                 <input type="text" class="form-control" name="search" placeholder="Type here...">
                             </form>
@@ -60,7 +62,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>trips Table</h6>
+                            <h6>Trips Table</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -77,7 +79,7 @@
 
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                phone</th>
+                                                Captain</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 cost</th>
@@ -124,7 +126,8 @@
 
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->user->phone }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $trip->captain->first_name }}
+                                                        {{ $trip->captain->last_name }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
@@ -207,8 +210,8 @@
                 </div>
             </div>
 
-            @include('dashboard.components.footer')
-            @yield('footer')
+            {{-- @include('dashboard.components.footer')
+            @yield('footer') --}}
         </div>
     </main>
 

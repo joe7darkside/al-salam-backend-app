@@ -14,9 +14,13 @@ class GuestFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => $this->faker->numberBetween(0, 10),
             'full_name' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
+            'last_visit' => $this->faker->date(),
+            'visits' => $this->faker->numberBetween(0, 10),
+
 
         ];
     }

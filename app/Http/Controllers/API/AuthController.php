@@ -60,7 +60,7 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
         if (!$token = auth()->guard('api')->attempt($validator->validated())) {
-            return response()->json(['statusCode' => 401], 401);
+            return response()->json(["error" => "Invalid coordinates"], 401);
         }
         return $this->respondWithToken($token);
     }
@@ -90,9 +90,8 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json(
-            ['Token' => $token, 'statusCode' => 200],
+            $token,
             200
-
         );
     }
 
