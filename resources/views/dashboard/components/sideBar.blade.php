@@ -225,10 +225,13 @@
                                         <a href="{{ route('invitations.overView') }}">Overview</a>
                                     </li>
                                     <li class="submenu-item ">
+                                        <a href="{{ route('invitations.category', ['category' => 0]) }}">Pandding</a>
+                                    </li>
+                                    <li class="submenu-item ">
                                         <a href="{{ route('invitations.category', ['category' => 1]) }}">Approved</a>
                                     </li>
                                     <li class="submenu-item ">
-                                        <a href="{{ route('invitations.category', ['category' => 0]) }}">Denied</a>
+                                        <a href="{{ route('invitations.category', ['category' => 2]) }}">Denied</a>
                                     </li>
                                 </ul>
 

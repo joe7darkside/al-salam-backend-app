@@ -16,7 +16,8 @@ class CreateInvitationsTable extends Migration
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('guest_id');
+            $table->string('guest_name');
+            $table->string('visit_date');
             $table->integer('permission')->default(0);
             $table->timestamps();
         });

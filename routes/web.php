@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 // use App\Http\Controllers\BillController;
 use App\Http\Controllers\CaptainController;
-use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\Admin\InvitationsController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -87,10 +87,12 @@ Route::group(['middleware' => 'auth',], function () {
 
     //* Routes for InvitationController 
     Route::group(['prefix' => 'invitations', 'middleware' => 'role:invitations,super'], function () {
-        Route::get('/overview', [InvitationController::class, 'getInvitations'])->name('invitations.overView');
-        Route::get('/categorized-invitations/{category}', [InvitationController::class, 'categorizedInvitations'])->name('invitations.category');
-        Route::get('/search', [InvitationController::class, 'search'])->name('invitations.search');
-        Route::get('/category-search/{category}', [InvitationController::class, 'categorizedSearch'])->name('invitations.category.search');
+        Route::get('/edit/{id}', [InvitationsController::class, 'edit'])->name('invitations.edit');
+        Route::put('/update', [InvitationsController::class, 'update'])->name('invitations.update');
+        Route::get('/overview', [InvitationsController::class, 'getInvitations'])->name('invitations.overView');
+        Route::get('/categorized-invitations/{category}', [InvitationsController::class, 'categorizedInvitations'])->name('invitations.category');
+        Route::get('/search', [InvitationsController::class, 'search'])->name('invitations.search');
+        Route::get('/category-search/{category}', [InvitationsController::class, 'categorizedSearch'])->name('invitations.category.search');
     });
 
 

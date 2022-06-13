@@ -16,6 +16,10 @@
     color: #d8e211;
 }
 
+.action {
+    color: #d8e211;
+}
+
 
 /* Dropdown Content (Hidden by Default) */
 
@@ -63,6 +67,13 @@
 /* Dropdown buttons style */
 
 .editBtn {
+    border: none;
+    background-color: white;
+    color: gold;
+    size: 15px;
+}
+
+.actionBtn {
     border: none;
     background-color: white;
     color: gold;

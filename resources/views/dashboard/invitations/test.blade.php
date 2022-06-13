@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        invitations
+        Invitations
     </title>
 
     @include('dashboard.components.header')
@@ -26,8 +26,7 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-s">Invitations
                         </li>
-                        <li class="breadcrumb-item text-s text-dark active" aria-current="page">{{ $category_name }}
-                        </li>
+                        <li class="breadcrumb-item text-s text-dark active" aria-current="page">Overview</li>
                     </ol>
                 </nav>
                 {{-- Search bar --}}
@@ -37,8 +36,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-body"><i class="fas fa-search"
                                     aria-hidden="true"></i></span>
-                            <form action="{{ route('invitations.category.search', ['category' => $category]) }}"
-                                method="get">
+                            <form action="{{ route('invitations.search') }}" method="get">
                                 @csrf
                                 <input type="text" class="form-control" name="search" placeholder="Type here...">
                             </form>
@@ -79,10 +77,10 @@
 
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                Visiter </th>
+                                                visiter </th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                Date</th>
+                                                permission</th>
 
                                             {{-- <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
@@ -104,9 +102,9 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Updated at</th>
-                                            <th
+                                            {{-- <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                            </th>
+                                            </th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,14 +122,28 @@
 
                                                 <td class="align-middle text-center">
                                                     <span class="text-s font-weight-bold mb-0">
-                                                        {{ $invitation->guest_name }}
+                                                        {{ $invitation->guest }}
 
                                                     </span>
                                                 </td>
 
                                                 <td class="align-middle text-center">
-                                                    <span
-                                                        class="text-s font-weight-bold mb-0">{{ $invitation->visit_date }}</span>
+                                                    @switch($invitation->permission)
+                                                        @case(0)
+                                                            <span class="text-s font-weight-bold mb-0">Denied</span>
+                                                        @break
+
+                                                        @case(1)
+                                                            <span class="text-s font-weight-bold mb-0">Approved</span>
+                                                        @break
+
+                                                        @case(2)
+                                                            <span class="text-s font-weight-bold mb-0">Pandding</span>
+                                                        @break
+
+                                                        @default
+                                                    @endswitch
+                                                    {{-- <span class="text-s font-weight-bold mb-0"></span> --}}
                                                 </td>
                                                 {{-- <td class="align-middle text-center">
                                                     <span
@@ -182,27 +194,6 @@
                                                     <span
                                                         class="text-s font-weight-bold mb-0">{{ $invitation->updated_at->diffForHumans() }}</span>
                                                 </td>
-
-                                                <td class="align-middle">
-                                                    <div class="dropdown">
-                                                        <i class="fa fa-ellipsis-v ">
-                                                            <div class="dropdown-content col-auto">
-
-                                                                <button value="{{ $invitation->id }}"
-                                                                    class="infoBtn "><i
-                                                                        class="fa fa-info"></i></button>
-
-                                                                <button value="{{ $invitation->id }}"
-                                                                    class="actionBtn "><i
-                                                                        class="fa fa-pen"></i></button>
-
-                                                                {{-- <button value="{{ $invitation->id }} "
-                                                                    class="deleteBtn"><i
-                                                                        class="fa fa-trash update "></i></button> --}}
-                                                            </div>
-                                                        </i>
-                                                    </div>
-                                                </td>
                                                 {{-- <td class="align-middle">
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
@@ -240,17 +231,9 @@
         </div>
     </main>
 
-    @include('dashboard.invitations.modals.info')
-    @yield('infoModal')
-    
-    @include('dashboard.invitations.modals.action')
-    @yield('actionModal')
 
-    @include('dashboard.invitations.script')
+    @include('dashboard.components.script')
     @yield('script')
-
-    {{-- @include('dashboard.components.script')
-    @yield('script') --}}
 </body>
 
 </html>

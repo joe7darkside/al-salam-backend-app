@@ -12,182 +12,186 @@ use Illuminate\Support\Facades\Validator;
 
 class InvitationController extends Controller
 {
-    public function addInvitation(Request $request)
-    {
+    // public function addInvitation(Request $request)
+    // {
 
-        $data = $request->all();
+    //     $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'user_first_name' => 'required|string|max:255',
-            'user_last_name' => 'required|string|max:255',
-            'guest_name' => 'required|string|max:255',
-            'phone' => 'required|digits:11|max:11',
-            'email' => 'required|email|max:255',
-            'visit_date' => 'required',
-        ]);
+    //     $validator = Validator::make($data, [
+    //         'user_first_name' => 'required|string|max:255',
+    //         'user_last_name' => 'required|string|max:255',
+    //         'guest_name' => 'required|string|max:255',
+    //         'phone' => 'required|digits:11|max:11',
+    //         'email' => 'required|email|max:255',
+    //         'visit_date' => 'required',
+    //     ]);
 
-        if ($validator->fails()) {
-            redirect()->back()->with(['message', $validator->errors()->toJson()]);
-            // return response()->json($validator->errors()->toJson(), 400);
-        }
+    //     if ($validator->fails()) {
+    //         redirect()->back()->with(['message', $validator->errors()->toJson()]);
+    //         // return response()->json($validator->errors()->toJson(), 400);
+    //     }
 
-        $user = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
-            ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
+    //     $user = User::where('first_name', 'LIKE', '%' . $request->user_first_name . '%')
+    //         ->where('last_name', 'LIKE', '%' . $request->user_last_name . '%')->first();
 
-        if (!$user) {
+    //     if (!$user) {
 
-            return redirect()->back()->with('Error', 'User not found');
-            // return response()->json('User not found');
-        }
+    //         return redirect()->back()->with('Error', 'User not found');
+    //         // return response()->json('User not found');
+    //     }
 
-        $guest = Guest::where('full_name', 'LIKE', '%' . $request->guest_name . '%')->first();
+    //     $guest = Guest::where('full_name', 'LIKE', '%' . $request->guest_name . '%')->first();
 
-        if (!$guest) {
-            $guest = Guest::create(
-                array_merge(
-                    $validator->validated(),
-                    [
-                        'user_id' => $user->id,
-                        'full_name' => $request->guest_name,
-                        'phone' => $request->phone,
-                        'email' => $request->email,
-                        'last_visit' => '',
-                        'visits' => 0,
-                    ]
-                )
-            );
-        }
-        Invitation::create([
-            'user_id' => $user->id,
-            'guest_id' => $guest->id,
-            'permission' => 0,
-
-
-        ]);
-        $last_invitation =  Invitation::where('guest_id', 'LIKE', '%' . $guest->id . '%')
-            ->where('permission', 'LIKE', '%' . 1 . '%')
-            ->latest('created_at')
-            ->first();
-
-        if ($last_invitation) {
-            $guest_update = Guest::find($guest->id);
-            $guest_update->update(['last_visit' => $last_invitation->created_at]);
-        }
-        return redirect()->back()->with('Success', 'Invitation add successfuly');
-    }
+    //     if (!$guest) {
+    //         $guest = Guest::create(
+    //             array_merge(
+    //                 $validator->validated(),
+    //                 [
+    //                     'user_id' => $user->id,
+    //                     'full_name' => $request->guest_name,
+    //                     'phone' => $request->phone,
+    //                     'email' => $request->email,
+    //                     'last_visit' => '',
+    //                     'visits' => 0,
+    //                 ]
+    //             )
+    //         );
+    //     }
+    //     Invitation::create([
+    //         'user_id' => $user->id,
+    //         'guest_id' => $guest->id,
+    //         'permission' => 0,
 
 
-    public function getUserInvitaions(Request $request)
-    {
+    //     ]);
+    //     $last_invitation =  Invitation::where('guest_id', 'LIKE', '%' . $guest->id . '%')
+    //         ->where('permission', 'LIKE', '%' . 1 . '%')
+    //         ->latest('created_at')
+    //         ->first();
 
-        $user_id = $request->user()->id;
-
-        $user_invitation = Invitation::where('user_id', 'LIKE', $user_id)
-            ->where('permission', 'LIKE', 0)
-            ->get();
-
-        foreach ($user_invitation as $invitation) {
-            $guests[] =  $invitation->guest;
-        }
-        return response()->json($user_invitation);
-    }
+    //     if ($last_invitation) {
+    //         $guest_update = Guest::find($guest->id);
+    //         $guest_update->update(['last_visit' => $last_invitation->created_at]);
+    //     }
+    //     return redirect()->back()->with('Success', 'Invitation add successfuly');
+    // }
 
 
-    /**
-     * Return overview view with array of invitations
+    // public function getUserInvitaions(Request $request)
+    // {
+
+    //     $user_id = $request->user()->id;
+
+    //     $user_invitation = Invitation::where('user_id', 'LIKE', $user_id)
+    //         ->where('permission', 'LIKE', 0)
+    //         ->get();
+
+    //     foreach ($user_invitation as $invitation) {
+    //         $guests[] =  $invitation->guest;
+    //     }
+    //     return response()->json($user_invitation);
+    // }
+
+
+    // /**
+    //  * Return overview view with array of invitations
     
-     * @return View|array
-     */
+    //  * @return View|array
+    //  */
 
-    public function getInvitations(Request $request)
-    {
-        $admin = $request->user()->first_name;
+    // public function getInvitations(Request $request)
+    // {
+    //     $admin = $request->user()->first_name;
 
-        $invitations = Invitation::orderBy('created_at', 'desc')
-            ->with(['user', 'guest'])->paginate(10);
+    //     $invitations = Invitation::orderBy('created_at', 'desc')
+    //         ->with(['user', 'guest'])->paginate(10);
 
-        // return response()->json([
-        //     'invitations' => $invitations,
-        //     'admin' => $admin
-        // ]);
+    //     // return response()->json([
+    //     //     'invitations' => $invitations,
+    //     //     'admin' => $admin
+    //     // ]);
 
-        return View::make('dashboard.invitations.overview', [
-            'invitations' => $invitations,
-            'admin' => $admin
-        ]);
-    }
+    //     return View::make('dashboard.invitations.overview', [
+    //         'invitations' => $invitations,
+    //         'admin' => $admin
+    //     ]);
+    // }
 
-    /**
-     * Return overview view with array of search results invitations
+    // /**
+    //  * Return overview view with array of search results invitations
     
-     * @return View|array
-     */
+    //  * @return View|array
+    //  */
 
-    public function search(Request $request)
-    {
+    // public function search(Request $request)
+    // {
 
-        $search_text = $request->input('search');
-        $admin = $request->user()->first_name;
+    //     $search_text = $request->input('search');
+    //     $admin = $request->user()->first_name;
 
-        if (isset($search_text)) {
-            $invitations = Invitation::with('user')
-                // ->where('visiter_name', 'LIKE', '%' . $search_text . '%')
-                ->where('permission', 'LIKE', '%' . $search_text . '%')
-                ->orWhereHas('user', function ($q) use ($search_text) {
-                    $q->where('first_name', 'LIKE', '%' . $search_text . '%');
-                    $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
-                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
-                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
-                })
-                ->orWhereHas('guest', function ($q) use ($search_text) {
-                    $q->where('full_name', 'LIKE', '%' . $search_text . '%');
-                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
-                    $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
-                })
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
+    //     if (isset($search_text)) {
+    //         $invitations = Invitation::with('user')
+    //             // ->where('visiter_name', 'LIKE', '%' . $search_text . '%')
+    //             ->where('permission', 'LIKE', '%' . $search_text . '%')
+    //             ->orWhereHas('user', function ($q) use ($search_text) {
+    //                 // $q->where(function ($query) use ($search_text) {
+    //                 $q->where('first_name', 'like', '%' . $search_text . '%')
+    //                     ->orWhere('last_name', 'like', '%' . $search_text . '%');
+    //                 // });
+    //                 // $q->where('first_name', 'LIKE', '%' . $search_text . '%');
+    //                 // $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+    //                 $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+    //                 $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+    //             })
+    //             ->orWhereHas('guest', function ($q) use ($search_text) {
+    //                 $q->where('full_name', 'LIKE', '%' . $search_text . '%');
+    //                 $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
+    //                 $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+    //             })
+    //             ->orderBy('created_at', 'desc')
+    //             ->paginate(10);
 
-            $invitations->appends($request->all());
+    //         $invitations->appends($request->all());
 
-            // return response()->json(['invitations' => $invitations]);
-            return View::make('dashboard.invitations.overview',  ['invitations' => $invitations, 'admin' => $admin]);
-        }
-        $invitations = Invitation::orderBy('created_at', 'desc')->paginate(10);
+    //         // return response()->json(['invitations' => $invitations]);
+    //         return View::make('dashboard.invitations.overview',  ['invitations' => $invitations, 'admin' => $admin]);
+    //     }
+    //     $invitations = Invitation::orderBy('created_at', 'desc')->paginate(10);
 
-        // return response()->json(['invitations' => $invitations]);
-        return View::make('dashboard.invitations.overview',  ['invitations' => $invitations, 'admin' => $admin]);
-    }
+    //     // return response()->json(['invitations' => $invitations]);
+    //     return View::make('dashboard.invitations.overview',  ['invitations' => $invitations, 'admin' => $admin]);
+    // }
 
 
-    /**
-     * Return overview view with array of invitations
+    // /**
+    //  * Return overview view with array of invitations
     
-     * @return View|array
-     */
+    //  * @return View|array
+    //  */
 
 
-    public function categorizedInvitations($category, Request $request)
-    {
-        $admin = $request->user()->first_name;
+    // public function categorizedInvitations($category, Request $request)
+    // {
+    //     $admin = $request->user()->first_name;
 
-        $invitations = Invitation::where('permission', 'LIKE', '%' . $category . '%')
-            ->with('user')
-            ->orderBy('created_at', 'desc')->paginate(10);
+    //     $invitations = Invitation::where('permission', 'LIKE', '%' . $category . '%')
+    //         ->with('user')
+    //         ->orderBy('created_at', 'desc')->paginate(10);
 
-        if ($category) {
-            $category_name = 'Approved';
-        } else {
+    //     if ($category) {
+    //         $category_name = 'Approved';
+    //     } else {
 
-            $category_name  = 'Denied';
-        }
-        // return response()->json(['invitations' => $invitations]);
-        return View::make('dashboard.invitations.categorized', [
-            'invitations' => $invitations,
-            'admin' => $admin,
-            'category_name' => $category_name,
-            'category' => $category,
-        ]);
-    }
+    //         $category_name  = 'Denied';
+    //     }
+    //     // return response()->json(['invitations' => $invitations]);
+    //     return View::make('dashboard.invitations.categorized', [
+    //         'invitations' => $invitations,
+    //         'admin' => $admin,
+    //         'category_name' => $category_name,
+    //         'category' => $category,
+    //     ]);
+    // }
 
 
 
@@ -230,16 +234,16 @@ class InvitationController extends Controller
 
 
 
-    public function invitaionUpdate($id, Request $request)
-    {
-        $invitation = Invitation::find($id);
+    // public function invitaionUpdate($id, Request $request)
+    // {
+    //     $invitation = Invitation::find($id);
 
-        if ($invitation) {
+    //     if ($invitation) {
 
-            $invitation->update($request->all());
+    //         $invitation->update($request->all());
 
-            return response()->json('Submitted');
-        }
-        return response()->json('Nothing happend');
-    }
+    //         return response()->json('Submitted');
+    //     }
+    //     return response()->json('Nothing happend');
+    // }
 }

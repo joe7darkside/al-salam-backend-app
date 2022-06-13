@@ -5,7 +5,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CaptainAuthController;
 use App\Http\Controllers\CaptainController;
-use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\API\InvitationController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisaCardController;
@@ -38,16 +38,22 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['assign.guard:api', 'jwt.auth']], function () {
-    
-    Route::put('appToken/update',[AppTokenController::class,'update']);
+
+    Route::put('appToken/update', [AppTokenController::class, 'update']);
     Route::get('/cards', [UserController::class, 'getVisaCard']);
     Route::get('/info', [UserController::class, 'getUserInfo']);
     Route::put('/update', [UserController::class, 'update']);
     Route::post('/visa-card/add', [VisaCardController::class, 'addVisaCard']);
     Route::delete('/visa-card/delete/{id}', [VisaCardController::class, 'deleteCard']);
-    Route::post('/invitation/create', [InvitationController::class, 'addInvitation']);
-    Route::get('/invitaions', [InvitationController::class, 'getUserInvitaions']);
-    Route::put('/invitaions/action/{id}', [InvitationController::class, 'invitaionUpdate']);
+
+    // Invitations Routes
+    Route::group(['prefix' => 'invitation'], function () {
+
+        Route::post('/add', [InvitationController::class, 'addInvitation']);
+        Route::get('/get', [InvitationController::class, 'getUserInvitaions']);
+        // Route::put('/invitaions/action/{id}', [InvitationController::class, 'invitaionUpdate']);
+    });
+
     Route::get('/trips', [TripController::class, 'getUserTrip']);
     Route::get('/pre-trips', [TripController::class, 'getUserPreTrip']);
     Route::post('/trips/add-preTrip', [TripController::class, 'addTrip']);
@@ -79,9 +85,6 @@ Route::group(['prefix' => 'captain', 'middleware' => ['assign.guard:captain', 'j
     Route::post('/refresh', [CaptainAuthController::class, 'refresh']);
     Route::post('/me', [CaptainAuthController::class, 'me']);
 });
-Route::post('appToken/store',[AppTokenController::class,'store']);
+Route::post('appToken/store', [AppTokenController::class, 'store']);
 
 // Route::post('captains/register', [CaptainAuthController::class, 'register'])->name('captains.register');
-
-
-
