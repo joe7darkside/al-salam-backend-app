@@ -157,11 +157,13 @@
                                             <p class="mb-0 text-xs">{{ $invite->created_at->format('d M H:i ') }}
                                             </p>
                                         </div>
-                                        @if ($invite->permission == 0)
+                                        @if ($invite->permission == 2)
                                             <a class="delete pe-3 ps-0 mb-0 ms-auto">Denied</a>
-                                        @else
-                                            <a class="profile pe-3 ps-0 mb-0 ms-auto">Approved</a>
-                                        @endif
+                                            @elseif ($invite->permission == 1)
+                                                <a class="profile pe-3 ps-0 mb-0 ms-auto">Approved</a>
+                                                @elseif ($invite->permission == 0)
+                                                    <a class=" pe-3 ps-0 mb-0 ms-auto">Pending</a>
+                                                @endif
 
                                     </li>
                                 @endforeach
@@ -254,7 +256,7 @@
     @yield('deleteUserModal')
     @include('dashboard.users.modals.edit')
     @yield('editModal')
-    
+
     @include('dashboard.users.modals.send')
     @yield('sendModal')
 

@@ -503,7 +503,7 @@
                                             <div class="row" style="justify-content: space-between;">
                                                 <div class="col-5">
                                                     <h6 class="text-dark text-sm font-weight-bold mb-0">
-                                                        {{ $invitation->visiter_name }}</h6>
+                                                        {{ $invitation->guest_name }}</h6>
                                                 </div>
 
                                                 @switch($invitation->permission)
@@ -527,7 +527,7 @@
 
                                             </div>
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                                                {{ $invitation->created_at->format('d M H:i ') }}
+                                                {{ $invitation->created_at->format('d M H ') }}
                                             </p>
                                         </div>
                                     </div>

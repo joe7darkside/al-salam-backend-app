@@ -56,8 +56,7 @@ class InvitationsController extends Controller
                 ->orWhereHas('user', function ($q) use ($search_text) {
                     $q->where('first_name', 'LIKE', '%' . $search_text . '%');
                     $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
-                    // $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
-                    // $q->orWhere('email', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
                 })
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
@@ -130,6 +129,7 @@ class InvitationsController extends Controller
 
                     $q->where('first_name', 'LIKE', '%' . $search_text . '%');
                     $q->orWhere('last_name', 'LIKE', '%' . $search_text . '%');
+                    $q->orWhere('phone', 'LIKE', '%' . $search_text . '%');
                 })
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);

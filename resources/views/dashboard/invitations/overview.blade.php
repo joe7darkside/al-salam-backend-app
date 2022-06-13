@@ -104,26 +104,12 @@
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 visiter</th>
-
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Date</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 permission</th>
-
-
-                                            {{-- <th
-                                                class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                electricity invitation</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment status</th> --}}
-                                            {{-- <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment method</th> --}}
-
-
                                             <th
                                                 class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 Created at</th>
@@ -172,7 +158,7 @@
                                                 <td class="align-middle text-center">
                                                     @switch($invitation->permission)
                                                         @case(0)
-                                                            <span class="text-s font-weight-bold mb-0">Pandding</span>
+                                                            <span class="text-s font-weight-bold mb-0">Pending</span>
                                                         @break
 
                                                         @case(1)

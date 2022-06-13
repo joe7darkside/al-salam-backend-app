@@ -78,12 +78,12 @@
 
 
                         {{-- Password --}}
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- <div class="col-12">
                             <div class="form-group">
                                 <label>Password confirmation</label>

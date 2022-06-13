@@ -82,7 +82,7 @@
                                                 Captain</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                cost</th>
+                                                cost (IQD)</th>
 
                                             {{-- <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">

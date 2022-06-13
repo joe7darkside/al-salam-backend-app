@@ -154,14 +154,10 @@
 
                             <div class="wrap-input100 validate-input m-b-23" data-validate="Phone is reauired">
                                 <span class="label-input100">Phone</span>
-                                <input class="input100" type="text" name="phone" placeholder="Type your phone">
+                                <input class="input100" type="number" name="phone" placeholder="Type your phone">
                                 <span class="focus-input100" data-symbol="&#xf206;"></span>
                             </div>
-                            {{-- @error('phone')
-                                <div class="alert alert-danger text-s">
-                                    <p>{{ $message }}</p>
-                                </div>
-                            @enderror --}}
+                           
                         </div>
                         <div class="col-6">
                             <div class="wrap-input100 validate-input m-b-20 m-t-7" data-validate="Role is reauired">
