@@ -52,7 +52,7 @@ class HomeController extends Controller
         $tables_data = $this->tablesData();
 
         $bills_table = $tables_data[0];
-        return response()->json($bills_table);
+        // return response()->json($bills_table);
         $table_trip = $tables_data[1];
         $table_invitation = $tables_data[2];
 
