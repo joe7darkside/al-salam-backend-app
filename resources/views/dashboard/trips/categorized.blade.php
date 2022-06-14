@@ -182,13 +182,16 @@
                                                     <div class="dropdown">
                                                         <i class="fa fa-ellipsis-v ">
                                                             <div class="dropdown-content">
-                                                                <a href="">
-                                                                    <i class="bi bi-info-circle-fill send"></i></a>
+                                                                {{-- <a href="">
+                                                                    <i class="bi bi-info-circle-fill send"></i></a> --}}
                                                                 {{-- <a href="#"><i class="fa-solid fa-pen edit"></i></a> --}}
                                                                 {{-- {{ route('trips.delete', ['trip' => $trip]) }} --}}
-                                                                <a href=""><i class="fa-solid fa-trash delete">
+                                                                <button value="{{ $trip->id }}"
+                                                                    class="infoBtn"><i
+                                                                        class="bi bi-info-circle-fill"></i></button>
+                                                                {{-- <a href=""><i class="fa-solid fa-trash delete">
                                                                         @method('DELETE')</i>
-                                                                </a>
+                                                                </a> --}}
                                                             </div>
                                                         </i>
                                                     </div>
@@ -215,9 +218,13 @@
         </div>
     </main>
 
+    @include('dashboard.trips.modals.info')
+    @yield('infoModal')
 
-    @include('dashboard.components.script')
+    @include('dashboard.trips.script')
     @yield('script')
+    {{-- @include('dashboard.components.script')
+    @yield('script') --}}
 </body>
 
 </html>

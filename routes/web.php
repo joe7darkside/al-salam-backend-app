@@ -1,22 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-// use App\Http\Controllers\BillController;
-use App\Http\Controllers\CaptainController;
+use App\Http\Controllers\Admin\CaptainAuthController;
 use App\Http\Controllers\Admin\InvitationsController;
-use App\Http\Controllers\TripController;
+use App\Http\Controllers\Admin\TripController;
+use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\CaptainController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\View;
-use App\Http\Controllers\CaptainAuthController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\Admin\BillController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,24 +20,6 @@ use App\Http\Controllers\Admin\BillController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-// Route::get('/overview', [UserController::class, 'getUsers'])->name('users.overView');
-// Route::get('/search', [UserController::class, 'search'])->name('users.search');
-// Route::get('/profile/{id}', [UserController::class, 'userProfile'])->name('users.profile');
 
 Route::group(['middleware' => 'auth',], function () {
 
@@ -70,9 +45,6 @@ Route::group(['middleware' => 'auth',], function () {
         Route::delete('/delete', [BillController::class, 'destroy'])->name('bills.delete');
         Route::get('/paymentStatus/{status}', [BillController::class, 'getPaymentStatusBills'])->name('bills.paymentStatus');
         Route::get('/statusSearch/{status}', [BillController::class, 'statusSearch'])->name('bills.statusSearch');
-
-        // Route::get('/categorized-bills/{category}', [BillController::class, 'getCategorized'])->name('bills.categorized');
-        // Route::get('/category-search/{category}', [BillController::class, 'categorizedSearch'])->name('bills.category.search');
     });
 
     //* Routes for TripController 
@@ -81,9 +53,8 @@ Route::group(['middleware' => 'auth',], function () {
         Route::get('/categorized-trips/{category}', [TripController::class, 'categorizedTrips'])->name('trips.category');
         Route::get('/search', [TripController::class, 'search'])->name('trips.search');
         Route::get('/category-search/{category}', [TripController::class, 'categorizedSearch'])->name('trips.category.search');
-        Route::get('/info/{id}', [TripController::class, 'info'])->name('trips.show');
+        Route::get('/show/{id}', [TripController::class, 'show'])->name('trips.show');
     });
-
 
     //* Routes for InvitationController 
     Route::group(['prefix' => 'invitations', 'middleware' => 'role:invitations,super'], function () {
@@ -95,20 +66,16 @@ Route::group(['middleware' => 'auth',], function () {
         Route::get('/category-search/{category}', [InvitationsController::class, 'categorizedSearch'])->name('invitations.category.search');
     });
 
-
-
     //* Routes for CaptainController 
     Route::group(['prefix' => 'captains', 'middleware' => 'role:captains,super'], function () {
         Route::post('/register', [CaptainAuthController::class, 'register'])->name('captains.register');
         Route::get('/overview', [CaptainController::class, 'getCaptains'])->name('captains.overView');
-        // Route::get('/categorized-invitations/{category}', [CaptainController::class, 'categorizedInvitations'])->name('invitations.category');
         Route::get('/search', [CaptainController::class, 'search'])->name('captains.search');
-        // Route::get('/category-search/{category}', [CaptainController::class, 'categorizedSearch'])->name('invitations.category.search');
-        Route::get('/profile/{id}', [CaptainController::class, 'getCaptainProfile'])->name('captains.profile');
         Route::get('/edit/{id}', [CaptainController::class, 'editCaptain'])->name('captains.edit');
         Route::put('/update', [CaptainController::class, 'updateCaptain'])->name('captains.update');
         Route::delete('/delete', [CaptainController::class, 'destroy'])->name('captains.delete');
     });
+
     //* Routes for CaptainController 
     Route::group(['prefix' => 'users', 'middleware' => 'role:users,super'], function () {
         Route::post('/create', [UserController::class, 'create'])->name('users.create');
@@ -131,9 +98,6 @@ Route::group(['middleware' => 'auth',], function () {
         Route::delete('/delete', [NotificationController::class, 'destroy'])->name('notifications.delete');
     });
 
-
-
-
     //* Routes for AdminController 
     Route::group(['prefix' => 'admins', 'middleware' => 'role:super,super'], function () {
         Route::get('/overview', [AdminController::class, 'getAdmins'])->name('admins.overView');
@@ -145,9 +109,6 @@ Route::group(['middleware' => 'auth',], function () {
         Route::post('/send', [AdminController::class, 'send'])->name('admins.send');
     });
 });
-
-
-
 
 
 require __DIR__ . '/auth.php';

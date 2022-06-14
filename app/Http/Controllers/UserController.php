@@ -181,18 +181,18 @@ class UserController extends Controller
         return response()->json(['User' => $user]);
     }
 
-    /**
-     * Return a json response of the user visa cards
-     * @param Request $request
-     * @return array
-     */
-    public function getVisaCard(Request $request)
-    {
-        $user_id = $request->user()->id;
-        $user_cards = User::find($user_id)->VisaCard;
+    // /**
+    //  * Return a json response of the user visa cards
+    //  * @param Request $request
+    //  * @return array
+    //  */
+    // public function getVisaCard(Request $request)
+    // {
+    //     $user_id = $request->user()->id;
+    //     $user_cards = User::find($user_id)->VisaCard;
 
-        return response()->json($user_cards);
-    }
+    //     return response()->json($user_cards);
+    // }
 
 
 

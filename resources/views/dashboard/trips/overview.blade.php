@@ -77,7 +77,7 @@
 
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                Captain</th>
+                                                phone</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 cost (IQD)</th>
@@ -85,12 +85,12 @@
 
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
-                                                payment method </th>
-
-
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
                                                 status </th>
+
+
+                                            {{-- <th
+                                                class="text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">
+                                                status </th> --}}
 
 
                                             <th
@@ -119,7 +119,7 @@
 
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-s font-weight-bold mb-0">{{ $trip->captain->first_name }}</span>
+                                                        class="text-s font-weight-bold mb-0">{{ $trip->user->phone }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
@@ -129,7 +129,7 @@
 
 
 
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     @switch($trip->payment_method)
                                                         @case(0)
                                                             <span class="text-s font-weight-bold mb-0">Cash</span>
@@ -146,20 +146,20 @@
                                                         @default
                                                     @endswitch
 
-                                                </td>
+                                                </td> --}}
 
-                                                @switch($trip->canceled)
+                                                @switch($trip->status)
                                                     @case(0)
                                                         <td class="align-middle text-center">
-                                                            <span class="text-s font-weight-bold mb-0 text-red-600"
-                                                                style="color: rgb(207, 12, 51) ">Canceled</span>
+                                                            <span class="badge badge-sm bg-gradient-danger"
+                                                               >Canceled</span>
                                                         </td>
                                                     @break
 
                                                     @case(1)
                                                         <td class="align-middle text-center">
-                                                            <span class="text-s font-weight-bold mb-0 text-green-600"
-                                                                style="color:rgb(9, 180, 9) ">Complete
+                                                            <span class="badge badge-sm bg-gradient-success"
+                                                                >Complete
                                                             </span>
                                                         </td>
                                                     @break
@@ -211,8 +211,10 @@
         </div>
     </main>
 
+    @include('dashboard.trips.modals.info')
+    @yield('infoModal')
 
-    @include('dashboard.components.script')
+    @include('dashboard.trips.script')
     @yield('script')
 
 

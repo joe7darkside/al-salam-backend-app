@@ -110,31 +110,31 @@ class BillController extends Controller
     // ]);
 
 
-    /**
-     * Return array of user's bills
-     * @param Request $request
-     * @return array
-     */
+    // /**
+    //  * Return array of user's bills
+    //  * @param Request $request
+    //  * @return array
+    //  */
 
-    public function getUserBills(Request $request)
-    {
-        $user_id = $request->user()->id;
+    // public function getUserBills(Request $request)
+    // {
+    //     $user_id = $request->user()->id;
 
-        $user_bills = Bill::where('user_id', 'LIKE', '%' . $user_id . '%')
-            ->with(['waterBill', 'gasBill', 'electricityBill'])->get();
+    //     $user_bills = Bill::where('user_id', 'LIKE', '%' . $user_id . '%')
+    //         ->with(['waterBill', 'gasBill', 'electricityBill'])->get();
 
-        return response()->json($user_bills);
+    //     return response()->json($user_bills);
 
-        // $user_bills = User::find($user_id)->bill;
-        // $months_name = array();
-        // foreach ($user_bills as $key => $bill) {
+    //     // $user_bills = User::find($user_id)->bill;
+    //     // $months_name = array();
+    //     // foreach ($user_bills as $key => $bill) {
 
 
-        //     $monthName = $bill->created_at->format("F");
-        //     $months_name[] = $monthName;
-        // }
+    //     //     $monthName = $bill->created_at->format("F");
+    //     //     $months_name[] = $monthName;
+    //     // }
 
-    }
+    // }
 
     // /**
     //  * Return overview view with array of users

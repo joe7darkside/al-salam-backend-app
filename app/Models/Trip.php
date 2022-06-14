@@ -15,7 +15,7 @@ class Trip extends Model
         'captain_id',
         'cost',
         'payment_method',
-        'canceled',
+        'status',
         'note',
 
     ];

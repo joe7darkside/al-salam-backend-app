@@ -52,8 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="bi bi-cash-stack"></i>
                                     </div>
                                 </div>
@@ -75,8 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="bi bi-people-fill"></i>
                                         {{-- class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i> --}}
@@ -100,8 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="fa fa-suitcase-rolling"></i>
                                         {{-- class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                         <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i> --}}
@@ -125,8 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div
-                                        class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
                                         <i class="bi bi-person-lines-fill"></i>
                                         {{-- <div
                                         class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
@@ -405,32 +401,32 @@
                                                 Full Name</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
-                                                Phone</th>
+                                                Cost (IQD)</th>
                                             <th
                                                 class=" text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                                Email</th>
+                                                Payment date</th>
                                             {{-- <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Completion</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($table_customer as $customer)
+                                        @foreach ($table_bills as $bill)
                                             <tr>
 
                                                 <td class="align-middle text-center text-s">
                                                     <span
-                                                        class="text-xs font-weight-bold">{{ $customer->first_name }}</span>
+                                                        class="text-xs font-weight-bold">{{ $bill->user->first_name }}
+                                                        {{ $bill->user->last_name }}</span>
 
                                                 </td>
                                                 <td class="align-middle text-center text-s">
-                                                    <span
-                                                        class="text-xs font-weight-bold">{{ $customer->phone }}</span>
+                                                    <span class="text-xs font-weight-bold">{{ $bill->bill_cost }}</span>
 
                                                 </td>
                                                 <td class="align-middle text-center text-s">
                                                     <span class="text-xs font-weight-bold">
-                                                        {{ $customer->email }}</span>
+                                                        {{ $bill->payment_date }}</span>
                                                 </td>
 
                                             </tr>
@@ -509,8 +505,9 @@
                                                 @switch($invitation->permission)
                                                     @case(0)
                                                         <div class="col-4">
-                                                            <h6 class="text-danger text-sm font-weight-bold mb-0 align-middle">
-                                                                Denied</h6>
+                                                            <h6
+                                                                class="text-secondary text-sm font-weight-bold mb-0 align-middle">
+                                                                Pending</h6>
                                                         </div>
                                                     @break
 
@@ -519,6 +516,13 @@
                                                             <h6
                                                                 class="text-success text-sm font-weight-bold mb-0 align-middle">
                                                                 Approved</h6>
+                                                        </div>
+                                                    @break
+
+                                                    @case(2)
+                                                        <div class="col-4">
+                                                            <h6 class="text-danger text-sm font-weight-bold mb-0 align-middle">
+                                                                Denied</h6>
                                                         </div>
                                                     @break
 
@@ -545,7 +549,7 @@
     </main>
 
     <script src="{{ asset('/js/plugins/chartjs.min.js') }}"></script>
-   <script src="{{ asset('/js/dashboard/chart/chart.js') }}" ></script>
+    <script src="{{ asset('/js/dashboard/chart/chart.js') }}"></script>
     @include('dashboard.components.script')
     @yield('script')
 

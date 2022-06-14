@@ -51,7 +51,8 @@ class HomeController extends Controller
         // Get data tables
         $tables_data = $this->tablesData();
 
-        $table_customer = $tables_data[0];
+        $bills_table = $tables_data[0];
+        return response()->json($bills_table);
         $table_trip = $tables_data[1];
         $table_invitation = $tables_data[2];
 
@@ -70,7 +71,7 @@ class HomeController extends Controller
             'overview_trip' => $overview_trip,
             'overview_invitation' => $overview_invitation,
             'overview_captains' => $overview_captains,
-            'table_customer' => $table_customer,
+            'table_bills' => $bills_table,
             'table_trip' => $table_trip,
             'table_invitation' => $table_invitation
         ]);
@@ -197,14 +198,20 @@ class HomeController extends Controller
     public function tablesData()
     {
 
-        $customers_table = User::latest()->take(6)->get();
+        $bills = Bill::where('payment_status', 'LIKE', 1)->latest()->take(6)->get();
+
+        $bills_table = array();
+        foreach ($bills as $bill) {
+            $bill->user;
+            $bills_table[] = $bill;
+        }
 
         $trips_table = Trip::latest()->take(5)->get();
 
         $invitation_table = Invitation::latest()->take(5)->get();
 
         return [
-            $customers_table,
+            $bills_table,
             $trips_table,
             $invitation_table
         ];

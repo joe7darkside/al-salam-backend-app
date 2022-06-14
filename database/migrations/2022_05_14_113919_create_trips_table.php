@@ -20,7 +20,7 @@ class CreateTripsTable extends Migration
             $table->float('cost')->default(0.0);
             $table->string('note');
             $table->string('payment_method');
-            $table->boolean('canceled')->default(false);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
