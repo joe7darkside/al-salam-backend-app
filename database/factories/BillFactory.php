@@ -20,7 +20,7 @@ class BillFactory extends Factory
             'Payment_date' => now(),
             'Payment_due' => now(),
             'bill_cost' => $this->faker->numberBetween(1000, 8000),
-            'month_name' => $this->faker->monthName(),
+            'month_name' => $this->faker->monthName('now'),
             'payment_status' => $this->faker->boolean(), // password
         ];
     }

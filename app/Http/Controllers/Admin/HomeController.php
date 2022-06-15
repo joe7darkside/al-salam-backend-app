@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         $chart_bills = $this->chartBills();
 
-        // return response()->json($chart_bills);
+        return response()->json($chart_bills);
 
         return View::make('dashboard.home.index', [
             'admin_name' => $admin,
@@ -81,13 +81,19 @@ class HomeController extends Controller
 
     public function chartBills()
     {
-        // $bills_per_month = array();
-        // $monthFormat = $this->monthFormat();
-        // foreach ($monthFormat as  $month) {
-        //     return $month;
-        // }
 
-        // // $c = count($bills_per_month);
+        $months = $this->monthFormat();
+
+        $totalCost = 0;
+
+        $bills = Bill::where('created_at', 'LIKE', '%' . '22-06' . '%')->get();
+        foreach ($bills as $bill) {
+
+            $totalCost = $totalCost + $bill->bill_cost;
+            $monthlyBill[] = array('2022-11' => $totalCost);
+        }
+
+        return response($monthlyBill);
     }
 
 
@@ -225,7 +231,9 @@ class HomeController extends Controller
     public function monthFormat()
     {
         $monthsFormat = array();
-        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        for ($i = 1; $i <= 12; $i++) {
+            $months[] = '0' . $i;
+        }
         foreach ($months as $month) {
             $monthsFormat[] = Carbon::today()->format('y-' . $month);
         }
