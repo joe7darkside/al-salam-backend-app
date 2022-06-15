@@ -86,11 +86,11 @@ class HomeController extends Controller
 
         $totalCost = 0;
 
-        $bills = Bill::where('created_at', 'LIKE', '%' . '22-06' . '%')->get();
+        $bills = Bill::where('created_at', 'LIKE', '%' . '22-12' . '%')->get();
         foreach ($bills as $bill) {
 
             $totalCost = $totalCost + $bill->bill_cost;
-            $monthlyBill[] = array('2022-11' => $totalCost);
+            $monthlyBill = array('2022-11' => $totalCost);
         }
 
         return response($monthlyBill);
