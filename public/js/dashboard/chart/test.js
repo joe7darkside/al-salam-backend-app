@@ -90,21 +90,21 @@ $.ajax({
 
         gradientStroke1.addColorStop(1, 'rgba(14,24,95,0.1)');
         gradientStroke1.addColorStop(0.2, 'rgba(14,24,95,0.1)');
-        gradientStroke1.addColorStop(0, 'rgba(29,39,134,0)'); //purple colors
+        gradientStroke1.addColorStop(0, 'rgba(29,39,134,0)');
 
 
         var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-        gradientStroke2.addColorStop(1, 'rgba(29,185,195,0.6)');
-        gradientStroke2.addColorStop(0.2, 'rgba(16,207,220,0.1)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+        gradientStroke2.addColorStop(1, 'rgba(0,121,101,0.1)');
+        gradientStroke2.addColorStop(0.2, 'rgba(15,132,113,0.1)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
 
         var gradientStroke3 = ctx2.createLinearGradient(0, 230, 0, 50);
 
         gradientStroke3.addColorStop(1, 'rgba(47,164,255,0.1)');
         gradientStroke3.addColorStop(0.2, 'rgba(7,147,255,0.1)');
-        gradientStroke3.addColorStop(0, 'rgba(65,173,255,0)'); //purple colors
+        gradientStroke3.addColorStop(0, 'rgba(65,173,255,0)');
         // ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
         new Chart(ctx2, {
             type: "line",
@@ -128,7 +128,7 @@ $.ajax({
                         tension: 0.4,
                         borderWidth: 0,
                         pointRadius: 0,
-                        borderColor: "#1DB9C3",
+                        borderColor: "#007965",
                         borderWidth: 3,
                         backgroundColor: gradientStroke2,
                         fill: true,
