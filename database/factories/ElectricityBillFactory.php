@@ -14,8 +14,8 @@ class ElectricityBillFactory extends Factory
     public function definition()
     {
         return [
-            'bill_id' => $this->faker->numberBetween(0, 15),
-            'cost' => $this->faker->numberBetween(0, 15),
+            'bill_id' => $this->faker->numberBetween(0,35),
+            'cost' => $this->faker->numberBetween(1000, 8000),
         ];
     }
 }

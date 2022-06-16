@@ -24,6 +24,8 @@ use App\Http\Controllers\NotificationController;
 Route::group(['middleware' => 'auth',], function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/chart',[HomeController::class,'chartBills'])->name('chart');
+    Route::get('/line/chart',[HomeController::class,'lineChartBills'])->name('line.chart');
 
     //* Routes for UserController 
     Route::group(['prefix' => 'users', 'middleware' => 'role:users,super'], function () {

@@ -56,9 +56,9 @@ class HomeController extends Controller
         $table_trip = $tables_data[1];
         $table_invitation = $tables_data[2];
 
-        $chart_bills = $this->chartBills();
+        // $chart_bills = $this->lineChartBills();
 
-        return response()->json($chart_bills);
+        // return response()->json($chart_bills);
 
         return View::make('dashboard.home.index', [
             'admin_name' => $admin,
@@ -77,25 +77,66 @@ class HomeController extends Controller
         ]);
     }
 
-
+    /**
+     * Return Bills Chart data.
+     *
+     * @return Json|Array
+     */
 
     public function chartBills()
     {
 
         $months = $this->monthFormat();
 
-        $totalCost = 0;
+        foreach ($months as $month) {
 
-        $bills = Bill::where('created_at', 'LIKE', '%' . '22-12' . '%')->get();
-        foreach ($bills as $bill) {
+            $totalCost = 0;
 
-            $totalCost = $totalCost + $bill->bill_cost;
-            $monthlyBill = array('2022-11' => $totalCost);
+            $bills = Bill::where('created_at', 'LIKE', '%' . $month . '%')->get();
+
+            foreach ($bills as $bill) {
+
+                $totalCost = $totalCost + $bill->bill_cost;
+            }
+            $monthlyBill[] = $totalCost;
         }
-
-        return response($monthlyBill);
+        return response()->json($monthlyBill);
     }
 
+
+    /**
+     * Return Line Chart data.
+     *
+     * @return Json|Array
+     */
+
+    public function lineChartBills()
+    {
+
+        $months = $this->monthFormat();
+
+        foreach ($months as $month) {
+
+            $waterCost = 0;
+            $gasCost = 0;
+            $electricityCost = 0;
+
+
+            $bills = Bill::where('created_at', 'LIKE', '%' . $month . '%')
+                ->with(['waterBill', 'gasBill', 'electricityBill'])->get();
+
+            foreach ($bills as $bill) {
+                $waterCost = $waterCost + $bill->waterBill->cost;
+                $gasCost = $gasCost + $bill->gasBill->cost;
+                $electricityCost = $electricityCost + $bill->electricityBill->cost;
+            }
+            $monthlyWaterBill[] = $waterCost;
+            $monthlyGasBill[] = $gasCost;
+            $monthlyElectricityBill[] = $electricityCost;
+        }
+        // return response()->json($bills);
+        return response()->json(['waterBills' => $monthlyWaterBill, 'gasBill' => $monthlyGasBill, 'electricityBill' => $monthlyElectricityBill]);
+    }
 
     /**
      *  Return daily data update .
@@ -133,8 +174,6 @@ class HomeController extends Controller
 
         ];
     }
-
-
 
     /**
      * Return daily overview data .
@@ -231,9 +270,7 @@ class HomeController extends Controller
     public function monthFormat()
     {
         $monthsFormat = array();
-        for ($i = 1; $i <= 12; $i++) {
-            $months[] = '0' . $i;
-        }
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         foreach ($months as $month) {
             $monthsFormat[] = Carbon::today()->format('y-' . $month);
         }
