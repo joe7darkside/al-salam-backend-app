@@ -110,11 +110,23 @@
                         <span class="focus-input100" data-symbol="&#xf190;"></span>
                     </div>
 
-                    <div class="text-right p-t-8 p-b-31">
-                        <a href="{{ route('register') }}">
-                            Don't hane an account ?
-                        </a>
+                    <div class="row" style="justify-content: space-between">
+                        <div class="col-auto  mt-4">
+                            <label for="remember_me" class="inline-flex items-center">
+                                <input id="remember_me" type="checkbox"
+                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    name="remember">
+                                <span class=" text-sm" style="color: black; font-weight: 400">{{ __('Remember me') }}</span>
+                            </label>
+                        </div>
+                        <div class="col-auto text-right mt-4 ">
+                            <a href="{{ route('register') }}">
+                                Don't hane an account ?
+                            </a>
+                        </div>
                     </div>
+
+
 
                     <div class="container-login100-form-btn">
                         <div class="wrap-login100-form-btn">

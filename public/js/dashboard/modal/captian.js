@@ -46,7 +46,7 @@ $(document).ready(function() {
                 $('#email').val(response.captain.email);
                 $('#password').val(response.captain.password);
                 $('#vehicle').val(response.captain.vehicle);
-                $('#licence_plate').val(response.captain.vehicle);
+                $('#licence_plate').val(response.captain.licence_plate);
                 $('#rate').val(response.captain.rate);
                 // $('#img').val(response.captain.img);
                 $('#captain_id').val(captain_id);

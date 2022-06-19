@@ -11,9 +11,9 @@
                     <input type="hidden" name="invitation_id" id="action_id">
                     <div class="modal-body">
                         <div class="row" style="justify-content: start">
-                            <div class="col-auto" id="name">
+                            {{-- <div class="col-auto" id="name"> --}}
                                 {{-- <p id="name"></p> --}}
-                            </div>
+                            {{-- </div> --}}
                             <div class="col-auto">
                                 Wants to get visit approval, granted?
                                 {{-- <p>Wants to get visit approval, granted?</p> --}}

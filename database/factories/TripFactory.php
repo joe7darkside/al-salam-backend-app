@@ -15,8 +15,8 @@ class TripFactory extends Factory
     {
         return [
 
-            'user_id' => $this->faker->numberBetween(0, 10),
-            'captain_id' => $this->faker->numberBetween(0, 10),
+            'user_id' => $this->faker->numberBetween(0, 1),
+            'captain_id' => $this->faker->numberBetween(0, 2),
             'cost' => $this->faker->numberBetween(1000, 3000),
             'payment_method' => $this->faker->numberBetween(0, 2),
             'note' => $this->faker->numberBetween(0, 1),

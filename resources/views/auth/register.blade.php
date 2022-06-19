@@ -107,10 +107,10 @@
 
         <div class="container-login100" style="background-color: rgb(229, 237, 237)">
 
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+            <div class="wrap-login100 p-l-40 p-r-40 p-t-30 p-b-30">
                 <form class="login100-form validate-form" action="{{ route('register.store') }}" method="POST">
                     @csrf
-                    <span class="login100-form-title p-b-49">
+                    <span class="login100-form-title p-b-40">
                         Register
                     </span>
                     {{-- <div>
