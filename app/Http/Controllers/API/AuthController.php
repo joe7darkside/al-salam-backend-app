@@ -39,10 +39,7 @@ class AuthController extends Controller
             ['password' => bcrypt($request->password)]
         ));
         $token = auth()->guard('api')->attempt($validator->validated());
-        return response()->json([
-            'message' => 'User successfully registered',
-            'userToken' => $this->respondWithToken($token)
-        ], 200);
+        return $this->respondWithToken($token);
     }
 
     /**
@@ -60,7 +57,7 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
         if (!$token = auth()->guard('api')->attempt($validator->validated())) {
-            return response()->json(["error" => "Invalid coordinates"], 401);
+            return response()->json(["message" => "Invalid coordinates"], 401);
         }
         return $this->respondWithToken($token);
     }
@@ -90,7 +87,7 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json(
-            $token,
+            ["userToken" => $token],
             200
         );
     }
